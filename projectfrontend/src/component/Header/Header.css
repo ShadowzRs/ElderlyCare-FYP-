@@ -1,0 +1,105 @@
+.Landing_Header {
+  border-bottom-width: 1px;
+  border-color: #e5e7eb;
+  background-color: #f7f9ff;
+}
+
+.Landing_Header_Container {
+  max-width: 1920px;
+  padding: 12px 16px;
+}
+
+.Landing_Header_Content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-image {
+  width: 210px;
+  height: auto; /* Maintains aspect ratio */
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
+.Landing_Header_Nav_Container {
+  display: none;
+}
+
+.Landing_Header_Nav_List {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  line-height: 20px;
+  font-size: 16px;
+}
+
+.Landing_Header_Nav_Content {
+  color: #111827;
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  padding-bottom: 2px;
+  font-weight: 400;
+}
+
+.Landing_Header_Nav_Content:hover {
+  border-bottom: 2px solid #111827;
+}
+
+.Landing_Header_Button {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.Landing_Login_button,
+.Landing_Register_button {
+  border-radius: 13px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.Landing_Login_button {
+  padding: 9px 41px;
+  justify-content: center;
+  align-items: center;
+  border-width: 1px;
+  border-color: #e5e7eb;
+  color: #111827;
+  background-color: #ffffff;
+}
+
+.Landing_Register_button {
+  padding: 9px 34px;
+  color: #ffffff;
+  background-color: #6f3afa;
+}
+
+.Landing_Login_button:hover {
+  background-color: #e8eaef;
+}
+
+.Landing_Register_button:hover {
+  background-color: #6633ff;
+}
+
+@media (min-width: 768px) {
+  .Landing_Header_Nav_Container {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .Landing_Header_Container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}

@@ -1,0 +1,62 @@
+.Register-Header {
+  max-width: 1920px;
+  padding: 40px 120px;
+}
+.Register-Header-Content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Register-Logo {
+  width: 270px;
+  height: auto;
+}
+
+.Register-Header-Button {
+  display: flex;
+  justify-content: end;
+}
+
+.Register-Header-Login-Button,
+.Register-Header-Register-Button {
+  border-radius: 13px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  color: #ffffff;
+  background-color: var(--primary-color);
+}
+
+.Register-Header-Login-Button {
+  padding: 9px 41px;
+}
+
+.Register-Header-Register-Button {
+  padding: 9px 34px;
+}
+
+.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  color: var(--black);
+  background-color: transparent;
+}
+
+.active:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 21%;
+  border-radius: 13px;
+  border-bottom: 3px solid var(--primary-color);
+}

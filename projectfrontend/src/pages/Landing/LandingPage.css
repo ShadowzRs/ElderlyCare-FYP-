@@ -1,0 +1,240 @@
+/* ================================================= Landing Main Section ================================================= */
+
+.Landing_Main_Body {
+  position: relative;
+  background-image: url("../../assets/Landing-Background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.Landing_Main_Body_filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-color);
+}
+
+.Landing_Main_Body_Container {
+  position: relative;
+  padding: 0 16px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 92.9vh;
+}
+
+.Landing_Main_Body_Content {
+  max-width: 650px;
+  text-align: left;
+}
+
+.Landing_Main_Body_Slogans_Container {
+  display: flex;
+  background-color: var(--white);
+  opacity: 85%;
+  border-radius: 40px;
+  width: 420px;
+  margin-bottom: 8px;
+}
+
+.Landing_Main_Body_Slogans_Content {
+  padding: 6px 8px 6px 30px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.Slogans-logo {
+  padding-left: 9px;
+  width: 65px;
+  height: auto;
+}
+
+.Landing_Main_Body_Title {
+  font-size: 30px;
+  font-weight: bolder;
+  color: var(--white);
+}
+
+.Landing_Main_Body_text {
+  margin: 5px 0;
+  color: var(--white);
+}
+
+.Landing_Main_Body_ButtonBox {
+  display: flex;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+  text-align: center;
+}
+
+.Landing_Main_Body_Button {
+  display: inline-block;
+  margin-top: 23px;
+  padding: 12px 34px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--white);
+  background-color: var(--primary-color);
+}
+
+/* ================================================= Landing Feature Section ================================================= */
+
+.Landing_Feature_Body {
+  position: relative;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--sec-background-color);
+}
+
+.Landing_Feature_Header {
+  max-width: 1920px;
+  padding: 50px 0;
+}
+
+.Landing_Feature_Title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.Landing_Feature_Container {
+  padding-bottom: 50px;
+}
+
+.Landing_Feature_Content {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  width: 80%;
+  gap: 35px;
+  padding-bottom: 35px;
+}
+
+/* ================================================= Footer Section ================================================= */
+
+.Landing_footer {
+  position: relative;
+  border-top: 1px solid var(--border-color);
+}
+
+.Landing_footer_Container {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 170px;
+}
+
+.Landing_footer-left {
+  text-align: left;
+  width: 27%;
+  margin: 80px 170px 80px 0;
+}
+
+.footer_logo-image {
+  width: 320px;
+  height: auto;
+  padding-bottom: 5px;
+}
+
+.Landing_footer-left p {
+  color: var(--secondary-color);
+  font-size: 18px;
+  margin: 14px 0;
+}
+
+.social-icons {
+  display: flex;
+  gap: 13px;
+}
+
+.social-icons a {
+  color: #1678f2;
+  font-size: 20px;
+}
+
+.Landing_footer-right {
+  display: block;
+  text-align: center;
+  margin: 45px auto;
+}
+
+.Landing_footer-right h3 {
+  font-size: 36px;
+  color: var(--black);
+  font-weight: 700;
+}
+
+.Landing_footer-right p {
+  color: var(--secondary-color);
+  font-size: 18px;
+  margin: 0 auto;
+  width: 78%;
+}
+
+.subscribe-form {
+  display: flex;
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 40px;
+}
+
+.subscribe-form input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px 0 0 4px;
+  flex-grow: 1;
+}
+
+.subscribe-form button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  background-color: #4e4eff;
+  color: var(--white);
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  height: 100%;
+}
+
+.Landing_footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  border-top: 1px solid var(--border-color-light);
+  margin: 0 140px;
+  font-size: 16px;
+  color: var(--black);
+}
+
+.Landing_footer-bottom p {
+  margin: 5px 0;
+  color: var(--secondary-color);
+}
+
+.Landing_footer-links {
+  display: flex;
+  gap: 15px;
+  color: var(--secondary-color);
+}
+
+/* ================================================= Responsive Design ================================================= */
+@media (min-width: 640px) {
+  .Landing_Main_Body_Container {
+    padding: 0 85px;
+  }
+
+  .Landing_Main_Body_Title {
+    font-size: var(--header-font-size);
+  }
+
+  .Landing_Main_Body_text {
+    font-size: var(--text-font-size);
+    line-height: 1.75;
+  }
+}

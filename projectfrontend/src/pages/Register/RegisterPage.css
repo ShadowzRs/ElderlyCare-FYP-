@@ -1,0 +1,125 @@
+.Register-background {
+  background-image: url("../../assets/Background-Box.svg");
+  background-repeat: no-repeat;
+  background-size: 80dvh;
+  background-position-x: 12%;
+}
+
+.Register-background-v2 {
+  background-image: url("../../assets/Background-BlueCircle.svg");
+  background-repeat: no-repeat;
+  background-position-y: 50%;
+}
+
+.Register-Section {
+  display: flex;
+  flex-direction: row;
+  margin: 0px 150px;
+  height: 87dvh;
+}
+
+.Register-Message-Container {
+  position: relative;
+  align-items: center;
+  letter-spacing: 0.2px;
+  width: 50%;
+  margin: auto 0px;
+}
+
+.Register-Message-Container h1 {
+  font-weight: bolder;
+  font-size: 64px;
+}
+
+.Register-Message-Container h2 {
+  font-weight: 500;
+  font-size: 48px;
+  max-width: 90%;
+  padding-top: 7px;
+}
+
+.Register-Message-Container p {
+  padding-top: 28px;
+  margin-bottom: 50px;
+  max-width: 60%;
+  font-weight: 400;
+  font-size: 27px;
+}
+
+.Register-Message-p {
+  font-weight: 500;
+  color: #4461f2;
+}
+
+.Register-Container {
+  height: auto;
+  width: 40%;
+  margin: 0px auto;
+  padding-top: 80px;
+}
+
+.Register-Container h1 {
+  font-size: 38px;
+  font-weight: 600;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.Register-Display {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+}
+
+.Register-Items {
+  flex-grow: 1;
+}
+
+.Register-Items-Age {
+  width: 80px;
+}
+
+.Register-Input-Label {
+  display: block;
+  text-align: start;
+  font-size: 17px;
+  font-weight: 400;
+  color: black;
+}
+
+.Register-Input-Box {
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 15px;
+  padding: 12px 10px;
+  border-radius: 8px;
+  border-color: var(--border-color-light);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+input[type="text"] {
+  font-size: 18px;
+}
+
+.Register-Button-Container {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.Register-Button-Container button {
+  padding: 12px 100px;
+  border-radius: 15px;
+  color: var(--white);
+  font-weight: 500;
+  font-size: 15px;
+  text-align: center;
+  background-color: var(--primary-color);
+}
+
+@media (min-width: 640px) {
+  .Register-Input-Box {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}

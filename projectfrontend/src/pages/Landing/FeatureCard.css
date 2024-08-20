@@ -1,0 +1,32 @@
+.card {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #ffffff00;
+  gap: 15px;
+}
+
+.card-content {
+  position: relative;
+  align-items: start;
+  padding: 5px 0px 0px 25px;
+}
+
+.card-title {
+  font-size: 25px;
+  font-weight: bold;
+  padding-bottom: 30px;
+}
+
+.card-text {
+  color: #666;
+  font-size: 20px;
+}
+
+.card-image img {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
