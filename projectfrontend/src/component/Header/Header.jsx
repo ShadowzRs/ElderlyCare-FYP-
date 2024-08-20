@@ -23,7 +23,7 @@ const Header = () => {
     <header className="Landing_Header">
       <div className="Landing_Header_Container">
         <div className="Landing_Header_Content">
-          <Link to="/test">
+          <Link to="/">
             <img src={logo} alt="AI-LifeConnect" className="logo-image" />
           </Link>
 
