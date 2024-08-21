@@ -81,6 +81,8 @@
   padding: 9px 34px;
   color: #ffffff;
   background-color: #6f3afa;
+  border-width: 1px;
+  border-color: var(--primary-color);
 }
 
 .Landing_Login_button:hover {
@@ -88,7 +90,8 @@
 }
 
 .Landing_Register_button:hover {
-  background-color: #6633ff;
+  color: var(--primary-color);
+  background-color: transparent;
 }
 
 @media (min-width: 768px) {

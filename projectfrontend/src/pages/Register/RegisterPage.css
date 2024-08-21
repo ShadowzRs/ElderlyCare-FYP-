@@ -1,74 +1,62 @@
-.Register-background {
-  background-image: url("../../assets/Background-Box.svg");
-  background-repeat: no-repeat;
-  background-size: 80dvh;
-  background-position-x: 12%;
-}
-
-.Register-background-v2 {
-  background-image: url("../../assets/Background-BlueCircle.svg");
-  background-repeat: no-repeat;
-  background-position-y: 50%;
-}
-
 .Register-Section {
   display: flex;
   flex-direction: row;
-  /* padding: 0px 150px; */
   height: 100dvh;
 }
 
-.Register-Message-Container {
+/* ================================================= Register-Left ================================================= */
+
+.Register-Left-Container {
   position: relative;
-  align-items: center;
-  letter-spacing: 0.2px;
-  width: 50%;
-  margin: auto 0px;
-  padding-left: 150px;
+  align-content: center;
+  width: 35%;
+  background-color: #6f3afa;
+  color: white;
 }
 
-.Register-Message-Container h1 {
-  font-weight: bolder;
-  font-size: 64px;
-}
-
-.Register-Message-Container h2 {
-  font-weight: 500;
-  font-size: 48px;
-  max-width: 90%;
-  padding-top: 7px;
-}
-
-.Register-Message-Container p {
-  padding-top: 28px;
-  margin-bottom: 50px;
-  max-width: 60%;
-  font-weight: 400;
-  font-size: 27px;
-}
-
-.Register-Message-p {
-  font-weight: 500;
-  color: #4461f2;
-}
-
-.Register-Container{
-  background-color: var(--sec-background-color);
-  width: 50%;
-  padding: 0px 150px ;
-}
-
-.Register-Content {
+.Register-Img {
+  width: 90%;
   height: auto;
   margin: auto;
-  /* padding-top: 80px; */
 }
 
-.Register-Content h1 {
-  font-size: 38px;
-  font-weight: 600;
-  padding-bottom: 40px;
-  text-align: center;
+.R-Font {
+  position: relative;
+  padding: 0 45px;
+  text-align: start;
+}
+
+.Register-Left-Container h1 {
+  padding-bottom: 12px;
+  font-weight: 700;
+  font-size: var(--header-font-size);
+}
+
+.Register-Left-Container p {
+  font-weight: 400;
+  font-size: 21px;
+}
+
+/* ================================================= Register-Right ================================================= */
+
+.Register-Container {
+  background-color: var(--sec-background-color);
+  width: 65%;
+  padding: 50px;
+}
+
+.Register-Logo {
+  width: 250px;
+  height: auto;
+}
+
+/* Registration Section */
+.Register-Content {
+  padding: 0px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 
 .Register-Display {
@@ -78,6 +66,7 @@
 }
 
 .Register-Items {
+  position: relative;
   flex-grow: 1;
 }
 
@@ -88,44 +77,94 @@
 .Register-Input-Label {
   display: block;
   text-align: start;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 400;
-  color: black;
+  line-height: 20px;
+  color: #374151;
 }
 
 .Register-Input-Box {
   width: 100%;
   margin-top: 4px;
-  margin-bottom: 15px;
-  padding: 12px 10px;
+  margin-bottom: 19px;
+  padding: 11px 10px;
   border-radius: 8px;
-  border-color: var(--border-color-light);
+  border-color: #e5e7eb;
+  border: rgba(0, 0, 0, 0.05) 1px solid;
+  color: #374151;
+  background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 input[type="text"] {
-  font-size: 18px;
+  font-size: 16px;
 }
 
-.Register-Button-Container {
-  display: flex;
-  justify-content: center;
+.Password-Toggle-Icon {
+  position: absolute;
+  top: 53%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--secondary-color);
+  font-size: 20px;
+}
+
+.Password-Toggle-Icon:hover {
+  color: #333;
+}
+
+.Register-Notice {
+  font-size: 15px;
+  line-height: 20px;
+  color: #6b7280;
   padding-top: 40px;
 }
 
-.Register-Button-Container button {
-  padding: 12px 10q0px;
-  border-radius: 15px;
+/* Register Button */
+.Register-Button-Container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.Register-Button {
+  padding: 12px 50px;
+  border-radius: 5px;
   color: var(--white);
   font-weight: 500;
-  font-size: 15px;
-  text-align: center;
+  font-size: 17px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: var(--primary-color);
   background-color: var(--primary-color);
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.Register-Button:hover {
+  color: var(--primary-color);
+  background-color: transparent;
+}
+
+.Register-Button-Container p {
+  padding-left: 20px;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--secondary-color);
+}
+
+.Register-Already-have-Acc {
+  color: var(--black);
+  text-decoration: underline;
 }
 
 @media (min-width: 640px) {
   .Register-Input-Box {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    font-size: 14px;
+    line-height: 20px;
   }
 }

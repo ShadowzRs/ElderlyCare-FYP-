@@ -64,6 +64,18 @@
   color: var(--white);
   background-color: var(--primary-color);
   border-radius: 7px;
+  border-width: 1px;
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.Landing_Main_Body_Button:hover {
+  color: var(--primary-color);
+  background-color: transparent;
 }
 
 .Landing_Main_Body_Illustrator {
