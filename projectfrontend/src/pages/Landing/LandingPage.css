@@ -2,19 +2,7 @@
 
 .Landing_Main_Body {
   position: relative;
-  background-image: url("../../assets/Landing-Background.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.Landing_Main_Body_filter {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--overlay-color);
+  background-color: var(--sec-background-color);
 }
 
 .Landing_Main_Body_Container {
@@ -23,28 +11,30 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  height: 92.9vh;
+  height: 88dvh;
 }
 
 .Landing_Main_Body_Content {
-  max-width: 650px;
+  max-width: 730px;
+  padding-left: 50px;
+  padding-right: 40px;
   text-align: left;
 }
 
 .Landing_Main_Body_Slogans_Container {
   display: flex;
-  background-color: var(--white);
+  background-color: rgba(141, 138, 138, 0.226);
   opacity: 85%;
   border-radius: 40px;
-  width: 420px;
-  margin-bottom: 8px;
+  width: 410px;
+  margin-bottom: 30px;
 }
 
 .Landing_Main_Body_Slogans_Content {
-  padding: 6px 8px 6px 30px;
+  padding: 6px 8px 6px 25px;
   font-size: 28px;
   font-weight: 700;
-  color: var(--black);
+  color: rgba(0, 0, 0, 0.966);
 }
 
 .Slogans-logo {
@@ -55,45 +45,43 @@
 
 .Landing_Main_Body_Title {
   font-size: 30px;
-  font-weight: bolder;
-  color: var(--white);
+  font-weight: 700;
 }
 
 .Landing_Main_Body_text {
-  margin: 5px 0;
-  color: var(--white);
-}
-
-.Landing_Main_Body_ButtonBox {
-  display: flex;
-  margin-top: 24px;
-  flex-wrap: wrap;
-  gap: 16px;
-  text-align: center;
+  margin: 15px 0;
+  font-weight: 400;
+  font-style: italic;
 }
 
 .Landing_Main_Body_Button {
-  display: inline-block;
-  margin-top: 23px;
-  padding: 12px 34px;
+  display: grid;
+  margin: 60px 0;
+  padding: 12px 38px;
   text-align: center;
   font-size: 20px;
   font-weight: 500;
   color: var(--white);
   background-color: var(--primary-color);
+  border-radius: 7px;
+}
+
+.Landing_Main_Body_Illustrator {
+  margin: auto;
+  width: 40%;
 }
 
 /* ================================================= Landing Feature Section ================================================= */
 
 .Landing_Feature_Body {
   position: relative;
-  border-top: 1px solid var(--border-color);
+  /* height: 88dvh; */
   background-color: var(--sec-background-color);
 }
 
 .Landing_Feature_Header {
   max-width: 1920px;
-  padding: 50px 0;
+  padding: 20px 0px;
 }
 
 .Landing_Feature_Title {
@@ -103,13 +91,17 @@
 }
 
 .Landing_Feature_Container {
-  padding-bottom: 50px;
+  height: 70dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .Landing_Feature_Content {
   display: flex;
   flex-direction: row;
-  margin: auto;
+  margin: 0 auto;
   width: 80%;
   gap: 35px;
   padding-bottom: 35px;
@@ -235,6 +227,6 @@
 
   .Landing_Main_Body_text {
     font-size: var(--text-font-size);
-    line-height: 1.75;
+    line-height: 1.8;
   }
 }

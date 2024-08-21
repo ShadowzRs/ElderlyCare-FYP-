@@ -14,8 +14,8 @@
 .Register-Section {
   display: flex;
   flex-direction: row;
-  margin: 0px 150px;
-  height: 87dvh;
+  /* padding: 0px 150px; */
+  height: 100dvh;
 }
 
 .Register-Message-Container {
@@ -24,6 +24,7 @@
   letter-spacing: 0.2px;
   width: 50%;
   margin: auto 0px;
+  padding-left: 150px;
 }
 
 .Register-Message-Container h1 {
@@ -51,14 +52,19 @@
   color: #4461f2;
 }
 
-.Register-Container {
-  height: auto;
-  width: 40%;
-  margin: 0px auto;
-  padding-top: 80px;
+.Register-Container{
+  background-color: var(--sec-background-color);
+  width: 50%;
+  padding: 0px 150px ;
 }
 
-.Register-Container h1 {
+.Register-Content {
+  height: auto;
+  margin: auto;
+  /* padding-top: 80px; */
+}
+
+.Register-Content h1 {
   font-size: 38px;
   font-weight: 600;
   padding-bottom: 40px;

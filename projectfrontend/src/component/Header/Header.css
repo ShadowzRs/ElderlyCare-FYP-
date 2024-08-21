@@ -1,12 +1,12 @@
 .Landing_Header {
-  border-bottom-width: 1px;
-  border-color: #e5e7eb;
-  background-color: #f7f9ff;
+  /* border-bottom-width: 1px;
+  border-color: #e5e7eb; */
+  background-color: var(--sec-background-color);
 }
 
 .Landing_Header_Container {
   max-width: 1920px;
-  padding: 12px 16px;
+  padding: 30px 16px;
 }
 
 .Landing_Header_Content {
@@ -17,7 +17,7 @@
 }
 
 .logo-image {
-  width: 210px;
+  width: 250px;
   height: auto; /* Maintains aspect ratio */
   padding-left: 5px;
   padding-bottom: 5px;
@@ -29,7 +29,7 @@
 
 .Landing_Header_Nav_List {
   display: flex;
-  gap: 26px;
+  gap: 30px;
   align-items: center;
   line-height: 20px;
   font-size: 16px;
@@ -51,14 +51,14 @@
 
 .Landing_Header_Button {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   align-items: center;
 }
 
 .Landing_Login_button,
 .Landing_Register_button {
   border-radius: 13px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 20px;
   font-weight: 500;
   transition-property: background-color, border-color, color, fill, stroke,
@@ -99,7 +99,7 @@
 
 @media (min-width: 1024px) {
   .Landing_Header_Container {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 70px;
+    padding-right: 70px;
   }
 }

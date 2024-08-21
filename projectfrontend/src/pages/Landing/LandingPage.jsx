@@ -6,6 +6,7 @@ import FeatureCard from "./FeatureCard.jsx";
 import logo from "../../assets/AI-LifeConnect_Logo.png";
 import Slogans from "../../assets/Slogans_Logo.svg";
 import imgPlaceHolder from "../../assets/ImagePlaceHolder.svg";
+import Illustrator from "../../assets/Health professional team-amico.svg";
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -21,8 +22,6 @@ function LandingPage() {
       {/* ======================================================================================================================================================================= */}
 
       <section className="Landing_Main_Body">
-        <div className="Landing_Main_Body_filter"></div>
-
         <div className="Landing_Main_Body_Container">
           <div className="Landing_Main_Body_Content">
             <div className="Landing_Main_Body_Slogans_Container">
@@ -33,11 +32,14 @@ function LandingPage() {
               <img src={Slogans} alt="Slogans-Logo" className="Slogans-logo" />
             </div>
 
-            <h1 className="Landing_Main_Body_Title">Helping Hands</h1>
+            <h1 className="Landing_Main_Body_Title">
+              Caring Companions, Dedicated to Supporting the Elderly
+            </h1>
 
             <p className="Landing_Main_Body_text">
-              Our mission is to provide compassionate care and support for the
-              elderly!
+              our mission is to deliver heartfelt care and unwavering support to
+              the elderly, ensuring they live their golden years with dignity
+              and joy.
             </p>
 
             <button
@@ -45,8 +47,12 @@ function LandingPage() {
               type="button"
               onClick={() => handleNavigation("/register")}
             >
-              Get Started with AI-LifeConnect
+              Start Your Journey
             </button>
+          </div>
+
+          <div className="Landing_Main_Body_Illustrator">
+            <img src={Illustrator} alt="Elderly-Illustrator" />
           </div>
         </div>
       </section>
