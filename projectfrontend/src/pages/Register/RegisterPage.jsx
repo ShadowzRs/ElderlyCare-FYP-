@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import logo from "../../assets/AI-LifeConnect_Logo.png";
 import RegisterImg from "../../assets/Online Doctor-rafiki-B.svg";
-import Header_v2 from "../../component/Header/Header-v2.jsx";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
@@ -79,7 +79,7 @@ const RegisterPage = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     id="ElderlyPass"
-                    className="Register-Input-Box"
+                    className="Register-Input-Box-Pass"
                     required
                   />
                   <span
@@ -102,7 +102,7 @@ const RegisterPage = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     id="ElderlyPassConfirm"
-                    className="Register-Input-Box"
+                    className="Register-Input-Box-Pass"
                     required
                   />
                   <span

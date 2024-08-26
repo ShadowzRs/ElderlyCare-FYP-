@@ -83,11 +83,11 @@
   color: #374151;
 }
 
-.Register-Input-Box {
+.Register-Input-Box,
+.Register-Input-Box-Pass {
   width: 100%;
   margin-top: 4px;
   margin-bottom: 19px;
-  padding: 11px 10px;
   border-radius: 8px;
   border-color: #e5e7eb;
   border: rgba(0, 0, 0, 0.05) 1px solid;
@@ -100,6 +100,14 @@ input[type="text"] {
   font-size: 16px;
 }
 
+.Register-Input-Box{
+  padding: 11px 10px;
+}
+
+.Register-Input-Box-Pass{
+  padding: 11px 55px 11px 10px;
+}
+
 .Password-Toggle-Icon {
   position: absolute;
   top: 53%;
@@ -107,7 +115,8 @@ input[type="text"] {
   transform: translateY(-50%);
   cursor: pointer;
   color: var(--secondary-color);
-  font-size: 20px;
+  font-size: 21px;
+  padding-right: 5px;
 }
 
 .Password-Toggle-Icon:hover {
