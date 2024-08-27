@@ -71,7 +71,7 @@
 }
 
 .Register-Items-Age {
-  width: 80px;
+  width: 130px;
 }
 
 .Register-Input-Label {
@@ -81,13 +81,13 @@
   font-weight: 400;
   line-height: 20px;
   color: #374151;
+  padding-top: 19px;
 }
 
 .Register-Input-Box,
 .Register-Input-Box-Pass {
   width: 100%;
   margin-top: 4px;
-  margin-bottom: 19px;
   border-radius: 8px;
   border-color: #e5e7eb;
   border: rgba(0, 0, 0, 0.05) 1px solid;
@@ -96,15 +96,11 @@
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
-input[type="text"] {
-  font-size: 16px;
-}
-
-.Register-Input-Box{
+.Register-Input-Box {
   padding: 11px 10px;
 }
 
-.Register-Input-Box-Pass{
+.Register-Input-Box-Pass {
   padding: 11px 55px 11px 10px;
 }
 
@@ -123,11 +119,54 @@ input[type="text"] {
   color: #333;
 }
 
+.Register-Input-Wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.RoleContainer{
+  display: flex;
+  flex-direction: row;
+  width: 43%;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding-right: 10px;
+  border-color: #e5e7eb;
+  border: rgba(0, 0, 0, 0.05) 1px solid;
+  color: #374151;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.RoleOption {
+  margin: 10px 25px;
+}
+
+.RoleOption input[type="radio"] {
+  margin-right: 10px;
+}
+
+.RoleInputLabel {
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .Register-Notice {
   font-size: 15px;
   line-height: 20px;
   color: #6b7280;
-  padding-top: 40px;
+  padding-top: 35px;
+}
+
+input[type="text"] {
+  font-size: 16px;
+}
+
+.Error-Message {
+  color: red;
+  font-size: 13px;
+  margin-top: 2px;
 }
 
 /* Register Button */
