@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HealthcareProvidersRepository extends JpaRepository<HealthcareProviders,String>{
+    boolean existsByEmail(String email);
 }

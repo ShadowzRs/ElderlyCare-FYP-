@@ -127,10 +127,8 @@
 .RoleContainer{
   display: flex;
   flex-direction: row;
-  width: 43%;
-  justify-content: space-between;
   margin-top: 4px;
-  padding-right: 10px;
+  padding-right: 5px;
   border-color: #e5e7eb;
   border: rgba(0, 0, 0, 0.05) 1px solid;
   color: #374151;
@@ -205,8 +203,8 @@ input[type="text"] {
   color: var(--secondary-color);
 }
 
-.Register-Already-have-Acc {
-  color: var(--black);
+.Already-have-Acc {
+  color: var(--primary-color);
   text-decoration: underline;
 }
 

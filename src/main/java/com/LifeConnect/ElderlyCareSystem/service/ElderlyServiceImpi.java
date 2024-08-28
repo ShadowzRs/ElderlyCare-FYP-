@@ -15,4 +15,9 @@ public class ElderlyServiceImpi implements ElderlyService {
     public ElderlyUser saveElderly(ElderlyUser elderly) {
         return elderlyRepo.save(elderly);
     }
+
+    public boolean doesEmailExist(String email) {
+        return elderlyRepo.existsByEmail(email);
+    }
+
 }

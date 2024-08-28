@@ -18,6 +18,7 @@ const RegisterPage = () => {
     phone: "",
     age: "",
     role: "",
+    healthProviderSpecialty: "",
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -35,128 +36,183 @@ const RegisterPage = () => {
     });
   };
 
-  const validate = () => {
+  const validate = async () => {
     let errors = {};
+    let isValid = true;
 
     // First Name Validation
     if (!formData.firstName.trim()) {
       errors.firstName = "First Name is required";
+      isValid = false;
     }
 
     // Last Name Validation
     if (!formData.lastName.trim()) {
       errors.lastName = "Last Name is required";
+      isValid = false;
     }
 
     // Password Validation
     if (!formData.password) {
       errors.password = "Password is required";
+      isValid = false;
     } else if (formData.password.length < 6) {
       errors.password = "Password is less than 6 characters";
+      isValid = false;
     }
 
     // Password Confirmation Validation
     if (!formData.confirmPassword) {
       errors.confirmPassword = "Password confirmation is required";
+      isValid = false;
     } else if (formData.confirmPassword !== formData.password) {
       errors.confirmPassword = "Passwords do not match";
+      isValid = false;
     }
 
     // Email Validation
     if (!formData.email) {
       errors.email = "Email is required";
+      isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "Email address is invalid";
+      isValid = false;
     }
 
     // Gender Validation
     if (!formData.gender) {
       errors.gender = "Gender is required";
+      isValid = false;
     }
 
     // Phone Number Validation
     if (!formData.phone) {
       errors.phone = "Phone number is required";
+      isValid = false;
     } else if (!/^0\d{2}-\d{3}-\d{4}$/.test(formData.phone)) {
       errors.phone = "Wrong format [0XX-XXX-XXXX]";
+      isValid = false;
     }
 
     // Age Validation
     if (!formData.age) {
       errors.age = "Age is required";
+      isValid = false;
     } else if (
       !/^\d+$/.test(formData.age) ||
       formData.age < 0 ||
       formData.age > 120
     ) {
       errors.age = "Please enter a valid age";
+      isValid = false;
     }
 
     // Role Validation
     if (!formData.role) {
       errors.role = "Role is required";
+      isValid = false;
     } else if (
       formData.role !== "Elderly" &&
       formData.role !== "HealthcareProvider"
     ) {
       errors.role = "Invalid role selected";
+      isValid = false;
+    }
+
+    if (
+      formData.role === "HealthcareProvider" &&
+      !formData.healthProviderSpecialty
+    ) {
+      errors.healthProviderSpecialty = "Required for Healthcare Providers";
+      isValid = false;
     }
 
     setFormErrors(errors);
-    return Object.keys(errors).length === 0;
+    return isValid;
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      let roleEndpoint = "";
-      let userData = {};
 
-      if (formData.role === "Elderly") {
-        roleEndpoint = "http://localhost:8080/elderly/add";
-        userData = {
-          firstname: formData.firstName,
-          lastname: formData.lastName,
-          age: formData.age,
-          email: formData.email,
-          phonenumber: formData.phone,
-          gender: formData.gender,
-          password: formData.confirmPassword,
-        };
-      }
-      // else if (formData.role === "HealthcareProvider") {
-      //   roleEndpoint = "/api/register-healthcare-provider";
-      //   userData = {
-      //     firstName: formData.firstName,
-      //     lastName: formData.lastName,
-      //     email: formData.email,
-      //     phone: formData.phone,
-      //     gender: formData.gender,
-      //     password: formData.confirmPassword,
-      //     role: "unselected",
-      //   };
-      // }
+    const isValid = await validate();
+    if (!isValid) {
+      return; // Stop if validation fails
+    }
 
-      try {
-        const response = await fetch(roleEndpoint, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
+    let roleEndpoint = "";
+    let emailCheckEndpoint = "";
+    let userData = {};
+
+    if (formData.role === "Elderly") {
+      if (formData.age < 50) {
+        setFormErrors({
+          age: "You must be 50 years or older to register as Elderly",
         });
-
-        if (response.ok) {
-          // Navigate to a different page on success
-          console.log("Form submitted successfully:", formData);
-          navigate("/login");
-        } else {
-          const errorData = await response.json();
-          console.error("Error submitting the form:", errorData);
-        }
-      } catch (error) {
-        console.error("Error submitting the form:", error);
+        return; // Stop the submission
       }
+
+      emailCheckEndpoint = `http://localhost:8080/elderly/check-email?email=${formData.email}`;
+      roleEndpoint = "http://localhost:8080/elderly/add";
+      userData = {
+        firstname: formData.firstName,
+        lastname: formData.lastName,
+        password: formData.confirmPassword,
+        email: formData.email,
+        age: formData.age,
+        gender: formData.gender,
+        phonenumber: formData.phone,
+      };
+    } else if (formData.role === "HealthcareProvider") {
+      emailCheckEndpoint = `http://localhost:8080/healthcareprovider/check-email?email=${formData.email}`;
+      roleEndpoint = "http://localhost:8080/healthcareprovider/add";
+      userData = {
+        firstname: formData.firstName,
+        lastname: formData.lastName,
+        password: formData.confirmPassword,
+        email: formData.email,
+        age: formData.age,
+        gender: formData.gender,
+        phonenumber: formData.phone,
+        roles: formData.healthProviderSpecialty, // Ensure this field is handled in the form
+      };
+    } else {
+      setFormErrors({ role: "Role is required" });
+      return; // To Stop submission
+    }
+
+    // Check if email exists for the selected role
+    try {
+      const emailResponse = await fetch(emailCheckEndpoint);
+      const emailData = await emailResponse.json();
+      if (emailData.exists) {
+        setFormErrors({ email: "Email is already in use" });
+        return;
+      }
+    } catch (error) {
+      console.error("Error checking email:", error);
+      setFormErrors({ email: "Error checking email" });
+      return;
+    }
+
+    // Submit
+    try {
+      const response = await fetch(roleEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        console.log("Form submitted successfully:", formData);
+        navigate("/login"); // Navigate on successful submission
+      } else {
+        const errorData = await response.json();
+        console.error("Error submitting the form:", errorData);
+      }
+    } catch (error) {
+      console.error("Error submitting the form:", error);
     }
   };
 
@@ -375,7 +431,7 @@ const RegisterPage = () => {
                 )}
               </div>
 
-              <div className="Register-Items">
+              <div>
                 <label className="Register-Input-Label">
                   Select your role:
                 </label>
@@ -417,6 +473,54 @@ const RegisterPage = () => {
                   <div className="Error-Message">{formErrors.role}</div>
                 )}
               </div>
+
+              {/* Conditional Rendering for Healthcare Provider */}
+
+              {formData.role === "HealthcareProvider" && (
+                <div>
+                  <label className="Register-Input-Label">
+                    Role Specialty:
+                  </label>
+                  <div className="RoleContainer">
+                    <div className="RoleOption">
+                      <input
+                        type="radio"
+                        id="caregiver"
+                        name="healthProviderSpecialty"
+                        value="Caregiver"
+                        checked={
+                          formData.healthProviderSpecialty === "Caregiver"
+                        }
+                        onChange={handleChange}
+                        required
+                      />
+                      <label htmlFor="caregiver" className="RoleInputLabel">
+                        Caregiver
+                      </label>
+                    </div>
+
+                    <div className="RoleOption">
+                      <input
+                        type="radio"
+                        id="doctor"
+                        name="healthProviderSpecialty"
+                        value="Doctor"
+                        checked={formData.healthProviderSpecialty === "Doctor"}
+                        onChange={handleChange}
+                        required
+                      />
+                      <label htmlFor="doctor" className="RoleInputLabel">
+                        Doctor
+                      </label>
+                    </div>
+                  </div>
+                  {formErrors.healthProviderSpecialty && (
+                    <div className="Error-Message">
+                      {formErrors.healthProviderSpecialty}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </form>
 
@@ -436,7 +540,7 @@ const RegisterPage = () => {
 
             <p>
               Already have an account?{" "}
-              <Link to="/login" className="Register-Already-have-Acc">
+              <Link to="/login" className="Already-have-Acc">
                 Log in
               </Link>
             </p>

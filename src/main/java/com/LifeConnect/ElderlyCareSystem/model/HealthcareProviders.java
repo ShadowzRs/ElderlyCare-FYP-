@@ -10,6 +10,7 @@ public class HealthcareProviders {
     @Id
     private String id;
     private String firstname, lastname, password, email, gender, phonenumber, roles;
+    private int age;
 
     public HealthcareProviders() {
         this.id = generateId();
@@ -78,5 +79,13 @@ public class HealthcareProviders {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

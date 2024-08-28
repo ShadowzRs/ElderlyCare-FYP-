@@ -1,7 +1,8 @@
 package com.LifeConnect.ElderlyCareSystem.controller;
 
 import com.LifeConnect.ElderlyCareSystem.model.ElderlyUser;
-import com.LifeConnect.ElderlyCareSystem.service.ElderlyService;
+import com.LifeConnect.ElderlyCareSystem.model.HealthcareProviders;
+import com.LifeConnect.ElderlyCareSystem.service.HealthcareProvidersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -10,24 +11,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/elderly")
+@RequestMapping("/healthcareprovider")
 @CrossOrigin
-public class ElderlyController {
+public class HealthcareProvidersController {
+
     @Autowired
-    private ElderlyService elderlyService;
+    private HealthcareProvidersService HProviderService;
 
     @PostMapping("/add")
-    public String add(@RequestBody ElderlyUser elderly){
-        elderlyService.saveElderly(elderly);
-        return "New Elderly User is Added";
+    public String add(@RequestBody HealthcareProviders Hproviders){
+        HProviderService.saveHProviders(Hproviders);
+        return "New HealthcareProvider User is Added";
     }
 
     @GetMapping("/check-email")
     public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestParam("email") String email) {
-        boolean emailExists = elderlyService.doesEmailExist(email);
+        boolean emailExists = HProviderService.doesEmailExist(email);
         Map<String, Boolean> response = new HashMap<>();
         response.put("exists", emailExists);
         return ResponseEntity.ok(response);
     }
-
 }

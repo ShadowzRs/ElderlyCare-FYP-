@@ -101,10 +101,10 @@ const LoginPage = () => {
             </button>
 
             <p className="text-center text-sm text-gray-500">
-              No account?
-              <a className="underline" href="#">
+              No account?{" "}
+              <Link className="Already-have-Acc" to="/register">
                 Sign up
-              </a>
+              </Link>
             </p>
           </form>
         </div>
