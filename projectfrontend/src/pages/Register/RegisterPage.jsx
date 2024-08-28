@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import logo from "../../assets/AI-LifeConnect_Logo.png";
 import RegisterImg from "../../assets/Online Doctor-rafiki-B.svg";
 import "./RegisterPage.css";
+import Notification from "../../component/Notification/Notification.jsx";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -23,9 +24,18 @@ const RegisterPage = () => {
 
   const [formErrors, setFormErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [notification, setNotification] = useState(null);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const showNotification = (message1, message2) => {
+    setNotification({ message1, message2 });
+  };
+
+  const closeNotification = () => {
+    setNotification(null);
   };
 
   const handleChange = (e) => {
@@ -77,6 +87,22 @@ const RegisterPage = () => {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "Email address is invalid";
       isValid = false;
+    } else {
+      // Check if email exists
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/check-email?email=${formData.email}`
+        );
+        const data = await response.json();
+        if (data.exists) {
+          errors.email = "Email is already in use";
+          isValid = false;
+        }
+      } catch (error) {
+        console.error("Error checking email:", error);
+        errors.email = "Error checking email";
+        isValid = false;
+      }
     }
 
     // Gender Validation
@@ -140,7 +166,7 @@ const RegisterPage = () => {
     }
 
     let roleEndpoint = "";
-    let emailCheckEndpoint = "";
+    //let emailCheckEndpoint = "";
     let userData = {};
 
     if (formData.role === "Elderly") {
@@ -151,7 +177,6 @@ const RegisterPage = () => {
         return; // Stop the submission
       }
 
-      emailCheckEndpoint = `http://localhost:8080/elderly/check-email?email=${formData.email}`;
       roleEndpoint = "http://localhost:8080/elderly/add";
       userData = {
         firstname: formData.firstName,
@@ -163,7 +188,6 @@ const RegisterPage = () => {
         phonenumber: formData.phone,
       };
     } else if (formData.role === "HealthcareProvider") {
-      emailCheckEndpoint = `http://localhost:8080/healthcareprovider/check-email?email=${formData.email}`;
       roleEndpoint = "http://localhost:8080/healthcareprovider/add";
       userData = {
         firstname: formData.firstName,
@@ -173,28 +197,13 @@ const RegisterPage = () => {
         age: formData.age,
         gender: formData.gender,
         phonenumber: formData.phone,
-        roles: formData.healthProviderSpecialty, // Ensure this field is handled in the form
+        roles: formData.healthProviderSpecialty,
       };
     } else {
       setFormErrors({ role: "Role is required" });
       return; // To Stop submission
     }
 
-    // Check if email exists for the selected role
-    try {
-      const emailResponse = await fetch(emailCheckEndpoint);
-      const emailData = await emailResponse.json();
-      if (emailData.exists) {
-        setFormErrors({ email: "Email is already in use" });
-        return;
-      }
-    } catch (error) {
-      console.error("Error checking email:", error);
-      setFormErrors({ email: "Error checking email" });
-      return;
-    }
-
-    // Submit
     try {
       const response = await fetch(roleEndpoint, {
         method: "POST",
@@ -205,8 +214,15 @@ const RegisterPage = () => {
       });
 
       if (response.ok) {
-        console.log("Form submitted successfully:", formData);
-        navigate("/login"); // Navigate on successful submission
+        // Show notification on success
+        showNotification(
+          "Successfully Register",
+          "You have successfully registered your account."
+        );
+        // Navigate to a different page on success
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000); // Navigate after 3 seconds
       } else {
         const errorData = await response.json();
         console.error("Error submitting the form:", errorData);
@@ -547,6 +563,13 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+      {notification && (
+        <Notification
+          message1={notification.message1}
+          message2={notification.message2}
+          onClose={closeNotification}
+        />
+      )}
     </section>
   );
 };

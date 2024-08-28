@@ -15,9 +15,4 @@ public class HealthcareProvidersServiceImpi implements HealthcareProvidersServic
     public HealthcareProviders saveHProviders(HealthcareProviders Hproviders) {
         return HProviderRepo.save(Hproviders);
     }
-
-    @Override
-    public boolean doesEmailExist(String email) {
-        return HProviderRepo.existsByEmail(email);
-    }
 }

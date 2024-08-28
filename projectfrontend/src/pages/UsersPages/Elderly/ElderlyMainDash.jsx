@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const MainDash = () => {
   return (
     <>
-      <h1>THIS IS THE MAIN DASHBOARD</h1>
+      <h1>THIS IS THE ELDERLY MAIN DASHBOARD</h1>
     </>
   );
 };

@@ -23,12 +23,4 @@ public class HealthcareProvidersController {
         HProviderService.saveHProviders(Hproviders);
         return "New HealthcareProvider User is Added";
     }
-
-    @GetMapping("/check-email")
-    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestParam("email") String email) {
-        boolean emailExists = HProviderService.doesEmailExist(email);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("exists", emailExists);
-        return ResponseEntity.ok(response);
-    }
 }

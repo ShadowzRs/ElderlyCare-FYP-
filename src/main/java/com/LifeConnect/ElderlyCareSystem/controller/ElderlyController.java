@@ -21,13 +21,4 @@ public class ElderlyController {
         elderlyService.saveElderly(elderly);
         return "New Elderly User is Added";
     }
-
-    @GetMapping("/check-email")
-    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestParam("email") String email) {
-        boolean emailExists = elderlyService.doesEmailExist(email);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("exists", emailExists);
-        return ResponseEntity.ok(response);
     }
-
-}
