@@ -11,10 +11,6 @@ import Illustrator from "../../assets/Health professional team-amico.svg";
 function LandingPage() {
   const navigate = useNavigate();
 
-  const handleNavigation = (route) => {
-    navigate(route);
-  };
-
   return (
     <>
       <Header />
@@ -45,7 +41,7 @@ function LandingPage() {
             <button
               className="Landing_Main_Body_Button"
               type="button"
-              onClick={() => handleNavigation("/register")}
+              onClick={() => navigate("/register")}
             >
               Start Your Journey
             </button>
@@ -134,7 +130,7 @@ function LandingPage() {
             </p>
             <form className="subscribe-form">
               <input type="email" placeholder="Enter your email address" />
-              <button type="submit" onClick={() => handleNavigation("#")}>
+              <button type="submit" onClick={() => navigate("#")}>
                 Subscribe
               </button>
             </form>

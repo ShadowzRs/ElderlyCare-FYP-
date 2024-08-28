@@ -19,6 +19,7 @@ const RegisterPage = () => {
     age: "",
     role: "",
   });
+
   const [formErrors, setFormErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
@@ -76,7 +77,7 @@ const RegisterPage = () => {
     // Phone Number Validation
     if (!formData.phone) {
       errors.phone = "Phone number is required";
-    } else if (!/^\d{3}-\d{3}-\d{4}$/.test(formData.phone)) {
+    } else if (!/^0\d{2}-\d{3}-\d{4}$/.test(formData.phone)) {
       errors.phone = "Wrong format [0XX-XXX-XXXX]";
     }
 
@@ -105,12 +106,57 @@ const RegisterPage = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (validate()) {
-      // Form is valid, proceed with the submission
-      console.log("Form submitted successfully:", formData);
-      // Additional submission logic here (e.g., API call)
+      let roleEndpoint = "";
+      let userData = {};
+
+      if (formData.role === "Elderly") {
+        roleEndpoint = "http://localhost:8080/elderly/add";
+        userData = {
+          firstname: formData.firstName,
+          lastname: formData.lastName,
+          age: formData.age,
+          email: formData.email,
+          phonenumber: formData.phone,
+          gender: formData.gender,
+          password: formData.confirmPassword,
+        };
+      }
+      // else if (formData.role === "HealthcareProvider") {
+      //   roleEndpoint = "/api/register-healthcare-provider";
+      //   userData = {
+      //     firstName: formData.firstName,
+      //     lastName: formData.lastName,
+      //     email: formData.email,
+      //     phone: formData.phone,
+      //     gender: formData.gender,
+      //     password: formData.confirmPassword,
+      //     role: "unselected",
+      //   };
+      // }
+
+      try {
+        const response = await fetch(roleEndpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        });
+
+        if (response.ok) {
+          // Navigate to a different page on success
+          console.log("Form submitted successfully:", formData);
+          navigate("/login");
+        } else {
+          const errorData = await response.json();
+          console.error("Error submitting the form:", errorData);
+        }
+      } catch (error) {
+        console.error("Error submitting the form:", error);
+      }
     }
   };
 
@@ -296,7 +342,7 @@ const RegisterPage = () => {
                   name="phone"
                   className="Register-Input-Box"
                   placeholder="0XX-XXX-XXXX"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  pattern="^0\d{2}-\d{3}-\d{4}$"
                   value={formData.phone}
                   onChange={handleChange}
                   required

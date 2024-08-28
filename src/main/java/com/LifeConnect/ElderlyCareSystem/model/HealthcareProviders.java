@@ -9,19 +9,10 @@ import java.time.format.DateTimeFormatter;
 public class HealthcareProviders {
     @Id
     private String id;
-    private String firstname, lastname, password, email, gender, roles;
-    private int age, phonenumber;
+    private String firstname, lastname, password, email, gender, phonenumber, roles;
 
-    public HealthcareProviders(String id, String firstname, String lastname, String password, String email, int age, String gender, int phonenumber, String roles) {
+    public HealthcareProviders() {
         this.id = generateId();
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.password = password;
-        this.email = email;
-        this.age = age;
-        this.gender = gender;
-        this.phonenumber = phonenumber;
-        this.roles = roles;
     }
 
     private String generateId() {
@@ -65,14 +56,6 @@ public class HealthcareProviders {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -81,11 +64,11 @@ public class HealthcareProviders {
         this.gender = gender;
     }
 
-    public int getPhonenumber() {
+    public String getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(int phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 

@@ -10,8 +10,8 @@ public class ElderlyUser {
     // make the ID a primary key
     @Id
     private String id;
-    private String firstname, lastname, password, email, gender;
-    private int age, phonenumber;
+    private String firstname, lastname, password, email, gender, phonenumber;
+    private int age;;
 
     // Default constructor required by JPA/Hibernate
     public ElderlyUser() {
@@ -75,11 +75,11 @@ public class ElderlyUser {
         this.gender = gender;
     }
 
-    public int getPhonenumber() {
+    public String getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(int phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 }
