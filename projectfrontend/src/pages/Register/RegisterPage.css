@@ -9,8 +9,8 @@
 .Register-Left-Container {
   position: relative;
   align-content: center;
-  width: 35%;
-  background-color: #6f3afa;
+  width: 30%;
+  background-color: #5f22d9;
   color: white;
 }
 
@@ -41,7 +41,7 @@
 
 .Register-Container {
   background-color: var(--sec-background-color);
-  width: 65%;
+  width: 70%;
   padding: 50px;
 }
 
@@ -52,7 +52,7 @@
 
 /* Registration Section */
 .Register-Content {
-  padding: 0px 80px;
+  padding: 0px 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,5 +1,7 @@
 package com.LifeConnect.ElderlyCareSystem.service;
 
+import com.LifeConnect.ElderlyCareSystem.model.ElderlyUser;
+import com.LifeConnect.ElderlyCareSystem.model.HealthcareProvider;
 import com.LifeConnect.ElderlyCareSystem.repository.ElderlyRepository;
 import com.LifeConnect.ElderlyCareSystem.repository.HealthcareProvidersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +22,7 @@ public class PublicServiceImpi implements PublicService {
         boolean emailExistsInHealthcareProvider = HProviderRepo.existsByEmail(email);
         return emailExistsInElderly || emailExistsInHealthcareProvider;
     }
+
+
 
 }

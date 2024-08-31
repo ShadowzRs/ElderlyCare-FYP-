@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
-public class HealthcareProviders {
+public class HealthcareProvider {
     @Id
     private String id;
     private String firstname, lastname, password, email, gender, phonenumber, roles;
     private int age;
 
-    public HealthcareProviders() {
+    public HealthcareProvider() {
         this.id = generateId();
     }
 

@@ -1,6 +1,6 @@
 package com.LifeConnect.ElderlyCareSystem.service;
 
-import com.LifeConnect.ElderlyCareSystem.model.HealthcareProviders;
+import com.LifeConnect.ElderlyCareSystem.model.HealthcareProvider;
 import com.LifeConnect.ElderlyCareSystem.repository.HealthcareProvidersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class HealthcareProvidersServiceImpi implements HealthcareProvidersServic
     private HealthcareProvidersRepository HProviderRepo;
 
     @Override
-    public HealthcareProviders saveHProviders(HealthcareProviders Hproviders) {
+    public HealthcareProvider saveHProviders(HealthcareProvider Hproviders) {
         return HProviderRepo.save(Hproviders);
     }
 }

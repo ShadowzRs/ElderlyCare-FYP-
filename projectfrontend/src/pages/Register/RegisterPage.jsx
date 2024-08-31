@@ -4,8 +4,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import logo from "../../assets/AI-LifeConnect_Logo.png";
 import RegisterImg from "../../assets/Online Doctor-rafiki-B.svg";
-import "./RegisterPage.css";
 import Notification from "../../component/Notification/Notification.jsx";
+import "./RegisterPage.css";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -166,7 +166,6 @@ const RegisterPage = () => {
     }
 
     let roleEndpoint = "";
-    //let emailCheckEndpoint = "";
     let userData = {};
 
     if (formData.role === "Elderly") {

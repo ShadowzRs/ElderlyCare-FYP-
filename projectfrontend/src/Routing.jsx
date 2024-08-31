@@ -16,7 +16,7 @@ function routing() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/elderly" element={<ElderlyMainDash />} />
+        <Route path="/elderly-home" element={<ElderlyMainDash />} />
         <Route path="/caregiver" element={<CaregiverMainDash />} />
         <Route path="/doctor" element={<HealthProfMainDash />} />
       </Routes>

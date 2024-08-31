@@ -15,4 +15,13 @@ public class ElderlyServiceImpi implements ElderlyService {
     public ElderlyUser saveElderly(ElderlyUser elderly) {
         return elderlyRepo.save(elderly);
     }
+
+    @Override
+    public boolean authenticateUser(String email, String password) {
+        ElderlyUser elderlyUser = elderlyRepo.findByEmail(email);
+        if (elderlyUser != null) {
+            return password.equals(elderlyUser.getPassword());
+        }
+        return false; // Return false cuz not found
+    }
 }

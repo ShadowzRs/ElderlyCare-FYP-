@@ -4,4 +4,5 @@ import com.LifeConnect.ElderlyCareSystem.model.ElderlyUser;
 
 public interface ElderlyService {
     public ElderlyUser saveElderly(ElderlyUser elderlyUser);
+    boolean authenticateUser(String email, String password);
 }

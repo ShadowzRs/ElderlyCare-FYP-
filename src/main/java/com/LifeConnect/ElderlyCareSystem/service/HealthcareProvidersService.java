@@ -1,7 +1,7 @@
 package com.LifeConnect.ElderlyCareSystem.service;
 
-import com.LifeConnect.ElderlyCareSystem.model.HealthcareProviders;
+import com.LifeConnect.ElderlyCareSystem.model.HealthcareProvider;
 
 public interface HealthcareProvidersService {
-    public HealthcareProviders saveHProviders(HealthcareProviders Hproviders);
+    public HealthcareProvider saveHProviders(HealthcareProvider Hproviders);
 }

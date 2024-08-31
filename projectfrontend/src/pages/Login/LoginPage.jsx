@@ -1,92 +1,182 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './FormStyles.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+import Notification from "../../component/Notification/Notification.jsx";
+import "./LoginPage.css";
 
 const SignInForm = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [notification, setNotification] = useState(null);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const showNotification = (message1, message2) => {
+    setNotification({ message1, message2 });
+  };
+
+  const closeNotification = () => {
+    setNotification(null);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const { email, password } = formData;
+
+    try {
+      const response = await fetch("http://localhost:8080/elderly/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const isAuthenticated = await response.json();
+
+      if (isAuthenticated) {
+        navigate("/elderly-home");
+      } else {
+        // If authentication fails, show a notification or error message
+        showNotification("Login failed", "Invalid email or password");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      showNotification("An error occurred", "Please try again.");
+    }
+  };
+
   return (
-    <div className="form-container">
-      <div className="form-wrapper">
-        <h1 className="form-header">Get started today</h1>
+    <section className="form-container">
+      <div className="form-wrapper-left">
+        <div className="form-text-container">
+          <h1 className="form-text-header">Get started today!</h1>
 
-        <p className="form-subheader">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati
-          sunt dolores deleniti inventore quaerat mollitia?
-        </p>
+          <p className="form-text-caption">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero
+            nulla eaque error neque ipsa culpa autem, at itaque nostrum!
+          </p>
+        </div>
 
-        <form action="#" className="form">
-          <p className="form-title">Sign in to your account</p>
-
-          <div className="input-group">
+        <form className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <div>
             <label htmlFor="email" className="sr-only">
               Email
             </label>
 
-            <input
-              type="email"
-              className="input-group-input"
-              placeholder="Enter email"
-            />
-            <span className="input-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                />
-              </svg>
-            </span>
+            <div className="relative">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                placeholder="Enter email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+
+              <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-4 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                  />
+                </svg>
+              </span>
+            </div>
           </div>
 
-          <div className="input-group">
+          <div>
             <label htmlFor="password" className="sr-only">
               Password
             </label>
 
-            <input
-              type="password"
-              className="input-group-input"
-              placeholder="Enter password"
-            />
-            <span className="input-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                />
-              </svg>
-            </span>
+            <div className="relative">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                placeholder="Enter password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+
+              <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-4 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+              </span>
+            </div>
           </div>
 
-          <button type="submit" className="submit-btn">
-            Sign in
-          </button>
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-gray-500">
+              No account?{" "}
+              <Link className="Already-have-Acc" to="/register">
+                Sign up
+              </Link>
+            </p>
 
-          <p className="sign-up-link">
-            No account?{" "}
-            <Link to="/register">Sign up</Link>
-          </p>
+            <button
+              type="submit"
+              className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+              onClick={handleLogin}
+            >
+              Sign in
+            </button>
+          </div>
         </form>
       </div>
-    </div>
+
+      <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
+        <h1>Photo</h1>
+      </div>
+    </section>
   );
 };
 
