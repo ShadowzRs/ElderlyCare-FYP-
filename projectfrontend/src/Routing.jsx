@@ -17,8 +17,8 @@ function routing() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/elderly-home" element={<ElderlyMainDash />} />
-        <Route path="/caregiver" element={<CaregiverMainDash />} />
-        <Route path="/doctor" element={<HealthProfMainDash />} />
+        <Route path="/caregiver-home" element={<CaregiverMainDash />} />
+        <Route path="/doctor-home" element={<HealthProfMainDash />} />
       </Routes>
     </BrowserRouter>
   );

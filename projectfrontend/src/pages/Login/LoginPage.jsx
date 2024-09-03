@@ -41,27 +41,36 @@ const SignInForm = () => {
     const { email, password } = formData;
 
     try {
-      const response = await fetch("http://localhost:8080/elderly/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+        const response = await fetch("http://localhost:8080/elderly/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
 
-      const isAuthenticated = await response.json();
+        // Check if the response status is 200 OK
+        if (response.ok) {
+            const role = await response.text();
 
-      if (isAuthenticated) {
-        navigate("/elderly-home");
-      } else {
-        // If authentication fails, show a notification or error message
-        showNotification("Login failed", "Invalid email or password");
-      }
+            // Check if the response body contains a valid role
+            if (role !== "false") {
+                // Navigate to the appropriate dashboard based on the role
+                navigate("/elderly-home");
+            } else {
+                // Show a notification if the role is "false"
+                showNotification("Login failed", "Invalid email or password");
+            }
+        } else {
+            // Handle non-200 status codes
+            showNotification("Login failed", "Invalid email or password");
+        }
     } catch (error) {
-      console.error("Error logging in:", error);
-      showNotification("An error occurred", "Please try again.");
+        console.error("Error logging in:", error);
+        showNotification("An error occurred", "Please try again.");
     }
-  };
+};
+
 
   return (
     <section className="form-container">
@@ -173,7 +182,7 @@ const SignInForm = () => {
         </form>
       </div>
 
-      <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
+      <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/4">
         <h1>Photo</h1>
       </div>
     </section>

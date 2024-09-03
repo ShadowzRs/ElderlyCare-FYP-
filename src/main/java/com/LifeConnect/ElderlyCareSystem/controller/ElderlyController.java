@@ -26,7 +26,7 @@ public class ElderlyController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Boolean>> login(@RequestBody LoginRequest loginRequest) {
-        boolean isAuthenticated = elderlyService.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
+        boolean isAuthenticated = elderlyService.Elderly_authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
 
         Map<String, Boolean> response = new HashMap<>();
         response.put("authenticated", isAuthenticated);

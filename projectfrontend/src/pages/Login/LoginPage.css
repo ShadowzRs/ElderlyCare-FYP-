@@ -1,7 +1,7 @@
 .form-container {
   display: flex;
   position: relative;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .form-wrapper-left {
@@ -53,6 +53,6 @@
     padding-right: 2rem;
     padding-top: 6rem;
     padding-bottom: 6rem;
-    width: 50%;
+    width: 70%;
   }
 }

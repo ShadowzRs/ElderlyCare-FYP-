@@ -17,7 +17,7 @@ public class ElderlyServiceImpi implements ElderlyService {
     }
 
     @Override
-    public boolean authenticateUser(String email, String password) {
+    public boolean Elderly_authenticateUser(String email, String password) {
         ElderlyUser elderlyUser = elderlyRepo.findByEmail(email);
         if (elderlyUser != null) {
             return password.equals(elderlyUser.getPassword());

@@ -3,6 +3,6 @@ package com.LifeConnect.ElderlyCareSystem.service;
 import com.LifeConnect.ElderlyCareSystem.model.ElderlyUser;
 
 public interface ElderlyService {
-    public ElderlyUser saveElderly(ElderlyUser elderlyUser);
-    boolean authenticateUser(String email, String password);
+    ElderlyUser saveElderly(ElderlyUser elderlyUser);
+    boolean Elderly_authenticateUser(String email, String password);
 }
