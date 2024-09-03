@@ -41,36 +41,74 @@ const SignInForm = () => {
     const { email, password } = formData;
 
     try {
-        const response = await fetch("http://localhost:8080/elderly/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-        });
+      const response = await fetch("http://localhost:8080/elderly/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-        // Check if the response status is 200 OK
-        if (response.ok) {
-            const role = await response.text();
+      // Check if the response status is 200 OK
+      if (response.ok) {
+        const validate = await response.text();
 
-            // Check if the response body contains a valid role
-            if (role !== "false") {
-                // Navigate to the appropriate dashboard based on the role
-                navigate("/elderly-home");
-            } else {
-                // Show a notification if the role is "false"
-                showNotification("Login failed", "Invalid email or password");
-            }
+        if (validate !== "false") {
+          navigate("/elderly-home");
         } else {
-            // Handle non-200 status codes
-            showNotification("Login failed", "Invalid email or password");
+          showNotification("Login failed", "Invalid email or password");
         }
-    } catch (error) {
-        console.error("Error logging in:", error);
-        showNotification("An error occurred", "Please try again.");
-    }
-};
+      } else {
+        showNotification("Login failed", "Invalid email or password");
+      }
 
+      // Attempt healthcare provider login
+      const role = await attemptHealthcareLogin(email, password);
+      if (role) {
+        if (role === "Doctor") {
+          navigate("/doctor-home");
+        } else if (role === "Caregiver") {
+          navigate("/caregiver-home");
+        } else {
+          showNotification("An error occurred", "Please try again.");
+        }
+        return;
+      }
+
+      // If neither login attempt succeeded, show a notification
+      showNotification("Login failed", "Invalid email or password");
+    } catch (error) {
+      console.error("Login error:", error);
+      showNotification("An error occurred", "Please try again.");
+    }
+  };
+
+  // Function to handle healthcare provider login and return the role
+  const attemptHealthcareLogin = async (email, password) => {
+    try {
+      const response = await fetch(
+        "http://localhost:8080/healthcareprovider/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.authenticated === "true") {
+          return data.role;
+        }
+      }
+    } catch (error) {
+      console.error("Error during healthcare provider login:", error);
+      throw new Error("Healthcare provider login failed");
+    }
+    return null;
+  };
 
   return (
     <section className="form-container">
@@ -173,7 +211,7 @@ const SignInForm = () => {
 
             <button
               type="submit"
-              className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+              className="form-input-button"
               onClick={handleLogin}
             >
               Sign in
@@ -182,8 +220,8 @@ const SignInForm = () => {
         </form>
       </div>
 
-      <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/4">
-        <h1>Photo</h1>
+      <div className="form-wrapper-right">
+        <h1>Welcome Back</h1>
       </div>
     </section>
   );
