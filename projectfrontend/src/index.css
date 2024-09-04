@@ -16,6 +16,7 @@
 
   --primary-color: #6f3afa;
   --secondary-color: #6c757d;
+  --third-color: #4e4eff;
   --sec-background-color: #f7f9ff;
   --overlay-color: rgba(17, 24, 39, 0.5);
   --white: #ffffff;
@@ -34,7 +35,3 @@
   scrollbar-width: thin;
   list-style-type: none;
 }
-
-/* div{
-  border:1px white solid;
-} */

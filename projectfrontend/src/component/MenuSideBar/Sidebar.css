@@ -1,0 +1,47 @@
+.sd-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64px;
+  height: 100vh;
+  padding: 32px 0;
+  background-color: white;
+}
+
+.sd-icon-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.sd-main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.sd-icon-button {
+  padding: 7px;
+  transition: color 200ms;
+  border-radius: 8px;
+}
+
+.sd-icon-button:focus {
+  outline: none;
+}
+
+.sd-icon-button:hover {
+  background-color: #8d8a8a39;
+}
+
+/* Active state styles */
+.sd-icon-button.active {
+  background-color: #4e4effdc;
+  color: white;
+}
+
+/* Optional: Add a specific style for icons inside active buttons */
+.sd-icon-button.active img {
+  filter: brightness(0) invert(1); /* Optionally invert icon color for better visibility */
+}
