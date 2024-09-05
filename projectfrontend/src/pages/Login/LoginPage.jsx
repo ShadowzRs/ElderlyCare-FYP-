@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../UserContext.jsx";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import Notification from "../../component/Notification/Notification.jsx";
 import "./LoginPage.css";
 
 const SignInForm = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const { loginUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [formErrors, setFormErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -41,74 +44,157 @@ const SignInForm = () => {
     const { email, password } = formData;
 
     try {
-      const response = await fetch("http://localhost:8080/elderly/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      // Attempt elderly login
+      const elderlyResponse = await fetch(
+        "http://localhost:8080/elderly/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
-      // Check if the response status is 200 OK
-      if (response.ok) {
-        const validate = await response.text();
+      if (elderlyResponse.ok) {
+        const validate = await elderlyResponse.text();
 
         if (validate !== "false") {
-          navigate("/elderly-home");
+          // Store elderly user data
+          const userData = { email, role: "Elderly" };
+          loginUser(userData); // Save in context and local storage
+          navigate("/home");
+          return;
+        }
+      }
+
+      // Attempt healthcare provider login
+      const providerResponse = await fetch(
+        "http://localhost:8080/healthcareprovider/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
+      if (providerResponse.ok) {
+        const data = await providerResponse.json();
+
+        if (data.authenticated === "true") {
+          const userData = { email, role: data.role };
+          loginUser(userData); // Save user data in context and local storage
+          navigate("/home");
         } else {
           showNotification("Login failed", "Invalid email or password");
         }
       } else {
         showNotification("Login failed", "Invalid email or password");
       }
-
-      // Attempt healthcare provider login
-      const role = await attemptHealthcareLogin(email, password);
-      if (role) {
-        if (role === "Doctor") {
-          navigate("/doctor-home");
-        } else if (role === "Caregiver") {
-          navigate("/caregiver-home");
-        } else {
-          showNotification("An error occurred", "Please try again.");
-        }
-        return;
-      }
-
-      // If neither login attempt succeeded, show a notification
-      showNotification("Login failed", "Invalid email or password");
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Error logging in:", error);
       showNotification("An error occurred", "Please try again.");
     }
   };
 
   // Function to handle healthcare provider login and return the role
-  const attemptHealthcareLogin = async (email, password) => {
-    try {
-      const response = await fetch(
-        "http://localhost:8080/healthcareprovider/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+  // const attemptHealthcareLogin = async (email, password) => {
+  //   try {
+  //     const response = await fetch(
+  //       "http://localhost:8080/healthcareprovider/login",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({ email, password }),
+  //       }
+  //     );
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.authenticated === "true") {
-          return data.role;
-        }
-      }
-    } catch (error) {
-      console.error("Error during healthcare provider login:", error);
-      throw new Error("Healthcare provider login failed");
-    }
-    return null;
-  };
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       if (data.authenticated === "true") {
+  //         return data.role; // "Doctor" or "Caregiver"
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during healthcare provider login:", error);
+  //     throw new Error("Healthcare provider login failed");
+  //   }
+  //   return null;
+  // };
+
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   const { email, password } = formData;
+
+  //   try {
+  //     const response = await fetch("http://localhost:8080/elderly/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ email, password }),
+  //     });
+
+  //     // Check if the response status is 200 OK
+  //     if (response.ok) {
+  //       const validate = await response.text();
+
+  //       if (validate !== "false") {
+  //         navigate("/elderly-home");
+  //       } else {
+  //         showNotification("Login failed", "Invalid email or password");
+  //       }
+  //     } else {
+  //       showNotification("Login failed", "Invalid email or password");
+  //     }
+
+  //     // Attempt healthcare provider login
+  //     const role = await attemptHealthcareLogin(email, password);
+  //     if (role) {
+  //       if (role === "Doctor") {
+  //         navigate("/doctor-home");
+  //       } else if (role === "Caregiver") {
+  //         navigate("/caregiver-home");
+  //       } else {
+  //         showNotification("An error occurred", "Please try again.");
+  //       }
+  //       return;
+  //     }
+
+  //     // If neither login attempt succeeded, show a notification
+  //     showNotification("Login failed", "Invalid email or password");
+  //   } catch (error) {
+  //     console.error("Login error:", error);
+  //     showNotification("An error occurred", "Please try again.");
+  //   }
+  // };
+
+  // // Function to handle healthcare provider login and return the role
+  // const attemptHealthcareLogin = async (email, password) => {
+  //   try {
+  //     const response = await fetch(
+  //       "http://localhost:8080/healthcareprovider/login",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({ email, password }),
+  //       }
+  //     );
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       if (data.authenticated === "true") {
+  //         return data.role;
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during healthcare provider login:", error);
+  //     throw new Error("Healthcare provider login failed");
+  //   }
+  //   return null;
+  // };
 
   return (
     <section className="form-container">

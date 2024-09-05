@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class HealthcareProvider {
     @Id
     private String id;
-    private String firstname, lastname, password, email, gender, phonenumber, roles;
+    private String firstname, lastname, password, email, gender, phonenumber, role;
     private int age;
 
     public HealthcareProvider() {
@@ -73,12 +73,12 @@ public class HealthcareProvider {
         this.phonenumber = phonenumber;
     }
 
-    public String getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRoles(String role) {
+        this.role = role;
     }
 
     public int getAge() {

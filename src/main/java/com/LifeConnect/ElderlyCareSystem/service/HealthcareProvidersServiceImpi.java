@@ -23,7 +23,7 @@ public class HealthcareProvidersServiceImpi implements HealthcareProvidersServic
 
         if (healthcareProvider != null && healthcareProvider.getPassword().equals(password)) {
             // Return the role if authentication is successful
-            return healthcareProvider.getRoles();
+            return healthcareProvider.getRole();
         }else {
             return null;
         }

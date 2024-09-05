@@ -1,18 +1,28 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
 
 import LandingPage from "./pages/Landing/LandingPage.jsx";
 import LoginPage from "./pages/Login/LoginPage.jsx";
 import RegisterPage from "./pages/Register/RegisterPage.jsx";
 
-import ElderlyMainDash from "./pages/UsersPages/Elderly/E_MainDash.jsx";
-import ElderlyChatPage from "./pages/UsersPages/Elderly/E_ChatPage.jsx";
+import MainPage from "./pages/UsersPages/MainHome/MainDash.jsx";
+import ChatPage from "./pages/UsersPages/ChatPage/ChatPage.jsx";
+import AIChatbot from "./pages/UsersPages/ChatBotPage/ChatBotPage.jsx";
 
-import CaregiverMainDash from "./pages/UsersPages/Caregiver/C_MainDash.jsx";
+const ProtectedRoute = ({ children }) => {
+  const { user } = useContext(UserContext);
 
-import HealthProfMainDash from "./pages/UsersPages/HealthcareProf/H_MainDash.jsx";
+  if (!user) {
+    return <Navigate to="/login" />; // Redirect to login if not authenticated
+  }
 
-function routing() {
+  return children; // Allow access if user is authenticated
+};
+
+function Routing() {
+  const { user } = useContext(UserContext);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -20,15 +30,34 @@ function routing() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
-        <Route path="/elderly-home" element={<ElderlyMainDash />} />
-        <Route path="/elderly-chat" element={<ElderlyChatPage />} />
-
-        <Route path="/caregiver-home" element={<CaregiverMainDash />} />
-
-        <Route path="/doctor-home" element={<HealthProfMainDash />} />
+        {/* Protected routes based on role */}
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <MainPage role={user?.role} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <ProtectedRoute>
+              <ChatPage role={user?.role} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AIchatbot"
+          element={
+            <ProtectedRoute>
+              <AIChatbot role={user?.role} />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default routing;
+export default Routing;

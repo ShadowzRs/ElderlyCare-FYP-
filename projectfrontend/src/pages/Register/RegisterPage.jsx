@@ -196,7 +196,7 @@ const RegisterPage = () => {
         age: formData.age,
         gender: formData.gender,
         phonenumber: formData.phone,
-        roles: formData.healthProviderSpecialty,
+        role: formData.healthProviderSpecialty,
       };
     } else {
       setFormErrors({ role: "Role is required" });
