@@ -41,12 +41,6 @@ const ChatBotPage = () => {
     },
   ];
 
-  const bottomLink = {
-    to: "/login",
-    title: "Logout",
-    icon: "https://cdn-icons-png.flaticon.com/128/1828/1828427.png",
-  };
-
   return (
     <>
       <div className="chatbot-container">
@@ -56,7 +50,7 @@ const ChatBotPage = () => {
               {user.role === "Elderly" &&
                 location.pathname === "/AIchatbot" && (
                   <>
-                    <Sidebar mainLinks={ElderlyLinks} bottomLink={bottomLink} />
+                    <Sidebar mainLinks={ElderlyLinks} />
                   </>
                 )}
             </>

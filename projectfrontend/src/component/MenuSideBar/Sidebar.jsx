@@ -1,11 +1,35 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import small_logo from "../../assets/AI-LifeConnect_Logo-small.png";
+import Notification from "../Notification/Notification.jsx";
+import { UserContext } from "../../UserContext.jsx";
 import "./Sidebar.css";
 
-const Sidebar = ({ mainLinks, bottomLink }) => {
-  const location = useLocation(); // Get the current location
+const Sidebar = ({ mainLinks }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { logoutUser } = useContext(UserContext);
+  const [notification, setNotification] = useState(null);
   const isActive = (path) => location.pathname === path;
+
+  const showNotification = (message1, message2) => {
+    setNotification({ message1, message2 });
+  };
+
+  const closeNotification = () => {
+    setNotification(null);
+  };
+
+  const handleLogout = () => {
+    showNotification(
+      "Successfully Logout",
+      "You have been successfully logged out. See you soon!!"
+    );
+    setTimeout(() => {
+      logoutUser();
+      navigate("/login");
+    }, 3000);
+  };
 
   return (
     <div className="sd-container">
@@ -20,7 +44,7 @@ const Sidebar = ({ mainLinks, bottomLink }) => {
               to={link.to}
               title={link.title}
               className={`sd-icon-button ${isActive(link.to) ? "active" : ""}`}
-              key={index}
+              key={index} // Use a unique key if possible
             >
               <img
                 src={link.icon}
@@ -31,22 +55,25 @@ const Sidebar = ({ mainLinks, bottomLink }) => {
           ))}
         </div>
 
-        {bottomLink && (
-          <Link
-            to={bottomLink.to}
-            title={bottomLink.title}
-            className={`sd-icon-button ${
-              isActive(bottomLink.to) ? "active" : ""
-            }`}
-          >
-            <img
-              src={bottomLink.icon}
-              alt={bottomLink.title}
-              style={{ width: "25px", height: "25px" }}
-            />
-          </Link>
-        )}
+        <Link
+          onClick={handleLogout}
+          title="Logout"
+          className={`sd-icon-button ${isActive("/login") ? "active" : ""}`}
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/1828/1828427.png"
+            alt="Logout"
+            style={{ width: "25px", height: "25px" }}
+          />
+        </Link>
       </div>
+      {notification && (
+        <Notification
+          message1={notification.message1}
+          message2={notification.message2}
+          onClose={closeNotification}
+        />
+      )}
     </div>
   );
 };

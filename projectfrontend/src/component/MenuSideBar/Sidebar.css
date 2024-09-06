@@ -41,7 +41,6 @@
   color: white;
 }
 
-/* Optional: Add a specific style for icons inside active buttons */
 .sd-icon-button.active img {
-  filter: brightness(0) invert(1); /* Optionally invert icon color for better visibility */
+  filter: brightness(0) invert(1);
 }

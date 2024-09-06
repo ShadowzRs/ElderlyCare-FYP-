@@ -79,12 +79,6 @@ const MainDash = () => {
     },
   ];
 
-  const bottomLink = {
-    to: "/login",
-    title: "Logout",
-    icon: "https://cdn-icons-png.flaticon.com/128/1828/1828427.png",
-  };
-
   return (
     <>
       <div className="maindash-container">
@@ -92,13 +86,13 @@ const MainDash = () => {
           {user ? (
             <>
               {user.role === "Elderly" && (
-                <Sidebar mainLinks={ElderlyLinks} bottomLink={bottomLink} />
+                <Sidebar mainLinks={ElderlyLinks} />
               )}
               {user.role === "Doctor" && (
-                <Sidebar mainLinks={DoctorLinks} bottomLink={bottomLink} />
+                <Sidebar mainLinks={DoctorLinks} />
               )}
               {user.role === "Caregiver" && (
-                <Sidebar mainLinks={CaregiverLinks} bottomLink={bottomLink} />
+                <Sidebar mainLinks={CaregiverLinks} />
               )}
             </>
           ) : (
