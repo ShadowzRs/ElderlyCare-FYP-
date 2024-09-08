@@ -26,17 +26,18 @@ public class ElderlyServiceImpi implements ElderlyService {
     }
 
     @Override
-    public boolean Elderly_authenticateUser(String email, String password) {
+    public String Elderly_authenticateUser(String email, String password) {
         ElderlyUser elderlyUser = elderlyRepo.findByEmail(email);
         if (elderlyUser != null) {
             try {
-                // Compare the hashed password with the stored hashed password
                 String hashedPassword = PasswordHasher.hashPassword(password);
-                return hashedPassword.equals(elderlyUser.getPassword());
+                if (hashedPassword.equals(elderlyUser.getPassword())){
+                    return elderlyUser.getId();
+                }
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();  // Handle the exception properly
             }
         }
-        return false; // Return false cuz not found
+        return null;
     }
 }

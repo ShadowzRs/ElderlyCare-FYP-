@@ -14,10 +14,10 @@ const ProtectedRoute = ({ children }) => {
   const { user } = useContext(UserContext);
 
   if (!user) {
-    return <Navigate to="/login" />; // Redirect to login if not authenticated
+    return <Navigate to="/login" />; // Redirect if false
   }
 
-  return children; // Allow access if user is authenticated
+  return children; // Allow access true
 };
 
 function Routing() {
@@ -30,7 +30,6 @@ function Routing() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
-        {/* Protected routes based on role */}
         <Route
           path="/home"
           element={

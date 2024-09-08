@@ -55,11 +55,12 @@ const SignInForm = () => {
       );
 
       if (elderlyResponse.ok) {
-        const validate = await elderlyResponse.text();
+        const elderlyData = await elderlyResponse.json();
 
-        if (validate !== "false") {
+        if (elderlyData.authenticated === "true") {
           // Store elderly user data
-          const userData = { email, role: "Elderly" };
+          const userData = { id: elderlyData.id, email, role: "Elderly" };
+          console.log('User Data:', userData);
           loginUser(userData); // Save in context and local storage
           navigate("/home");
           return;
@@ -77,10 +78,11 @@ const SignInForm = () => {
       );
 
       if (providerResponse.ok) {
-        const data = await providerResponse.json();
+        const HprovData = await providerResponse.json();
 
-        if (data.authenticated === "true") {
-          const userData = { email, role: data.role };
+        if (HprovData.authenticated === "true") {
+          const userData = { id: HprovData.id, email, role: HprovData.role };
+          console.log('User Data:', userData);
           loginUser(userData); // Save user data in context and local storage
           navigate("/home");
         } else {

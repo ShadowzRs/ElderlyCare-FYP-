@@ -85,12 +85,8 @@ const MainDash = () => {
         <aside className="flex">
           {user ? (
             <>
-              {user.role === "Elderly" && (
-                <Sidebar mainLinks={ElderlyLinks} />
-              )}
-              {user.role === "Doctor" && (
-                <Sidebar mainLinks={DoctorLinks} />
-              )}
+              {user.role === "Elderly" && <Sidebar mainLinks={ElderlyLinks} />}
+              {user.role === "Doctor" && <Sidebar mainLinks={DoctorLinks} />}
               {user.role === "Caregiver" && (
                 <Sidebar mainLinks={CaregiverLinks} />
               )}

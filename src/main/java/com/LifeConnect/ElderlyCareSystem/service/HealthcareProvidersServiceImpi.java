@@ -1,5 +1,6 @@
 package com.LifeConnect.ElderlyCareSystem.service;
 
+import com.LifeConnect.ElderlyCareSystem.dto.AuthResponse;
 import com.LifeConnect.ElderlyCareSystem.model.HealthcareProvider;
 import com.LifeConnect.ElderlyCareSystem.repository.HealthcareProvidersRepository;
 import com.LifeConnect.ElderlyCareSystem.util.PasswordHasher;
@@ -28,7 +29,7 @@ public class HealthcareProvidersServiceImpi implements HealthcareProvidersServic
 
 
     @Override
-    public String HProv_authenticateUser(String email, String password) {
+    public AuthResponse HProv_authenticateUser(String email, String password) {
         HealthcareProvider healthcareProvider = HProviderRepo.findByEmail(email);
 
         if (healthcareProvider != null) {
@@ -36,7 +37,7 @@ public class HealthcareProvidersServiceImpi implements HealthcareProvidersServic
                 String hashedPassword = PasswordHasher.hashPassword(password);
                 // Compare the hashed password with the stored hashed password
                 if (hashedPassword.equals(healthcareProvider.getPassword())) {
-                    return healthcareProvider.getRole();
+                    return new AuthResponse(healthcareProvider.getRole(), healthcareProvider.getId());
                 }
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();

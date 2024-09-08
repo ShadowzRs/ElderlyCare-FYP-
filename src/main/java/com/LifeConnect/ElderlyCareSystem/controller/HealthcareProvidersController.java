@@ -1,5 +1,6 @@
 package com.LifeConnect.ElderlyCareSystem.controller;
 
+import com.LifeConnect.ElderlyCareSystem.dto.AuthResponse;
 import com.LifeConnect.ElderlyCareSystem.dto.LoginRequest;
 import com.LifeConnect.ElderlyCareSystem.model.HealthcareProvider;
 import com.LifeConnect.ElderlyCareSystem.service.HealthcareProvidersService;
@@ -27,13 +28,14 @@ public class HealthcareProvidersController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest) {
-        String role = HProviderService.HProv_authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
+        AuthResponse authResponse = HProviderService.HProv_authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
 
         Map<String, String> response = new HashMap<>();
 
-        if (role != null) {
+        if (authResponse != null) {
             response.put("authenticated", "true");
-            response.put("role", role); // Add the role to the response
+            response.put("role", authResponse.getRole());
+            response.put("id", authResponse.getId());
             return ResponseEntity.ok(response);
         } else {
             response.put("authenticated", "false");

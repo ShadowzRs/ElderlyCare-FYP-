@@ -25,15 +25,17 @@ public class ElderlyController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Boolean>> login(@RequestBody LoginRequest loginRequest) {
-        boolean isAuthenticated = elderlyService.Elderly_authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest) {
+        String id = elderlyService.Elderly_authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
 
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("authenticated", isAuthenticated);
+        Map<String, String> response = new HashMap<>();
 
-        if (isAuthenticated) {
+        if (id != null) {
+            response.put("authenticated", "true");
+            response.put("id", id);
             return ResponseEntity.ok(response);
         } else {
+            response.put("authenticated", "false");  // Put String value
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }

@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../../../component/MenuSideBar/Sidebar.jsx";
 import { UserContext } from "../../../UserContext.jsx";
+import { getChatHistory, sendMessage } from "./MessageService";
 import "./ChatPage.css";
 
 const ChatPage = () => {
@@ -239,11 +240,11 @@ const ChatPage = () => {
                   </div>
                 </>
               )}
-              {user.role === "Doctor" && (
-                <Sidebar mainLinks={DoctorLinks} bottomLink={bottomLink} />
+              {user.role === "Doctor" && location.pathname === "/chat" && (
+                <Sidebar mainLinks={DoctorLinks} />
               )}
-              {user.role === "Caregiver" && (
-                <Sidebar mainLinks={CaregiverLinks} bottomLink={bottomLink} />
+              {user.role === "Caregiver" && location.pathname === "/chat" && (
+                <Sidebar mainLinks={CaregiverLinks} />
               )}
             </>
           ) : (
