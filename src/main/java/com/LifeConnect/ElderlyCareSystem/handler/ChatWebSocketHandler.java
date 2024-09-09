@@ -30,5 +30,4 @@ public class ChatWebSocketHandler  extends TextWebSocketHandler{
         // Handle WebSocket connection closure
         System.out.println("Connection closed with session: " + session.getId());
     }
-
 }

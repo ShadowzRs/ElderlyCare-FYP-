@@ -36,5 +36,4 @@ public class PublicController {
         }
         return ResponseEntity.ok(user);
     }
-
 }
