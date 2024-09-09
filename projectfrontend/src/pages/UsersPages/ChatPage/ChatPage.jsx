@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../../../component/MenuSideBar/Sidebar.jsx";
 import { UserContext } from "../../../UserContext.jsx";
-import { getChatHistory, sendMessage } from "./MessageService";
+import ChatList from "./ChatList.jsx";
 import "./ChatPage.css";
 
 const ChatPage = () => {
@@ -10,23 +10,18 @@ const ChatPage = () => {
   const location = useLocation();
   const ElderlyLinks = [
     {
-      to: "/home",
-      title: "Home",
-      icon: "https://cdn-icons-png.flaticon.com/128/2948/2948025.png",
-    },
-    {
-      to: "/chat",
+      to: "/chats",
       title: "Chat",
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },
     {
-      to: "/AIchatbot",
+      to: "/chatbot",
       title: "AI Chatbot",
       icon: "https://cdn-icons-png.flaticon.com/128/2068/2068998.png",
     },
     {
-      to: "/med_reminder",
-      title: "Reminder",
+      to: "/med",
+      title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
     {
@@ -88,7 +83,7 @@ const ChatPage = () => {
         <aside className="flex">
           {user ? (
             <>
-              {user.role === "Elderly" && location.pathname === "/chat" && (
+              {user.role === "Elderly" && location.pathname === "/chats" && (
                 <>
                   <Sidebar mainLinks={ElderlyLinks} />
                   <div className="cp-container">
@@ -133,117 +128,15 @@ const ChatPage = () => {
                     <h2 className="cp-container-header">Accounts</h2>
 
                     <div className="cp-user-list-container">
-                      <button className="cp-user-profile">
-                        <img
-                          className="object-cover w-8 h-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=faceare&facepad=3&w=688&h=688&q=100"
-                          alt=""
-                        />
-
-                        <div className="cp-user-label-container">
-                          <h1 className="cp-user-name">Mia John</h1>
-
-                          <p className="cp-user-desc">11.2 Followers</p>
-                        </div>
-                      </button>
-
-                      <button className="cp-user-profile">
-                        <img
-                          className="object-cover w-8 h-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&h=880&q=80"
-                          alt=""
-                        />
-
-                        <div className="cp-user-label-container">
-                          <h1 className="cp-user-name">arthur melo</h1>
-
-                          <p className="cp-user-desc">1.2 Followers</p>
-                        </div>
-                      </button>
-
-                      <button className="cp-user-profile">
-                        <div className="relative">
-                          <img
-                            className="object-cover w-8 h-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&h=764&q=100"
-                            alt=""
-                          />
-                        </div>
-
-                        <div className="cp-user-label-container">
-                          <h1 className="cp-user-name">Jane Doe</h1>
-
-                          <p className="cp-user-desc">15.6 Followers</p>
-                        </div>
-                      </button>
-
-                      <button className="cp-user-profile">
-                        <img
-                          className="object-cover w-8 h-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&h=764&q=80"
-                          alt=""
-                        />
-
-                        <div className="cp-user-label-container">
-                          <h1 className="cp-user-name">Amelia. Anderson</h1>
-
-                          <p className="cp-user-desc">32.9 Followers</p>
-                        </div>
-                      </button>
-
-                      <button className="cp-user-profile">
-                        <img
-                          className="object-cover w-8 h-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&h=687&q=80"
-                          alt=""
-                        />
-
-                        <div className="cp-user-label-container">
-                          <h1 className="cp-user-name">Joseph Gonzalez</h1>
-
-                          <p className="cp-user-desc">100.2 Followers</p>
-                        </div>
-                      </button>
-
-                      <button className="flex items-center w-full px-5 py-2 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 gap-x-2 focus:outline-none">
-                        <div className="relative">
-                          <img
-                            className="object-cover w-8 h-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1488508872907-592763824245?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&h=1470&q=80"
-                            alt=""
-                          />
-                        </div>
-
-                        <div className="cp-user-label-container">
-                          <h1 className="cp-user-name">Olivia Wathan</h1>
-
-                          <p className="cp-user-desc">8.6 Followers</p>
-                        </div>
-                      </button>
-
-                      <button className="flex items-center w-full px-5 py-2 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800 gap-x-2 focus:outline-none">
-                        <div className="relative">
-                          <img
-                            className="object-cover w-8 h-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1608174386344-80898cec6beb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&h=687&q=80"
-                            alt=""
-                          />
-                        </div>
-
-                        <div className="cp-user-label-container">
-                          <h1 className="cp-user-name">Junior REIS</h1>
-
-                          <p className="cp-user-desc">56.6 Followers</p>
-                        </div>
-                      </button>
+                      <ChatList userId={user.id} />
                     </div>
                   </div>
                 </>
               )}
-              {user.role === "Doctor" && location.pathname === "/chat" && (
+              {user.role === "Doctor" && location.pathname === "/chats" && (
                 <Sidebar mainLinks={DoctorLinks} />
               )}
-              {user.role === "Caregiver" && location.pathname === "/chat" && (
+              {user.role === "Caregiver" && location.pathname === "/chats" && (
                 <Sidebar mainLinks={CaregiverLinks} />
               )}
             </>
@@ -251,6 +144,161 @@ const ChatPage = () => {
             <p>Please log in to access the features.</p>
           )}
         </aside>
+
+        {/* Chat Section */}
+        <div className="cs-Section">
+          <div className="cs-Container">
+            {/* Chat Display */}
+            <div className="flex flex-col h-full overflow-x-auto mb-4">
+              <div className="flex flex-col h-full">
+                <div className="grid grid-cols-12 gap-y-2">
+                  {/* 1 */}
+                  <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                    <div className="flex flex-row items-center">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                        A
+                      </div>
+                      <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                        <div>Hey How are you today?</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2 */}
+                  <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                    <div className="flex flex-row items-center">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                        A
+                      </div>
+                      <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                        <div>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Vel ipsa commodi illum saepe numquam maxime
+                          asperiores voluptate sit, minima perspiciatis.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-start-6 col-end-13 p-3 rounded-lg">
+                    <div className="flex items-center justify-start flex-row-reverse">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                        A
+                      </div>
+                      <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                        <div>I'm ok what about you?</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-start-6 col-end-13 p-3 rounded-lg">
+                    <div className="flex items-center justify-start flex-row-reverse">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                        A
+                      </div>
+                      <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                        <div>
+                          Lorem ipsum dolor sit, amet consectetur adipisicing. ?
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 3 */}
+                  <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                    <div className="flex flex-row items-center">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                        A
+                      </div>
+                      <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                        <div>Lorem ipsum dolor sit amet !</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-start-6 col-end-13 p-3 rounded-lg">
+                    <div className="flex items-center justify-start flex-row-reverse">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                        A
+                      </div>
+                      <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                        <div>
+                          Lorem ipsum dolor sit, amet consectetur adipisicing. ?
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4 */}
+                  <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                    <div className="flex flex-row items-center">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                        A
+                      </div>
+                      <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                        <div>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Perspiciatis, in.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* User Texting Input */}
+            <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+              <div>
+                <button className="flex items-center justify-center text-gray-400 hover:text-gray-600">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokelinejoinn="round"
+                      strokeWidth="2"
+                      d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div className="flex-grow ml-4">
+                <div className="relative w-full">
+                  <input
+                    type="text"
+                    placeholder="Message"
+                    className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
+                  />
+                  <button className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokelinejoinn="round"
+                        strokeWidth="2"
+                        d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div className="ml-4">
+                <button className="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -4,48 +4,48 @@ import "./Notification.css";
 const Notification = ({ message1, message2, onClose }) => {
   return (
     <div className="notification-container">
-      <div role="alert" class="rounded-xl border border-gray-100 p-4" style={{ backgroundColor: '#FBFFF4' }}>
-        <div class="flex items-start gap-4">
-          <span class="text-green-600">
+      <div role="alert" className="rounded-xl border border-gray-100 p-4" style={{ backgroundColor: '#FBFFF4' }}>
+        <div className="flex items-start gap-4">
+          <span className="text-green-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              class="size-6"
+              className="size-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
           </span>
 
-          <div class="flex-1">
-            <strong class="block font-medium text-gray-900"> {message1}</strong>
+          <div className="flex-1">
+            <strong className="block font-medium text-gray-900"> {message1}</strong>
 
-            <p class="mt-1 text-sm text-gray-700">{message2}</p>
+            <p className="mt-1 text-sm text-gray-700">{message2}</p>
           </div>
 
           <button
-            class="text-gray-500 transition hover:text-gray-600"
+            className="text-gray-500 transition hover:text-gray-600"
             onClick={onClose}
           >
-            <span class="sr-only">Dismiss popup</span>
+            <span className="sr-only">Dismiss popup</span>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              class="size-6"
+              className="size-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>

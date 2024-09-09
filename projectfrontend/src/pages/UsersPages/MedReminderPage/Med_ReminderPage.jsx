@@ -1,53 +1,28 @@
 import React, { useContext } from "react";
-import Sidebar from "../../../component/MenuSideBar/Sidebar.jsx";
+import { useLocation } from "react-router-dom";
 import { UserContext } from "../../../UserContext.jsx";
-import "./MainDash.css";
+import Sidebar from "../../../component/MenuSideBar/Sidebar.jsx";
 
-const MainDash = () => {
+import "./Med_ReminderPage.css";
+
+const MedPage = () => {
   const { user } = useContext(UserContext);
+  const location = useLocation();
   const ElderlyLinks = [
     {
-      to: "/home",
-      title: "Home",
-      icon: "https://cdn-icons-png.flaticon.com/128/2948/2948025.png",
-    },
-    {
-      to: "/chat",
+      to: "/chats",
       title: "Chat",
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },
     {
-      to: "/AIchatbot",
+      to: "/chatbot",
       title: "AI Chatbot",
       icon: "https://cdn-icons-png.flaticon.com/128/2068/2068998.png",
     },
     {
-      to: "/med_reminder",
-      title: "Reminder",
+      to: "/med",
+      title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
-    },
-    {
-      to: "/appointment",
-      title: "Appointment",
-      icon: "https://cdn-icons-png.flaticon.com/128/6946/6946547.png",
-    },
-    {
-      to: "/settings",
-      title: "Setting",
-      icon: "https://cdn-icons-png.flaticon.com/128/2040/2040504.png",
-    },
-  ];
-
-  const DoctorLinks = [
-    {
-      to: "/home",
-      title: "Home",
-      icon: "https://cdn-icons-png.flaticon.com/128/2948/2948025.png",
-    },
-    {
-      to: "/chat",
-      title: "Chat",
-      icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },
     {
       to: "/appointment",
@@ -85,8 +60,9 @@ const MainDash = () => {
         <aside className="flex">
           {user ? (
             <>
-              {user.role === "Elderly" && <Sidebar mainLinks={ElderlyLinks} />}
-              {user.role === "Doctor" && <Sidebar mainLinks={DoctorLinks} />}
+              {user.role === "Elderly" && location.pathname === "/med" && (
+                <Sidebar mainLinks={ElderlyLinks} />
+              )}
               {user.role === "Caregiver" && (
                 <Sidebar mainLinks={CaregiverLinks} />
               )}
@@ -100,4 +76,4 @@ const MainDash = () => {
   );
 };
 
-export default MainDash;
+export default MedPage;

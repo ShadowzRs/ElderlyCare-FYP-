@@ -6,9 +6,9 @@ import LandingPage from "./pages/Landing/LandingPage.jsx";
 import LoginPage from "./pages/Login/LoginPage.jsx";
 import RegisterPage from "./pages/Register/RegisterPage.jsx";
 
-import MainPage from "./pages/UsersPages/MainHome/MainDash.jsx";
 import ChatPage from "./pages/UsersPages/ChatPage/ChatPage.jsx";
 import AIChatbot from "./pages/UsersPages/ChatBotPage/ChatBotPage.jsx";
+import MedPage from "./pages/UsersPages/MedReminderPage/Med_ReminderPage.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useContext(UserContext);
@@ -31,15 +31,7 @@ function Routing() {
         <Route path="/register" element={<RegisterPage />} />
 
         <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <MainPage role={user?.role} />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/chat"
+          path="/chats"
           element={
             <ProtectedRoute>
               <ChatPage role={user?.role} />
@@ -47,10 +39,18 @@ function Routing() {
           }
         />
         <Route
-          path="/AIchatbot"
+          path="/chatbot"
           element={
             <ProtectedRoute>
               <AIChatbot role={user?.role} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/med"
+          element={
+            <ProtectedRoute>
+              <MedPage role={user?.role} />
             </ProtectedRoute>
           }
         />

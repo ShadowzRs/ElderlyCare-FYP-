@@ -11,15 +11,20 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/chats")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ChatController {
 
     @Autowired
     private ChatService chatService;
 
-
     @PostMapping("/create")
     public Chat createChat(@RequestParam String participantOneId, @RequestParam String participantTwoId) {
         return chatService.createChat(participantOneId, participantTwoId);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Chat> getAllChatsForUser(@PathVariable String userId) {
+        return chatService.getAllChatsForUser(userId);
     }
 
     @GetMapping("/by-participants")

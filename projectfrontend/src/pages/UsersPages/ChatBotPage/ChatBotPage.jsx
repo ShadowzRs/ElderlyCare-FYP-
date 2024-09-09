@@ -7,26 +7,20 @@ import "./ChatBotPage.css";
 const ChatBotPage = () => {
   const { user } = useContext(UserContext);
   const location = useLocation();
-
   const ElderlyLinks = [
     {
-      to: "/home",
-      title: "Home",
-      icon: "https://cdn-icons-png.flaticon.com/128/2948/2948025.png",
-    },
-    {
-      to: "/chat",
+      to: "/chats",
       title: "Chat",
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },
     {
-      to: "/AIchatbot",
+      to: "/chatbot",
       title: "AI Chatbot",
       icon: "https://cdn-icons-png.flaticon.com/128/2068/2068998.png",
     },
     {
-      to: "/med_reminder",
-      title: "Reminder",
+      to: "/med",
+      title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
     {
@@ -47,12 +41,11 @@ const ChatBotPage = () => {
         <aside className="flex">
           {user ? (
             <>
-              {user.role === "Elderly" &&
-                location.pathname === "/AIchatbot" && (
-                  <>
-                    <Sidebar mainLinks={ElderlyLinks} />
-                  </>
-                )}
+              {user.role === "Elderly" && location.pathname === "/chatbot" && (
+                <>
+                  <Sidebar mainLinks={ElderlyLinks} />
+                </>
+              )}
             </>
           ) : (
             <p>Please log in to access the features.</p>

@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 public class PublicController {
     @Autowired
     private PublicService publicService;
@@ -27,4 +27,14 @@ public class PublicController {
         // Return the response entity
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable String userId) {
+        Object user = publicService.getUserById(userId);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
+    }
+
 }

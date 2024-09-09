@@ -62,7 +62,7 @@ const SignInForm = () => {
           const userData = { id: elderlyData.id, email, role: "Elderly" };
           console.log('User Data:', userData);
           loginUser(userData); // Save in context and local storage
-          navigate("/home");
+          navigate("/chats");
           return;
         }
       }
@@ -84,7 +84,7 @@ const SignInForm = () => {
           const userData = { id: HprovData.id, email, role: HprovData.role };
           console.log('User Data:', userData);
           loginUser(userData); // Save user data in context and local storage
-          navigate("/home");
+          navigate("/chats");
         } else {
           showNotification("Login failed", "Invalid email or password");
         }
@@ -96,107 +96,6 @@ const SignInForm = () => {
       showNotification("An error occurred", "Please try again.");
     }
   };
-
-  // Function to handle healthcare provider login and return the role
-  // const attemptHealthcareLogin = async (email, password) => {
-  //   try {
-  //     const response = await fetch(
-  //       "http://localhost:8080/healthcareprovider/login",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ email, password }),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       if (data.authenticated === "true") {
-  //         return data.role; // "Doctor" or "Caregiver"
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during healthcare provider login:", error);
-  //     throw new Error("Healthcare provider login failed");
-  //   }
-  //   return null;
-  // };
-
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   const { email, password } = formData;
-
-  //   try {
-  //     const response = await fetch("http://localhost:8080/elderly/login", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ email, password }),
-  //     });
-
-  //     // Check if the response status is 200 OK
-  //     if (response.ok) {
-  //       const validate = await response.text();
-
-  //       if (validate !== "false") {
-  //         navigate("/elderly-home");
-  //       } else {
-  //         showNotification("Login failed", "Invalid email or password");
-  //       }
-  //     } else {
-  //       showNotification("Login failed", "Invalid email or password");
-  //     }
-
-  //     // Attempt healthcare provider login
-  //     const role = await attemptHealthcareLogin(email, password);
-  //     if (role) {
-  //       if (role === "Doctor") {
-  //         navigate("/doctor-home");
-  //       } else if (role === "Caregiver") {
-  //         navigate("/caregiver-home");
-  //       } else {
-  //         showNotification("An error occurred", "Please try again.");
-  //       }
-  //       return;
-  //     }
-
-  //     // If neither login attempt succeeded, show a notification
-  //     showNotification("Login failed", "Invalid email or password");
-  //   } catch (error) {
-  //     console.error("Login error:", error);
-  //     showNotification("An error occurred", "Please try again.");
-  //   }
-  // };
-
-  // // Function to handle healthcare provider login and return the role
-  // const attemptHealthcareLogin = async (email, password) => {
-  //   try {
-  //     const response = await fetch(
-  //       "http://localhost:8080/healthcareprovider/login",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ email, password }),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       if (data.authenticated === "true") {
-  //         return data.role;
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during healthcare provider login:", error);
-  //     throw new Error("Healthcare provider login failed");
-  //   }
-  //   return null;
-  // };
 
   return (
     <section className="form-container">

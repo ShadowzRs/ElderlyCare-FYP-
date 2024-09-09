@@ -11,7 +11,7 @@ public class ElderlyUser {
     @Id
     private String id;
     private String firstname, lastname, password, email, gender, phonenumber;
-    private int age;;
+    private int age;
 
     // Default constructor required by JPA/Hibernate
     public ElderlyUser() {

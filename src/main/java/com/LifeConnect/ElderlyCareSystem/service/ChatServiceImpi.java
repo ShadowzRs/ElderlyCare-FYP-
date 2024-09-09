@@ -30,11 +30,6 @@ public class ChatServiceImpi implements ChatService {
     private MessageRepository messageRepository;
 
     @Override
-    public Optional<Chat> getChatByParticipants(String participantOneId, String participantTwoId) {
-        return chatRepository.findByParticipantOneIdAndParticipantTwoId(participantOneId, participantTwoId);
-    }
-
-    @Override
     public Chat createChat(String participantOneId, String participantTwoId) {
         // Fetch user entities by ID
         ElderlyUser participantOne = elderlyRepo.findById(participantOneId).orElse(null);
@@ -45,6 +40,16 @@ public class ChatServiceImpi implements ChatService {
         chat.setParticipantOneId(participantOneId);
         chat.setParticipantTwoId(participantTwoId);
         return chatRepository.save(chat);
+    }
+
+    @Override
+    public List<Chat> getAllChatsForUser(String userId) {
+        return chatRepository.findByParticipantOneIdOrParticipantTwoId(userId, userId);
+    }
+
+    @Override
+    public Optional<Chat> getChatByParticipants(String participantOneId, String participantTwoId) {
+        return chatRepository.findByParticipantOneIdAndParticipantTwoId(participantOneId, participantTwoId);
     }
 
     @Override
