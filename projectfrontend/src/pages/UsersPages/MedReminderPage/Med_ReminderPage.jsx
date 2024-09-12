@@ -38,12 +38,7 @@ const MedPage = () => {
 
   const CaregiverLinks = [
     {
-      to: "/home",
-      title: "Home",
-      icon: "https://cdn-icons-png.flaticon.com/128/2948/2948025.png",
-    },
-    {
-      to: "/chat",
+      to: "/chats",
       title: "Chat",
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },

@@ -1,29 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
-import { UserContext } from "../../../UserContext.jsx";
+import React, { useState, useEffect } from "react";
 import { getAllChatsForUser, getUserById } from "./MessageService.jsx";
-import "./ChatPage.css";
+import "../ChatPage.css";
 
-const defaultProfilePic = "";
-
-const maleProfilePic = "";
-const femaleProfilePic = "";
-
-const ChatList = ({ userId }) => {
-  const { user } = useContext(UserContext);
+const ChatList = ({ userId, onChatSelect, onChatsLoaded }) => {
   const [chats, setChats] = useState([]);
   const [users, setUsers] = useState({});
-
-  const getProfilePicUrl = (role, gender) => {
-    // Default profile picture
-    let profilePic = "https://cdn-icons-png.flaticon.com/128/666/666201.png";
-
-    if (role !== "Elderly" && gender === "Male") {
-      profilePic = "https://cdn-icons-png.flaticon.com/128/4140/4140037.png";
-    } else if (role !== "Elderly" && gender === "Female") {
-      profilePic = "https://cdn-icons-png.flaticon.com/128/4140/4140047.png";
-    }
-    return profilePic;
-  };
 
   useEffect(() => {
     // Fetch the user's chats
@@ -51,6 +32,7 @@ const ChatList = ({ userId }) => {
         }, {});
 
         setUsers(userMap);
+        onChatsLoaded(fetchedChats);
       } catch (error) {
         console.error("Error fetching chats or user data:", error);
       }
@@ -63,21 +45,22 @@ const ChatList = ({ userId }) => {
     <div>
       {chats.map((chat) => {
         // Determine the user data based on the role of the logged-in user
-        const isParticipantOne = chat.participantOneId === user.id;
+        const isParticipantOne = chat.participantOneId === userId;
         const participantId = isParticipantOne
           ? chat.participantTwoId
           : chat.participantOneId;
         const participant = users[participantId];
+        const participantRole = participant?.role ?? "Elderly";
 
         return (
-          <button key={chat.id} className="cp-user-profile">
+          <button
+            key={chat.id}
+            className="cp-user-profile"
+            onClick={() => onChatSelect(chat.id)} // Add chat selection here
+          >
             <img
               className="object-cover w-8 h-8 rounded-full"
-              src={
-                participant
-                  ? getProfilePicUrl(participant.role, participant.gender)
-                  : null
-              }
+              src="https://cdn-icons-png.flaticon.com/128/149/149071.png"
               alt=""
             />
             <div className="cp-user-label-container">
@@ -85,7 +68,7 @@ const ChatList = ({ userId }) => {
                 {participant ? participant.firstname : "Loading..."}
               </h1>
               <p className="cp-user-desc">
-                Role: {participant ? participant.role : "Loading..."}
+                Role: {participant ? participantRole : "Loading..."}
               </p>
             </div>
           </button>

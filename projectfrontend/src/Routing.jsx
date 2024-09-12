@@ -13,9 +13,9 @@ import MedPage from "./pages/UsersPages/MedReminderPage/Med_ReminderPage.jsx";
 const ProtectedRoute = ({ children }) => {
   const { user } = useContext(UserContext);
 
-  if (!user) {
-    return <Navigate to="/login" />; // Redirect if false
-  }
+  // if (!user) {
+  //   return <Navigate to="/login" />; // Redirect if false
+  // }
 
   return children; // Allow access true
 };
