@@ -4,6 +4,7 @@ import Sidebar from "../../../component/MenuSideBar/Sidebar.jsx";
 import { UserContext } from "../../../UserContext.jsx";
 import ChatList from "./Service/ChatList.jsx";
 import ChatConversation from "./Service/ChatMessage.jsx";
+import ChatSearchBar from "./Service/ChatSearch.jsx";
 import "./ChatPage.css";
 
 const ChatPage = () => {
@@ -92,44 +93,7 @@ const ChatPage = () => {
               )}
 
               <div className="cp-container">
-                <div className="cp-search-container">
-                  <label htmlFor="Search" className="sr-only">
-                    {" "}
-                    Search{" "}
-                  </label>
-
-                  <input
-                    type="text"
-                    id="Search"
-                    placeholder="Search"
-                    className="cp-search"
-                  />
-
-                  <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
-                    <button
-                      type="button"
-                      className="text-gray-600 hover:text-gray-700"
-                    >
-                      <span className="sr-only">Search</span>
-
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="black"
-                        className="size-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                        />
-                      </svg>
-                    </button>
-                  </span>
-                </div>
-
+                <ChatSearchBar currentUserId={user.id} />
                 <h2 className="cp-container-header">Accounts</h2>
 
                 <div className="cp-user-list-container">
@@ -162,86 +126,6 @@ const ChatPage = () => {
                 </h1>
               </div>
             )}
-            
-            {/* This user is sending the message 
-            </div>
-                      <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                        <div>Hey How are you today?</div>
-                      </div>
-                    </div>
-                  </div> */}
-
-            {/* This user is receiving the message */}
-            {/* <div className="col-start-1 col-end-8 p-3 rounded-lg">
-                    <div className="flex flex-row items-center">
-                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                        A
-                      </div>
-                      <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                        <div>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Vel ipsa commodi illum saepe numquam maxime
-                          asperiores voluptate sit, minima perspiciatis.
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-
-            {/* This user is sending the message */}
-            {/* <div className="col-start-6 col-end-13 p-3 rounded-lg">
-                    <div className="flex items-center justify-start flex-row-reverse">
-                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                        A
-                      </div>
-                      <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
-                        <div>I'm ok what about you?</div>
-                      </div>
-                    </div>
-                  </div> */}
-
-            {/* This user is sending the message */}
-            {/* <div className="col-start-6 col-end-13 p-3 rounded-lg">
-                    <div className="flex items-center justify-start flex-row-reverse">
-                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                        A
-                      </div>
-                      <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
-                        <div>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing. ?
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-
-            {/* This user is receiving the message */}
-            {/* <div className="col-start-1 col-end-8 p-3 rounded-lg">
-                    <div className="flex flex-row items-center">
-                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                        A
-                      </div>
-                      <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                        <div>Lorem ipsum dolor sit amet !</div>
-                      </div>
-                    </div>
-                  </div> */}
-
-            {/* This user is sending the message */}
-            {/* <div className="col-start-6 col-end-13 p-3 rounded-lg">
-                    <div className="flex items-center justify-start flex-row-reverse">
-                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                        A
-                      </div>
-                      <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
-                        <div>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing. ?
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-            {/* </div>
-              </div>
-            </div> */}
-
           </div>
         </div>
       </div>

@@ -49,11 +49,10 @@ const ChatConversation = ({ chatId, userId, chats }) => {
 
     wsClientRef.current.onmessage = (event) => {
       console.log("Received WebSocket message:", event.data);
-      // setMessages((prevMessages) => [...prevMessages, newMessage]);
       refetchMessages();
     };
 
-    // Cleanup WebSocket connection on component unmount or when chatId changes
+    // Cleanup WebSocket connection when chatId changes
     return () => {
       if (wsClientRef.current) {
         wsClientRef.current.close();
@@ -77,8 +76,7 @@ const ChatConversation = ({ chatId, userId, chats }) => {
       if (message.receiverId) {
         if (wsClientRef.current.readyState === WebSocket.OPEN) {
           wsClientRef.current.send(JSON.stringify(message));
-          // wsClientRef.current.sendMessage(message);
-          setNewMessage(""); // Clear the message input after sending
+          setNewMessage("");
         } else {
           console.error("WebSocket is not open. Cannot send message.");
         }
@@ -90,18 +88,8 @@ const ChatConversation = ({ chatId, userId, chats }) => {
     }
   };
 
-  // const refetchMessages = async () => {
-  //   try {
-  //     const newMessages = await getMessages(chatId);
-  //     setMessages(newMessages); // Update the state with new messages
-  //   } catch (error) {
-  //     console.error("Failed to refetch messages:", error);
-  //   }
-  // };
-
   const refetchMessages = async () => {
     try {
-      console.log("Fetching new messages...");
       const newMessages = await getMessages(chatId);
       setMessages(newMessages);
       console.log("Messages updated: ", newMessages);
@@ -111,7 +99,7 @@ const ChatConversation = ({ chatId, userId, chats }) => {
   };
 
   const getReceiverIdFromChat = (chatId) => {
-    const chat = chats.find((c) => c.id === chatId); 
+    const chat = chats.find((c) => c.id === chatId);
     if (!chat) return null;
 
     return chat.participantOneId === userId
@@ -121,8 +109,8 @@ const ChatConversation = ({ chatId, userId, chats }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault(); 
-      handleSendMessage(); 
+      e.preventDefault();
+      handleSendMessage();
     }
   };
 
@@ -137,9 +125,11 @@ const ChatConversation = ({ chatId, userId, chats }) => {
               return (
                 <div
                   key={index}
-                  className={`col-start-${isSender ? "6" : "1"} col-end-${
-                    isSender ? "13" : "8"
-                  } p-3 rounded-lg`}
+                  className={`p-3 rounded-lg ${
+                    isSender
+                      ? "col-start-6 col-end-13"
+                      : "col-start-1 col-end-8"
+                  }`}
                 >
                   <div
                     className={`flex items-center ${

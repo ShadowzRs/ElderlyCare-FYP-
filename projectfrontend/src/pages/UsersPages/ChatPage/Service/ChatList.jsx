@@ -5,6 +5,7 @@ import "../ChatPage.css";
 const ChatList = ({ userId, onChatSelect, onChatsLoaded }) => {
   const [chats, setChats] = useState([]);
   const [users, setUsers] = useState({});
+  const [activeChatId, setActiveChatId] = useState(null);
 
   useEffect(() => {
     // Fetch the user's chats
@@ -41,22 +42,28 @@ const ChatList = ({ userId, onChatSelect, onChatsLoaded }) => {
     fetchChats();
   }, [userId]);
 
+  const handleChatClick = (chatId) => {
+    setActiveChatId(chatId); // Set the active chat ID
+    onChatSelect(chatId); // Call the onChatSelect handler
+  };
+
   return (
     <div>
       {chats.map((chat) => {
-        // Determine the user data based on the role of the logged-in user
+        // Determine the user data based on the role
         const isParticipantOne = chat.participantOneId === userId;
         const participantId = isParticipantOne
           ? chat.participantTwoId
           : chat.participantOneId;
         const participant = users[participantId];
         const participantRole = participant?.role ?? "Elderly";
+        const isActive = chat.id === activeChatId;
 
         return (
           <button
             key={chat.id}
-            className="cp-user-profile"
-            onClick={() => onChatSelect(chat.id)} // Add chat selection here
+            className={`cp-user-profile ${isActive ? "active" : ""}`}
+            onClick={() => handleChatClick(chat.id)} 
           >
             <img
               className="object-cover w-8 h-8 rounded-full"
@@ -65,7 +72,9 @@ const ChatList = ({ userId, onChatSelect, onChatsLoaded }) => {
             />
             <div className="cp-user-label-container">
               <h1 className="cp-user-name">
-                {participant ? participant.firstname : "Loading..."}
+                {participant
+                  ? `${participant.firstname} ${participant.lastname}`
+                  : "Loading..."}
               </h1>
               <p className="cp-user-desc">
                 Role: {participant ? participantRole : "Loading..."}

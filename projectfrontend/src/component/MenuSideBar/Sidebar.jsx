@@ -27,7 +27,7 @@ const Sidebar = ({ mainLinks }) => {
     );
     setTimeout(() => {
       logoutUser();
-      navigate("/login");
+      navigate("/");
     }, 3000);
   };
 
@@ -44,7 +44,7 @@ const Sidebar = ({ mainLinks }) => {
               to={link.to}
               title={link.title}
               className={`sd-icon-button ${isActive(link.to) ? "active" : ""}`}
-              key={index} // Use a unique key if possible
+              key={index} 
             >
               <img
                 src={link.icon}
@@ -58,7 +58,7 @@ const Sidebar = ({ mainLinks }) => {
         <Link
           onClick={handleLogout}
           title="Logout"
-          className={`sd-icon-button ${isActive("/login") ? "active" : ""}`}
+          className="sd-icon-button"
         >
           <img
             src="https://cdn-icons-png.flaticon.com/128/1828/1828427.png"

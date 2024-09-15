@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { UserProvider } from "./UserContext"; // Import the UserProvider
+import { UserProvider } from "./UserContext";
 import WebRouting from "./Routing.jsx";
 import "./index.css";
 

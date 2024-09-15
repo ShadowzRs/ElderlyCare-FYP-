@@ -14,6 +14,22 @@ export const getUserById = async (userId) => {
   }
 };
 
+// STILL WORKING
+export const checkIfChatExists = async (participantOneId, participantTwoId) => {
+  try {
+    const response = await axios.get(`${API_CHAT_BASE_URL}/check`, {
+      params: {
+        participantOneId,
+        participantTwoId,
+      },
+    });
+    return response.data.exists; // Assuming the response has an `exists` field
+  } catch (error) {
+    console.error("Error checking if chat exists:", error);
+    throw error;
+  }
+};
+
 // Function to create a chat
 export const createChat = async (participantOneId, participantTwoId) => {
   try {
@@ -100,6 +116,20 @@ export const getMessagesBetween = async (senderId, receiverId) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching messages between participants:", error);
+    throw error;
+  }
+};
+
+export const searchUsers = async (query) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/users`, {
+      params: {
+        search: query,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error searching for users:", error);
     throw error;
   }
 };

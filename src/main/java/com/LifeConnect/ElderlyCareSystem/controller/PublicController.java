@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -35,5 +36,15 @@ public class PublicController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/users")
+    public List<Object> searchUsers(@RequestParam String search) {
+        return publicService.searchUsers(search);
+    }
+
+    @GetMapping("/chats/check")
+    public boolean checkChatExists(@RequestParam String userId1, @RequestParam String userId2) {
+        return publicService.checkIfChatExists(userId1, userId2);
     }
 }

@@ -37,8 +37,7 @@
 
 /* Active state styles */
 .sd-icon-button.active {
-  background-color: #4e4effdc;
-  color: white;
+  background-color:#4e4effd3;
 }
 
 .sd-icon-button.active img {
