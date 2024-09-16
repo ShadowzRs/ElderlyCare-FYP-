@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import { getAllChatsForUser, getUserById } from "./MessageService.jsx";
 import "../ChatPage.css";
 
-const ChatList = ({ userId, onChatSelect, onChatsLoaded }) => {
-  const [chats, setChats] = useState([]);
+const ChatList = ({
+  userId,
+  onChatSelect,
+  onChatsLoaded,
+  onActiveChatId,
+  chats,
+}) => {
   const [users, setUsers] = useState({});
-  const [activeChatId, setActiveChatId] = useState(null);
 
   useEffect(() => {
-    // Fetch the user's chats
+    // Fetch the user's chats if userId is present
     const fetchChats = async () => {
       try {
         const fetchedChats = await getAllChatsForUser(userId);
-        setChats(fetchedChats);
 
         // Fetch user data for each participant
         const participantIds = new Set();
@@ -39,12 +42,13 @@ const ChatList = ({ userId, onChatSelect, onChatsLoaded }) => {
       }
     };
 
-    fetchChats();
-  }, [userId]);
+    if (userId) {
+      fetchChats();
+    }
+  }, [userId, onChatsLoaded]);
 
   const handleChatClick = (chatId) => {
-    setActiveChatId(chatId); // Set the active chat ID
-    onChatSelect(chatId); // Call the onChatSelect handler
+    onChatSelect(chatId);
   };
 
   return (
@@ -57,13 +61,13 @@ const ChatList = ({ userId, onChatSelect, onChatsLoaded }) => {
           : chat.participantOneId;
         const participant = users[participantId];
         const participantRole = participant?.role ?? "Elderly";
-        const isActive = chat.id === activeChatId;
+        const isActive = chat.id === onActiveChatId;
 
         return (
           <button
             key={chat.id}
             className={`cp-user-profile ${isActive ? "active" : ""}`}
-            onClick={() => handleChatClick(chat.id)} 
+            onClick={() => handleChatClick(chat.id)}
           >
             <img
               className="object-cover w-8 h-8 rounded-full"

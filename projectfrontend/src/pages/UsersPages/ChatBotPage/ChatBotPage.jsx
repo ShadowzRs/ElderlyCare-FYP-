@@ -7,6 +7,7 @@ import "./ChatBotPage.css";
 const ChatBotPage = () => {
   const { user } = useContext(UserContext);
   const location = useLocation();
+  
   const ElderlyLinks = [
     {
       to: "/chats",

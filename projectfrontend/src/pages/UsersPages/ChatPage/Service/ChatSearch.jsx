@@ -4,18 +4,16 @@ import {
   createChat,
   searchUsers,
 } from "./MessageService.jsx";
-import { useNavigate } from "react-router-dom";
 import "../ChatPage.css";
 
-const ChatSearchBar = ({ currentUserId }) => {
+const ChatSearchBar = ({ currentUserId, onSeach, onChatCreated }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [showList, setShowList] = useState(false);
   const listRef = useRef(null);
-  const navigate = useNavigate();
 
   // Handle click outside the list
-  const handleClickOutside = (event) => {
+  const handleClick = (event) => {
     if (listRef.current && !listRef.current.contains(event.target)) {
       setShowList(false);
       setSearchQuery("");
@@ -26,11 +24,11 @@ const ChatSearchBar = ({ currentUserId }) => {
   // Add & Clear event listeners for clicks and key presses
   useEffect(() => {
     console.log("Adding event listeners");
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClick);
 
     return () => {
       console.log("Removing event listeners");
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClick);
     };
   }, []);
 
@@ -47,27 +45,28 @@ const ChatSearchBar = ({ currentUserId }) => {
     }
   };
 
-  // STILL WORKING
-  // const handleUserSelect = async (selectedUserId) => {
-  //   try {
-  //     // Check if chat exists
-  //     const chatExists = await checkIfChatExists(currentUserId, selectedUserId);
+  const handleUserSelect = async (selectedUserId) => {
+    try {
+      // Check if chat exists
+      const chatExists = await checkIfChatExists(currentUserId, selectedUserId);
 
-  //     if (chatExists) {
-  //       // If chat exists, navigate to that chat
-  //       navigate(`/chat/${selectedUserId}`); // Assuming `selectedUserId` is used as `chatId` in your chat URL
-  //     } else {
-  //       // If chat doesn't exist, create a new chat
-  //       console.log("Not in the existing list");
-  //       // const newChat = await createChat(currentUserId, selectedUserId);
+      if (chatExists !== null) {
+        console.log("Exists", chatExists);
+        onSeach(chatExists);
+      } else {
+        console.log("Not in the existing list");
+        const newChat = await createChat(currentUserId, selectedUserId);
+        onChatCreated(newChat);
+        onSeach(newChat.id);
+      }
 
-  //       // Navigate to the new chat
-  //       // navigate(`/chat/${newChat.id}`); // Assuming `newChat.id` is the ID of the newly created chat
-  //     }
-  //   } catch (error) {
-  //     console.error("Error handling user selection:", error);
-  //   }
-  // };
+      setShowList(false);
+      setSearchQuery("");
+      setFilteredUsers([]);
+    } catch (error) {
+      console.error("Error handling user selection:", error);
+    }
+  };
 
   return (
     <div className="cp-search-container">
@@ -115,9 +114,9 @@ const ChatSearchBar = ({ currentUserId }) => {
                 .map((user) => (
                   <li
                     key={user.id}
-                    // onClick={() =>
-                    //   user.id !== currentUserId && handleUserSelect(user.id)
-                    // }
+                    onClick={() =>
+                      user.id !== currentUserId && handleUserSelect(user.id)
+                    }
                     className={user.id === currentUserId ? "disabled" : ""}
                   >
                     {user.firstname} {user.lastname}

@@ -2,6 +2,7 @@ package com.LifeConnect.ElderlyCareSystem.controller;
 
 import com.LifeConnect.ElderlyCareSystem.service.PublicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -44,7 +45,12 @@ public class PublicController {
     }
 
     @GetMapping("/chats/check")
-    public boolean checkChatExists(@RequestParam String userId1, @RequestParam String userId2) {
-        return publicService.checkIfChatExists(userId1, userId2);
+    public ResponseEntity<String> checkChatExists(@RequestParam String participantOneId, @RequestParam String participantTwoId) {
+        String chatId = publicService.checkIfChatExists(participantOneId, participantTwoId);
+        if (chatId != null) {
+            return ResponseEntity.ok(chatId);  // Return the chat ID if found
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Chat not found");  // Return 404 if not found
+        }
     }
 }

@@ -65,7 +65,7 @@ public class PublicServiceImpi implements PublicService {
     }
 
     @Override
-    public boolean checkIfChatExists(String participantOneId, String participantTwoId) {
-        return chatRepository.checkIfChatAlreadyExist(participantOneId, participantTwoId);
+    public String checkIfChatExists(String participantOneId, String participantTwoId) {
+        return chatRepository.findChatIdByParticipants(participantOneId, participantTwoId);
     }
 }

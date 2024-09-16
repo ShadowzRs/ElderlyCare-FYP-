@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../../../component/MenuSideBar/Sidebar.jsx";
 import { UserContext } from "../../../UserContext.jsx";
 import ChatList from "./Service/ChatList.jsx";
@@ -11,10 +11,17 @@ const ChatPage = () => {
   const { user } = useContext(UserContext);
   const [chats, setChats] = useState([]);
   const [selectedChatId, setSelectedChatId] = useState(null);
+  const [activeChatId, setActiveChatId] = useState(null);
   const location = useLocation();
 
   const handleChatSelect = (chatId) => {
     setSelectedChatId(chatId);
+    setActiveChatId(chatId);
+  };
+
+  const handleChatCreated = (newChat) => {
+    setChats((prevChats) => [...prevChats, newChat]);
+    console.log(chats);
   };
 
   const ElderlyLinks = [
@@ -57,6 +64,11 @@ const ChatPage = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/6946/6946547.png",
     },
     {
+      to: "/healthRecord",
+      title: "Health Record",
+      icon: "https://cdn-icons-png.flaticon.com/128/4039/4039062.png",
+    },
+    {
       to: "/settings",
       title: "Setting",
       icon: "https://cdn-icons-png.flaticon.com/128/2040/2040504.png",
@@ -68,6 +80,16 @@ const ChatPage = () => {
       to: "/chats",
       title: "Chat",
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
+    },
+    {
+      to: "/med",
+      title: "Medication",
+      icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
+    },
+    {
+      to: "/healthRecord",
+      title: "Health Record",
+      icon: "https://cdn-icons-png.flaticon.com/128/4039/4039062.png",
     },
     {
       to: "/settings",
@@ -93,7 +115,11 @@ const ChatPage = () => {
               )}
 
               <div className="cp-container">
-                <ChatSearchBar currentUserId={user.id} />
+                <ChatSearchBar
+                  currentUserId={user.id}
+                  onSeach={(fetchedChatId) => handleChatSelect(fetchedChatId)}
+                  onChatCreated={(fetchednNewChat) => handleChatCreated (fetchednNewChat)} 
+                />
                 <h2 className="cp-container-header">Accounts</h2>
 
                 <div className="cp-user-list-container">
@@ -101,6 +127,8 @@ const ChatPage = () => {
                     userId={user.id}
                     onChatSelect={handleChatSelect}
                     onChatsLoaded={(fetchedChats) => setChats(fetchedChats)}
+                    onActiveChatId={activeChatId}
+                    chats={chats}
                   />
                 </div>
               </div>

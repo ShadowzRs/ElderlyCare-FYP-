@@ -13,9 +13,9 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
     Optional<Chat> findByParticipantOneIdAndParticipantTwoId(String participantOneId, String participantTwoId);
     List<Chat> findByParticipantOneIdOrParticipantTwoId(String participantOneId, String participantTwoId);
 
-    @Query("SELECT CASE WHEN COUNT(c) > 0 THEN true ELSE false END FROM Chat c WHERE " +
-            "(c.participantOneId = :userId1 AND c.participantTwoId = :userId2) OR " +
-            "(c.participantOneId = :userId2 AND c.participantTwoId = :userId1)")
-    boolean checkIfChatAlreadyExist(@Param("userId1") String userId1, @Param("userId2") String userId2);
+    @Query("SELECT c.id FROM Chat c WHERE " +
+            "(c.participantOneId = :participantOneId  AND c.participantTwoId = :participantTwoId) OR " +
+            "(c.participantOneId = :participantTwoId AND c.participantTwoId = :participantOneId )")
+    String findChatIdByParticipants(@Param("participantOneId") String participantOneId, @Param("participantTwoId") String participantTwoId);
 }
 

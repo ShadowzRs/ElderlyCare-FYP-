@@ -8,6 +8,7 @@ import "./Med_ReminderPage.css";
 const MedPage = () => {
   const { user } = useContext(UserContext);
   const location = useLocation();
+  
   const ElderlyLinks = [
     {
       to: "/chats",
@@ -41,6 +42,16 @@ const MedPage = () => {
       to: "/chats",
       title: "Chat",
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
+    },
+    {
+      to: "/med",
+      title: "Medication",
+      icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
+    },
+    {
+      to: "/healthRecord",
+      title: "Health Record",
+      icon: "https://cdn-icons-png.flaticon.com/128/4039/4039062.png",
     },
     {
       to: "/settings",
