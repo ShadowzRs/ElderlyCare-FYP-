@@ -3,3 +3,12 @@
   flex-direction: row;
   background-color: var(--sec-background-color);
 }
+
+.cb-chatSection {
+  display: flex;
+  height: 100dvh;
+  flex-direction: row;
+  flex: 1 1 auto;
+  background-color: #f7f9ff;
+  border-left: 1px solid #d1d5db;
+}
