@@ -6,6 +6,8 @@
   height: 100dvh;
   padding: 32px 0;
   background-color: white;
+  position: sticky; 
+  top: 0; 
 }
 
 .sd-icon-container {

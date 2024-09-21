@@ -55,7 +55,6 @@ export const createChat = async (participantOneId, participantTwoId) => {
 export const getAllChatsForUser = async (userId) => {
   try {
     const response = await axios.get(`${API_CHAT_BASE_URL}/user/${userId}`);
-    console.log("Fetched chats:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching chats for user:", error);

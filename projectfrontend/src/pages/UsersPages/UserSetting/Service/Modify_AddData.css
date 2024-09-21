@@ -1,0 +1,87 @@
+.MA-Section {
+  height: 100dvh;
+  background-color: #f7f9ff;
+  padding: 0 50px;
+}
+
+.MA-Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 0;
+  margin-bottom: 40px;
+  /* border-bottom: 1px solid #d1d5db; */
+}
+
+.MA-Return {
+  color: var(--primary-color);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.MA-Title {
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.MA-Save_Button {
+  padding: 3px 23px;
+  border-radius: 6px;
+  border-width: 1px;
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--white);
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.MA-Save_Button:hover {
+  color: var(--primary-color);
+  background-color: transparent;
+}
+
+.MA-DataSection {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.MA-Container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(1, 1fr); /* 1 column by default */
+  gap: 4px;
+  padding: 0 12px;
+}
+
+.MA-DataTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.MA-Data-Container {
+  color: #374151;
+}
+
+.MA-Data-Input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px !important;
+}
+
+@media (min-width: 640px) {
+  .MA-Container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .MA-Data-Container {
+    grid-column: span 2; /* Span 2 columns on small screens and larger */
+  }
+}

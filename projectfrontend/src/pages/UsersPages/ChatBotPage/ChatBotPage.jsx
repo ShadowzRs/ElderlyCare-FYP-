@@ -198,15 +198,15 @@ const ChatBotPage = () => {
 
           <div className="cb-chatSection">
             {/* Main Content */}
-            <main className="flex flex-col bg-white p-4 w-full max-w-full">
+            <main className="flex flex-col p-4 w-full max-w-full">
               <div
                 id="response-container"
                 className="flex-1 mb-4 p-4 h-full overflow-auto"
               >
                 <div className="mb-8">
-                  {message || chatResponses ? ( // Check if has a value
+                  {message || chatResponses ? ( 
                     <>
-                      <div className="inline-block bg-slate-100 rounded-lg p-2 ml-auto">
+                      <div className="inline-block bg-white text-base py-2 px-4 shadow rounded-xl">
                         {message}
                       </div>
                       <p className="mt-4 h-full overflow-auto">
@@ -219,11 +219,11 @@ const ChatBotPage = () => {
 
               {/* Chat Form */}
               <div>
-                <div className="flex items-center bg-gray-100 rounded-full p-1 shadow-md ">
+                <div className="flex items-center bg-white rounded-full p-1 shadow-md ">
                   <input
                     id="message"
                     name="message"
-                    className="bg-gray-100 outline-none text-gray-700 rounded-full py-2 px-4 w-full"
+                    className="bg-white outline-none text-gray-700 rounded-full py-2 px-4 w-full"
                     type="text"
                     placeholder="Message Chatbot"
                     value={Newmessage}
@@ -233,7 +233,7 @@ const ChatBotPage = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-gray-300 hover:bg-gray-400 text-gray-600 rounded-full p-2 ml-2"
+                    className="bg-white hover:bg-gray-400 text-gray-600 rounded-full p-2 ml-2"
                     onClick={handleNewPrompt}
                   >
                     <svg

@@ -62,14 +62,14 @@ const MedPage = () => {
 
   return (
     <>
-      <div className="maindash-container">
+      <div className="medDash-container">
         <aside className="flex">
           {user ? (
             <>
               {user.role === "Elderly" && location.pathname === "/med" && (
                 <Sidebar mainLinks={ElderlyLinks} />
               )}
-              {user.role === "Caregiver" && (
+              {user.role === "Caregiver" && location.pathname === "/med" && (
                 <Sidebar mainLinks={CaregiverLinks} />
               )}
             </>
