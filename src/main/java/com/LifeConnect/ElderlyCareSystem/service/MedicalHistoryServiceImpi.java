@@ -13,10 +13,12 @@ public class MedicalHistoryServiceImpi implements MedicalHistoryService{
     @Autowired
     private MedicalHistoryRepository medicalHistoryRepository;
 
+    @Override
     public List<MedicalHistory> getAllByElderlyUserId(String elderlyUserId) {
         return medicalHistoryRepository.findByElderlyUserId(elderlyUserId);
     }
 
+    @Override
     public MedicalHistory saveMedicalHistory(MedicalHistory medicalHistory) {
         return medicalHistoryRepository.save(medicalHistory);
     }

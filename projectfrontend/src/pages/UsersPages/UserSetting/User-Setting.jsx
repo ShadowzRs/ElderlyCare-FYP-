@@ -15,6 +15,12 @@ const UserSetting = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const [medicalHistories, setMedicalHistories] = useState([]);
+  const [MedicalAllergies, setMedicalAllergies] = useState({
+    medicationAllergies: [],
+    foodAllergies: [],
+    environmentalAllergies: [],
+  });
+
   const [view_UserData, setView_UserData] = useState(false);
   const [view_MedData, setview_MedData] = useState(false);
   const [refresh, setRefresh] = useState(false);
@@ -102,10 +108,38 @@ const UserSetting = () => {
           setUserData(userInfo);
 
           // Fetch medical histories
-          const response = await axios.get(
+          const responseHistory = await axios.get(
             `http://localhost:8080/api/medical-history/${user.id}`
           );
-          setMedicalHistories(response.data);
+
+          setMedicalHistories(responseHistory.data);
+
+          const responseAllergy = await axios.get(
+            `http://localhost:8080/api/medical-allergies/${user.id}`
+          );
+
+          const allergyData = responseAllergy.data;
+
+          const fetchedMedAllergies = allergyData.medicationAllergies
+            ? allergyData.medicationAllergies
+                .split(",")
+                .map((item) => item.trim())
+            : [];
+          const fetchedFoodAllergies = allergyData.foodAllergies
+            ? allergyData.foodAllergies.split(",").map((item) => item.trim())
+            : [];
+          const fetchedEnvAllergies = allergyData.environmentalAllergies
+            ? allergyData.environmentalAllergies
+                .split(",")
+                .map((item) => item.trim())
+            : [];
+
+          // Update state
+          setMedicalAllergies({
+            medicationAllergies: fetchedMedAllergies,
+            foodAllergies: fetchedFoodAllergies,
+            environmentalAllergies: fetchedEnvAllergies,
+          });
           setRefresh(false);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -337,46 +371,84 @@ const UserSetting = () => {
                         <div className="s-tab-button-Container">
                           <button
                             className="s-tab-button"
-                            onClick={() =>
-                              navigate(`modify-add?type=allegriesrecord`)
-                            }
+                            onClick={() => {
+                              const hasAllergies =
+                                MedicalAllergies.medicationAllergies.length >
+                                  0 ||
+                                MedicalAllergies.foodAllergies.length > 0 ||
+                                MedicalAllergies.environmentalAllergies.length >
+                                  0;
+
+                              navigate(
+                                hasAllergies
+                                  ? `modify-add?type=allergiesrecordupdate` // Update
+                                  : `modify-add?type=allergiesrecord` // Add New
+                              );
+                            }}
                           >
-                            Add New
+                            {MedicalAllergies.medicationAllergies.length > 0 ||
+                            MedicalAllergies.foodAllergies.length > 0 ||
+                            MedicalAllergies.environmentalAllergies.length > 0
+                              ? "Update"
+                              : "Add New"}
                           </button>
                         </div>
                       </div>
-                      <div className="bg-white">
-                        <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
-                          <dl className="-my-3 divide-y divide-gray-100 text-sm">
-                            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                              <dt className="font-medium text-gray-900">
-                                Medication Allergies
-                              </dt>
-                              <dd className="text-gray-700 sm:col-span-2">
-                                ...
-                              </dd>
-                            </div>
 
-                            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                              <dt className="font-medium text-gray-900">
-                                Food Allergies
-                              </dt>
-                              <dd className="text-gray-700 sm:col-span-2">
-                                ...
-                              </dd>
-                            </div>
+                      {MedicalAllergies.medicationAllergies.length > 0 ||
+                      MedicalAllergies.foodAllergies.length > 0 ||
+                      MedicalAllergies.environmentalAllergies.length > 0 ? (
+                        <div className="bg-white">
+                          <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
+                            <dl className="-my-3 divide-y divide-gray-100 text-sm">
+                              <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                                <dt className="font-medium text-gray-900">
+                                  Medication Allergies
+                                </dt>
+                                <dd className="text-gray-700 sm:col-span-2">
+                                  {MedicalAllergies.medicationAllergies.length >
+                                  0
+                                    ? MedicalAllergies.medicationAllergies.join(
+                                        ", "
+                                      )
+                                    : "None"}
+                                </dd>
+                              </div>
 
-                            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                              <dt className="font-medium text-gray-900">
-                                Environmental Allergies
-                              </dt>
-                              <dd className="text-gray-700 sm:col-span-2">
-                                ...
-                              </dd>
-                            </div>
-                          </dl>
+                              <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                                <dt className="font-medium text-gray-900">
+                                  Food Allergies
+                                </dt>
+                                <dd className="text-gray-700 sm:col-span-2">
+                                  {MedicalAllergies.foodAllergies.length > 0
+                                    ? MedicalAllergies.foodAllergies.join(", ")
+                                    : "None"}
+                                </dd>
+                              </div>
+
+                              <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                                <dt className="font-medium text-gray-900">
+                                  Environmental Allergies
+                                </dt>
+                                <dd className="text-gray-700 sm:col-span-2">
+                                  {MedicalAllergies.environmentalAllergies
+                                    .length > 0
+                                    ? MedicalAllergies.environmentalAllergies.join(
+                                        ", "
+                                      )
+                                    : "None"}
+                                </dd>
+                              </div>
+                            </dl>
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <div className="text-center py-4">
+                          <p className="text-gray-400">
+                            No Medical History Records as of Today
+                          </p>
+                        </div>
+                      )}
                     </>
                   )}
 

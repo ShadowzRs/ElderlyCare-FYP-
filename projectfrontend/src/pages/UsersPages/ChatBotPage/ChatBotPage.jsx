@@ -198,13 +198,17 @@ const ChatBotPage = () => {
 
           <div className="cb-chatSection">
             {/* Main Content */}
+
             <main className="flex flex-col p-4 w-full max-w-full">
+              <div className="p-5">
+                <h1 className="text-xl font-medium">AI-Chatbot</h1>
+              </div>
               <div
                 id="response-container"
                 className="flex-1 mb-4 p-4 h-full overflow-auto"
               >
                 <div className="mb-8">
-                  {message || chatResponses ? ( 
+                  {message || chatResponses ? (
                     <>
                       <div className="inline-block bg-white text-base py-2 px-4 shadow rounded-xl">
                         {message}
@@ -213,7 +217,8 @@ const ChatBotPage = () => {
                         {loading ? "Loading..." : renderChatResponse()}
                       </p>
                     </>
-                  ) : null}{""}
+                  ) : null}
+                  {""}
                 </div>
               </div>
 

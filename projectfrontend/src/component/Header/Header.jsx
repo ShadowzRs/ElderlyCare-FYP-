@@ -10,15 +10,6 @@ const Header = () => {
     navigate(route);
   };
 
-  const navItems = [
-    { text: "About", path: "#" },
-    { text: "Careers", path: "#" },
-    { text: "History", path: "#" },
-    { text: "Services", path: "#" },
-    { text: "Projects", path: "#" },
-    { text: "Blog", path: "#" },
-  ];
-
   return (
     <header className="Landing_Header">
       <div className="Landing_Header_Container">
@@ -26,20 +17,6 @@ const Header = () => {
           <Link to="/">
             <img src={logo} alt="AI-LifeConnect" className="logo-image" />
           </Link>
-
-          <div className="Landing_Header_Nav_Container">
-            <nav aria-label="Global">
-              <ul className="Landing_Header_Nav_List">
-                {navItems.map((item, index) => (
-                  <li key={index}>
-                    <Link className="Landing_Header_Nav_Content" to={item.path}>
-                      {item.text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
 
           <div className="Landing_Header_Button">
             <button

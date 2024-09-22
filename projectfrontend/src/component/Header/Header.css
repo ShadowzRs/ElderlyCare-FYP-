@@ -23,32 +23,6 @@
   padding-bottom: 5px;
 }
 
-.Landing_Header_Nav_Container {
-  display: none;
-}
-
-.Landing_Header_Nav_List {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  line-height: 20px;
-  font-size: 16px;
-}
-
-.Landing_Header_Nav_Content {
-  color: #111827;
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-  padding-bottom: 2px;
-  font-weight: 400;
-}
-
-.Landing_Header_Nav_Content:hover {
-  border-bottom: 2px solid #111827;
-}
-
 .Landing_Header_Button {
   display: flex;
   gap: 20px;

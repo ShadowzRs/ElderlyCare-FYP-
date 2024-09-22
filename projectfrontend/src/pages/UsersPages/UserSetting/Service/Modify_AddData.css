@@ -11,7 +11,6 @@
   align-items: center;
   padding: 35px 0;
   margin-bottom: 40px;
-  /* border-bottom: 1px solid #d1d5db; */
 }
 
 .MA-Return {
@@ -48,17 +47,16 @@
 .MA-DataSection {
   display: flex;
   flex-direction: column;
-  gap: 25px;
 }
 
-.MA-Section-Title{
+.MA-Section-Title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-right: 50px;
 }
 
-.MA-Container {
+.MH-Container {
   display: grid;
   align-items: center;
   grid-template-columns: repeat(1, 1fr); /* 1 column by default */
@@ -66,29 +64,73 @@
   padding: 0 12px;
 }
 
-.MA-DataTitle {
+.MH-DataTitle {
   font-size: 14px;
   font-weight: 500;
   color: #1f2937;
 }
 
-.MA-Data-Container {
+.MH-Data-Container {
   color: #374151;
 }
 
-.MA-Data-Input {
+.MH-Data-Input {
   width: 100%;
   padding: 12px;
   font-size: 14px !important;
 }
 
+.AR-Section h1 {
+  padding-bottom: 10px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.AR-Container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0 32px;
+}
+
+.AR-Option-Container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-gap: 20px;
+  padding: 15px 20px;
+  background-color: white;
+  border: 1px solid #d1d5db; /* Example: green border */
+  border-radius: 8px;
+}
+
+.AR-Option-Item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.AR-List-Container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.AR-List-Title {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.AR-List-Value {
+  margin-left: 10px;
+}
+
 @media (min-width: 640px) {
-  .MA-Container {
+  .MH-Container {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
-  .MA-Data-Container {
+  .MH-Data-Container {
     grid-column: span 2; /* Span 2 columns on small screens and larger */
   }
 }
