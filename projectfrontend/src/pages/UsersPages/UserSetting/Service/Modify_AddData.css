@@ -51,6 +51,13 @@
   gap: 25px;
 }
 
+.MA-Section-Title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 50px;
+}
+
 .MA-Container {
   display: grid;
   align-items: center;

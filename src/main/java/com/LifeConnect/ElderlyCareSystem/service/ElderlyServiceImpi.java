@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 
 @Service
 public class ElderlyServiceImpi implements ElderlyService {
@@ -39,5 +40,10 @@ public class ElderlyServiceImpi implements ElderlyService {
             }
         }
         return null;
+    }
+
+    public ElderlyUser findById(String id) {
+        Optional<ElderlyUser> elderlyUserOptional = elderlyRepo.findById(id);
+        return elderlyUserOptional.orElse(null); // Return the user if found, otherwise return null
     }
 }

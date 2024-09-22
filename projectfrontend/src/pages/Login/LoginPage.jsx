@@ -60,7 +60,7 @@ const SignInForm = () => {
         if (elderlyData.authenticated === "true") {
           // Store elderly user data
           const userData = { id: elderlyData.id, email, role: "Elderly" };
-          console.log('User Data:', userData);
+          console.log("User Data:", userData);
           loginUser(userData); // Save in context and local storage
           navigate("/chats");
           return;
@@ -82,18 +82,25 @@ const SignInForm = () => {
 
         if (HprovData.authenticated === "true") {
           const userData = { id: HprovData.id, email, role: HprovData.role };
-          console.log('User Data:', userData);
+          console.log("User Data:", userData);
           loginUser(userData); // Save user data in context and local storage
           navigate("/chats");
+
         } else {
-          showNotification("Login failed", "Invalid email or password");
+          alert(
+            "Login Failed!\nPlease check your email and password and try again."
+          );
         }
       } else {
-        showNotification("Login failed", "Invalid email or password");
+        alert(
+          "Login Failed!\nPlease check your email and password and try again."
+        );
       }
     } catch (error) {
       console.error("Error logging in:", error);
-      showNotification("An error occurred", "Please try again.");
+      alert(
+        "Login Failed!\nPlease check your email and password and try again."
+      );
     }
   };
 

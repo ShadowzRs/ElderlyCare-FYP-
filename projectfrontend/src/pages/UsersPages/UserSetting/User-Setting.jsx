@@ -1,18 +1,23 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { UserContext } from "../../../UserContext.jsx";
 import { getUserById } from "../ChatPage/Service/MessageService.jsx";
 import Sidebar from "../../../component/MenuSideBar/Sidebar.jsx";
+import axios from "axios";
 
 import "./User-Setting.css";
+
+export const RefreshContext = createContext();
 
 const UserSetting = () => {
   const { user } = useContext(UserContext);
   const location = useLocation();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
+  const [medicalHistories, setMedicalHistories] = useState([]);
   const [view_UserData, setView_UserData] = useState(false);
   const [view_MedData, setview_MedData] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const ElderlyLinks = [
     {
@@ -91,18 +96,25 @@ const UserSetting = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       if (user?.id) {
-        // Check if user and user.id exist
         try {
+          // Fetch user data
           const userInfo = await getUserById(user.id);
           setUserData(userInfo);
+
+          // Fetch medical histories
+          const response = await axios.get(
+            `http://localhost:8080/api/medical-history/${user.id}`
+          );
+          setMedicalHistories(response.data);
+          setRefresh(false);
         } catch (error) {
-          console.error("Error fetching user data:", error);
+          console.error("Error fetching data:", error);
         }
       }
     };
 
     fetchUserData();
-  }, [user]);
+  }, [user, refresh]);
 
   const handleOnView = (type) => {
     if (type === "User") {
@@ -271,33 +283,54 @@ const UserSetting = () => {
                               navigate(`modify-add?type=medicalhistory`)
                             }
                           >
-                            Add/Modify
+                            Add New
                           </button>
                         </div>
                       </div>
-                      <div className="bg-white">
-                        <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
-                          <dl className="-my-3 divide-y divide-gray-100 text-sm">
-                            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                              <dt className="font-medium text-gray-900">
-                                Previous Illnesses
-                              </dt>
-                              <dd className="text-gray-700 sm:col-span-2">
-                                ...
-                              </dd>
-                            </div>
+                      {medicalHistories.length > 0 ? (
+                        medicalHistories.map((history, index) => (
+                          <div key={index}>
+                            <div className="bg-white">
+                              <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
+                                <dl className="-my-3 divide-y divide-gray-100 text-sm">
+                                  <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                                    <dt className="font-medium text-gray-900">
+                                      Previous Illnesses
+                                    </dt>
+                                    <dd className="text-gray-700 sm:col-span-2">
+                                      {history.illness || "No data available"}
+                                    </dd>
+                                  </div>
 
-                            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                              <dt className="font-medium text-gray-900">
-                                Surgeries
-                              </dt>
-                              <dd className="text-gray-700 sm:col-span-2">
-                                ...
-                              </dd>
+                                  <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                                    <dt className="font-medium text-gray-900">
+                                      Surgeries
+                                    </dt>
+                                    <dd className="text-gray-700 sm:col-span-2">
+                                      {history.surgeries || "No data available"}
+                                    </dd>
+                                  </div>
+
+                                  <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                                    <dt className="font-medium text-gray-900">
+                                      Date
+                                    </dt>
+                                    <dd className="text-gray-700 sm:col-span-2">
+                                      {history.date || "No data available"}
+                                    </dd>
+                                  </div>
+                                </dl>
+                              </div>
                             </div>
-                          </dl>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-center py-4">
+                          <p className="text-gray-400">
+                            No Medical History Records as of Today
+                          </p>
                         </div>
-                      </div>
+                      )}
 
                       <div className="s-tab-Title">
                         <h2>Allegries Record</h2>
@@ -308,7 +341,7 @@ const UserSetting = () => {
                               navigate(`modify-add?type=allegriesrecord`)
                             }
                           >
-                            Add/Modify
+                            Add New
                           </button>
                         </div>
                       </div>
@@ -374,7 +407,9 @@ const UserSetting = () => {
           )}
         </>
       )}
-      <Outlet />
+      <RefreshContext.Provider value={{ refresh, setRefresh }}>
+        <Outlet />
+      </RefreshContext.Provider>
     </>
   );
 };
