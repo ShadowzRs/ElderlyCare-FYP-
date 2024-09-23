@@ -249,9 +249,9 @@ const DisplayRecordPage = () => {
                   )}
               </aside>
 
-              <div className="settingSection">
-                <div className="s-Header">
-                  <h1 className="s-Heading">Medical Record</h1>
+              <div className="medSection">
+                <div className="medHis-Header">
+                  <h1 className="medHis-Heading">Medical Record</h1>
                 </div>
 
                 {(user.role === "Doctor" ||
@@ -306,14 +306,14 @@ const DisplayRecordPage = () => {
                   </div>
                 )}
 
-                <div className="s-Content">
-                  <div className="s-tab-Title">
+                <div className="medHis-Content">
+                  <div className="medHis-tab-Title">
                     <h2>Medical History</h2>
                     {user.role === "Elderly" &&
                       location.pathname === "/healthRecord" && (
-                        <div className="s-tab-button-Container">
+                        <div className="medHis-tab-button-Container">
                           <button
-                            className="s-tab-button"
+                            className="medHis-tab-button"
                             onClick={() =>
                               navigate(`modify-add?type=medicalhistory`)
                             }
@@ -369,13 +369,13 @@ const DisplayRecordPage = () => {
                     </div>
                   )}
 
-                  <div className="s-tab-Title">
+                  <div className="medHis-tab-Title">
                     <h2>Allegries Record</h2>
                     {user.role === "Elderly" &&
                       location.pathname === "/healthRecord" && (
-                        <div className="s-tab-button-Container">
+                        <div className="medHis-tab-button-Container">
                           <button
-                            className="s-tab-button"
+                            className="medHis-tab-button"
                             onClick={() => {
                               const hasAllergies =
                                 MedicalAllergies.medicationAllergies.length >

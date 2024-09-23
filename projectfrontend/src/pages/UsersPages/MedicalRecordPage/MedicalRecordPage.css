@@ -4,7 +4,7 @@
   background-color: var(--sec-background-color);
 }
 
-.settingSection {
+.medSection {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -13,69 +13,22 @@
   padding-bottom: 50px;
 }
 
-.s-Header {
+.medHis-Header {
   padding: 35px 40px;
 }
-.s-Heading {
+.medHis-Heading {
   font-size: 19px;
   font-weight: 500;
 }
 
-.s-Content {
+.medHis-Content {
   display: flex;
   flex-direction: column;
   margin: 0 70px;
   gap: 25px;
 }
 
-.s-Card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  padding: 14px 30px;
-  border-radius: 15px;
-  border: 1px solid #d1d5db;
-}
-
-.s-Title {
-  font-size: 17px;
-  font-weight: 400;
-}
-
-.s-Desc {
-  font-size: 14px;
-  color: #6b7280c9;
-}
-
-.s-arrow {
-  height: auto;
-  width: 30px;
-  padding: 3px 0px;
-}
-
-.s-SurveyButton {
-  height: 36px;
-  padding: 0px 20px;
-  color: var(--white);
-  font-weight: 500;
-  font-size: 14px;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: var(--primary-color);
-  background-color: var(--primary-color);
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-}
-
-.s-SurveyButton:hover {
-  color: var(--primary-color);
-  background-color: transparent;
-}
-
-.s-tab-Title {
+.medHis-tab-Title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -83,11 +36,11 @@
   justify-items: center;
 }
 
-.s-tab-button-Container {
+.medHis-tab-button-Container {
   padding-right: 30px;
 }
 
-.s-tab-button {
+.medHis-tab-button {
   padding: 2px 10px;
   border-radius: 6px;
   border-width: 1px;
@@ -102,14 +55,9 @@
   transition-duration: 300ms;
 }
 
-.s-tab-button:hover {
+.medHis-tab-button:hover {
   color: var(--primary-color);
   background-color: transparent;
-}
-
-.s-plus {
-  height: auto;
-  width: 24px;
 }
 
 .med-search-container {
