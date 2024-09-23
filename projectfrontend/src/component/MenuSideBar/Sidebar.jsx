@@ -33,9 +33,9 @@ const Sidebar = ({ mainLinks }) => {
 
   return (
     <div className="sd-container">
-      <Link to="/" className="pb-[35px]">
+      <div className="pb-[35px]">
         <img className="w-auto h-7" src={small_logo} alt="logo" />
-      </Link>
+      </div>
 
       <div className="sd-icon-container">
         <div className="sd-main-container">

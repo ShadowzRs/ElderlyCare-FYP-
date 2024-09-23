@@ -13,6 +13,7 @@ import axios from "axios";
 import "./MedicalRecordPage.css";
 
 export const RefreshContext = createContext();
+
 const extractAllergies = (allergyData, type) =>
   allergyData[type]
     ? allergyData[type].split(",").map((item) => item.trim())
@@ -308,7 +309,7 @@ const DisplayRecordPage = () => {
 
                 <div className="medHis-Content">
                   <div className="medHis-tab-Title">
-                    <h2>Medical History</h2>
+                    <h2> --- Medical History --- </h2>
                     {user.role === "Elderly" &&
                       location.pathname === "/healthRecord" && (
                         <div className="medHis-tab-button-Container">
@@ -370,7 +371,7 @@ const DisplayRecordPage = () => {
                   )}
 
                   <div className="medHis-tab-Title">
-                    <h2>Allegries Record</h2>
+                    <h2>--- Allegries Record ---</h2>
                     {user.role === "Elderly" &&
                       location.pathname === "/healthRecord" && (
                         <div className="medHis-tab-button-Container">

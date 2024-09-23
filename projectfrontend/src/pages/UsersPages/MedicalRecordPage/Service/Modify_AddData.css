@@ -78,6 +78,7 @@
   width: 100%;
   padding: 12px;
   font-size: 14px !important;
+  resize: none;
 }
 
 .AR-Section h1 {

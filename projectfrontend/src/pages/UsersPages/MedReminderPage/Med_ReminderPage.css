@@ -1,5 +1,57 @@
-.medDash-container {
+.Reminder-container {
   display: flex;
   flex-direction: row;
   background-color: var(--sec-background-color);
+}
+
+.Reminder-Section {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  background-color: #f7f9ff;
+  border-left: 1px solid #d1d5db;
+  padding-bottom: 50px;
+}
+
+.Reminder-Header {
+  padding: 35px 40px;
+}
+.Reminder-Heading {
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.Reminder-Content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 70px;
+  gap: 25px;
+}
+
+.Reminder-tab-Title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  justify-items: center;
+  padding-bottom: 20px;
+}
+
+.Reminder-tab-Title h2 {
+  font-weight: 500;
+}
+
+.Reminder-button {
+  padding: 7px 15px;
+  border-radius: 6px;
+  border-width: 1px;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--white);
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }

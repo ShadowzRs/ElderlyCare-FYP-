@@ -14,6 +14,7 @@ const Modify_Add = () => {
   const queryParams = new URLSearchParams(location.search);
   const type = queryParams.get("type");
   const [title, setTitle] = useState("");
+
   const [form, setForm] = useState([{ illness: "", surgeries: "", date: "" }]);
 
   const [allergyId, setAllergyId] = useState(null);
@@ -321,6 +322,7 @@ const Modify_Add = () => {
                         value={form.illness}
                         onChange={handleInputChange}
                         autoComplete="off"
+                        required
                       />
                     </dd>
                   </div>
@@ -337,6 +339,7 @@ const Modify_Add = () => {
                         value={form.surgeries}
                         onChange={handleInputChange}
                         autoComplete="off"
+                        required
                       />
                     </dd>
                   </div>
@@ -351,6 +354,7 @@ const Modify_Add = () => {
                         className="MH-Data-Input"
                         value={form.date}
                         onChange={handleInputChange}
+                        required
                       />
                     </dd>
                   </div>
@@ -375,6 +379,7 @@ const Modify_Add = () => {
                           medicationAllergies.includes("None") &&
                           option !== "None"
                         }
+                        required
                       />
                       {option}
                     </div>
@@ -395,6 +400,7 @@ const Modify_Add = () => {
                         disabled={
                           foodAllergies.includes("None") && option !== "None"
                         }
+                        required
                       />
                       {option}
                     </div>
@@ -416,6 +422,7 @@ const Modify_Add = () => {
                           environmentalAllergies.includes("None") &&
                           option !== "None"
                         }
+                        required
                       />
                       {option}
                     </div>

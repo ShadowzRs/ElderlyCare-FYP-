@@ -9,7 +9,8 @@ import RegisterPage from "./pages/Register/RegisterPage.jsx";
 import ChatPage from "./pages/UsersPages/ChatPage/ChatPage.jsx";
 import AIChatbot from "./pages/UsersPages/ChatBotPage/ChatBotPage.jsx";
 import Reminder from "./pages/UsersPages/MedReminderPage/Med_ReminderPage.jsx";
-import ElderlyMedRecord from "./pages/UsersPages/MedicalRecordPage/MedicalRecordPage.jsx";
+import NewReminder from "./pages/UsersPages/MedReminderPage/Service/NewReminder.jsx";
+import MedRecord from "./pages/UsersPages/MedicalRecordPage/MedicalRecordPage.jsx";
 import Modify_Add from "./pages/UsersPages/MedicalRecordPage/Service/Modify_AddData.jsx";
 import Setting from "./pages/UsersPages/UserSetting/User-Setting.jsx";
 
@@ -25,11 +26,10 @@ function Routing() {
 
         <Route path="/chats" element={<ChatPage role={user?.role} />} />
         <Route path="/chatbot" element={<AIChatbot role={user?.role} />} />
-        <Route path="/med" element={<Reminder role={user?.role} />} />
-        <Route
-          path="/healthRecord/*"
-          element={<ElderlyMedRecord role={user?.role} />}
-        >
+        <Route path="/med/*" element={<Reminder role={user?.role} />}>
+          <Route path="new-reminder" element={<NewReminder />} />
+        </Route>
+        <Route path="/healthRecord/*" element={<MedRecord role={user?.role} />}>
           <Route path="modify-add" element={<Modify_Add />} />
         </Route>
         <Route path="/settings" element={<Setting role={user?.role} />} />
