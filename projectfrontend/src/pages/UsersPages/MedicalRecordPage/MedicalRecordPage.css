@@ -1,0 +1,5 @@
+.medRecordDash-container {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--sec-background-color);
+}

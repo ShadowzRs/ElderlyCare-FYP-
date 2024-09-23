@@ -32,11 +32,6 @@ const ChatBotPage = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
     {
-      to: "/appointment",
-      title: "Appointment",
-      icon: "https://cdn-icons-png.flaticon.com/128/6946/6946547.png",
-    },
-    {
       to: "/settings",
       title: "Setting",
       icon: "https://cdn-icons-png.flaticon.com/128/2040/2040504.png",
@@ -265,7 +260,7 @@ const ChatBotPage = () => {
         <ErrorPage
           errorCode="401"
           title="Unauthorized Access!"
-          message="Invalid Authentication Credentials"
+          message="Invalid Authentication Credentials to Access AI-Chatbot"
           buttonText="Return to Home"
           redirectTo="/"
         />

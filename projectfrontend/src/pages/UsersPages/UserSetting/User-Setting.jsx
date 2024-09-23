@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { UserContext } from "../../../UserContext.jsx";
 import { getUserById } from "../ChatPage/Service/MessageService.jsx";
 import Sidebar from "../../../component/MenuSideBar/Sidebar.jsx";
+import ErrorPage from "../../../component/Error/ErrorPage.jsx";
 import axios from "axios";
 
 import "./User-Setting.css";
@@ -42,11 +43,6 @@ const UserSetting = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
     {
-      to: "/appointment",
-      title: "Appointment",
-      icon: "https://cdn-icons-png.flaticon.com/128/6946/6946547.png",
-    },
-    {
       to: "/settings",
       title: "Setting",
       icon: "https://cdn-icons-png.flaticon.com/128/2040/2040504.png",
@@ -58,11 +54,6 @@ const UserSetting = () => {
       to: "/chats",
       title: "Chat",
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
-    },
-    {
-      to: "/appointment",
-      title: "Appointment",
-      icon: "https://cdn-icons-png.flaticon.com/128/6946/6946547.png",
     },
     {
       to: "/healthRecord",
@@ -475,7 +466,13 @@ const UserSetting = () => {
               </div>
             </div>
           ) : (
-            <p>Please log in to access the features.</p>
+            <ErrorPage
+              errorCode="401"
+              title="Unauthorized Access!"
+              message="Invalid Authentication Credentials to Access Setting"
+              buttonText="Return to Home"
+              redirectTo="/"
+            />
           )}
         </>
       )}
