@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Sidebar from "../../../component/MenuSideBar/Sidebar.jsx";
 import { UserContext } from "../../../UserContext.jsx";
 import ChatList from "./Service/ChatList.jsx";
@@ -40,6 +40,11 @@ const ChatPage = () => {
       to: "/med",
       title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
+    },
+    {
+      to: "/healthRecord",
+      title: "Health Record",
+      icon: "https://cdn-icons-png.flaticon.com/128/4039/4039062.png",
     },
     {
       to: "/settings",

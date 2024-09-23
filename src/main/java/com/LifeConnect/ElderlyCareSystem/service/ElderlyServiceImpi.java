@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,8 +43,21 @@ public class ElderlyServiceImpi implements ElderlyService {
         return null;
     }
 
-    public ElderlyUser findById(String id) {
-        Optional<ElderlyUser> elderlyUserOptional = elderlyRepo.findById(id);
-        return elderlyUserOptional.orElse(null); // Return the user if found, otherwise return null
+    @Override
+    public List<ElderlyUser> searchElderlyUsersOnly(String query) {
+        List<ElderlyUser> elderlyUsers;
+
+        if (query != null && query.trim().contains(" ")) {
+            // Full name search
+            String[] parts = query.trim().split(" ", 2);
+            String firstname = parts[0];
+            String lastname = parts.length > 1 ? parts[1] : "";
+
+            elderlyUsers = elderlyRepo.findByFirstnameContainingIgnoreCaseOrLastnameContainingIgnoreCase(firstname, lastname);
+        } else {
+            // Single query search
+            elderlyUsers = elderlyRepo.findByFirstnameContainingIgnoreCaseOrLastnameContainingIgnoreCase(query, query);
+        }
+        return elderlyUsers;
     }
 }

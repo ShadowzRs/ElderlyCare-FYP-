@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../../../../UserContext.jsx";
-import { RefreshContext } from "../User-Setting.jsx";
+import { RefreshContext } from "../../MedicalRecordPage/MedicalRecordPage.jsx";
 import axios from "axios";
 
 import "./Modify_AddData.css";
@@ -14,9 +14,7 @@ const Modify_Add = () => {
   const queryParams = new URLSearchParams(location.search);
   const type = queryParams.get("type");
   const [title, setTitle] = useState("");
-  const [form, setForm] = useState([
-    { illness: "", surgeries: "", date: "" }, // initialized 1 form
-  ]);
+  const [form, setForm] = useState([{ illness: "", surgeries: "", date: "" }]);
 
   const [allergyId, setAllergyId] = useState(null);
   const [medicationAllergies, setMedicationAllergies] = useState([]);

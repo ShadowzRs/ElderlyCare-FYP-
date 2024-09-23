@@ -23,11 +23,9 @@ const ChatSearchBar = ({ currentUserId, onSeach, onChatCreated }) => {
 
   // Add & Clear event listeners for clicks and key presses
   useEffect(() => {
-    console.log("Adding event listeners");
     document.addEventListener("mousedown", handleClick);
 
     return () => {
-      console.log("Removing event listeners");
       document.removeEventListener("mousedown", handleClick);
     };
   }, []);

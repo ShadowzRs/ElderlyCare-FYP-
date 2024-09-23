@@ -27,6 +27,11 @@ const MedPage = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
     {
+      to: "/healthRecord",
+      title: "Health Record",
+      icon: "https://cdn-icons-png.flaticon.com/128/4039/4039062.png",
+    },
+    {
       to: "/settings",
       title: "Setting",
       icon: "https://cdn-icons-png.flaticon.com/128/2040/2040504.png",

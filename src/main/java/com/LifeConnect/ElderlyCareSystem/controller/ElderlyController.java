@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/elderly")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 public class ElderlyController {
     @Autowired
     private ElderlyService elderlyService;
@@ -38,5 +39,10 @@ public class ElderlyController {
             response.put("authenticated", "false");  // Put String value
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
+    }
+
+    @GetMapping("/users")
+    public List<ElderlyUser> searchUsers(@RequestParam String search) {
+        return elderlyService.searchElderlyUsersOnly(search);
     }
 }
