@@ -14,12 +14,12 @@ public class MedicalHistoryServiceImpi implements MedicalHistoryService{
     private MedicalHistoryRepository medicalHistoryRepository;
 
     @Override
-    public List<MedicalHistory> getAllByElderlyUserId(String elderlyUserId) {
-        return medicalHistoryRepository.findByElderlyUserId(elderlyUserId);
+    public MedicalHistory saveMedicalHistory(MedicalHistory medicalHistory) {
+        return medicalHistoryRepository.save(medicalHistory);
     }
 
     @Override
-    public MedicalHistory saveMedicalHistory(MedicalHistory medicalHistory) {
-        return medicalHistoryRepository.save(medicalHistory);
+    public List<MedicalHistory> getAllByElderlyUserId(String elderlyUserId) {
+        return medicalHistoryRepository.findByElderlyUserId(elderlyUserId);
     }
 }

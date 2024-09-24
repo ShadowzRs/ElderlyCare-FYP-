@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class MedicalHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Unique identifier for medical history entries
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "elderly_user_id", nullable = false)
