@@ -1,15 +1,38 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LandingPage.css";
 import Header from "../../component/Header/Header.jsx";
 import FeatureCard from "./FeatureCard.jsx";
 import logo from "../../assets/AI-LifeConnect_Logo.png";
 import Slogans from "../../assets/Slogans_Logo.svg";
-import imgPlaceHolder from "../../assets/ImagePlaceHolder.svg";
 import Illustrator from "../../assets/Health professional team-amico.svg";
+import ChatImg from "../../assets/Group Chat-pana.svg";
+import ServiceImg from "../../assets/Service 24_7-amico.svg";
+import Chatbotimg from "../../assets/Chat bot-amico.svg";
+import ReminderImg from "../../assets/Reminders-pana.svg";
 
 function LandingPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Basic email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    console.log(`Subscribed with email: ${email}`);
+    alert("Thank you for subscribing! Check your inbox for updates.");
+    setEmail("");
+  };
 
   return (
     <>
@@ -63,27 +86,27 @@ function LandingPage() {
         <div className="Landing_Feature_Container">
           <div className="Landing_Feature_Content">
             <FeatureCard
-              title="24/7 Support"
-              text="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
-              imageUrl={imgPlaceHolder}
+              title="Real Time Engagement"
+              text="Stay connected with loved ones and healthcare providers through instant messaging"
+              imageUrl={ChatImg}
             />
             <FeatureCard
               title="24/7 Support"
-              text="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
-              imageUrl={imgPlaceHolder}
+              text="Full time support for any urgent queries or needed support"
+              imageUrl={ServiceImg}
             />
           </div>
 
           <div className="Landing_Feature_Content">
             <FeatureCard
-              title="24/7 Support"
-              text="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
-              imageUrl={imgPlaceHolder}
+              title="AI-Powered Chatbot Assistance"
+              text="Get responses to health-related questions or any personalized guidance at any given time"
+              imageUrl={Chatbotimg}
             />
             <FeatureCard
-              title="24/7 Support"
-              text="Lorem Ipsum is simply dummy text of the printing and typesetting industry"
-              imageUrl={imgPlaceHolder}
+              title="Appointment & Med Reminders"
+              text="Never miss an important appointment or medication again with our reminders"
+              imageUrl={ReminderImg}
             />
           </div>
         </div>
@@ -101,24 +124,25 @@ function LandingPage() {
             />
 
             <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam
+              Enhancing elderly care with innovative technology and
+              compassionate support for a brighter future
             </p>
             <div className="social-icons">
-              <Link to="#">
+              <div className="social-icons-img">
                 <i className="fab fa-facebook-f"></i>
-              </Link>
-              <Link to="#">
+              </div>
+              <div className="social-icons-img">
                 <i className="fab fa-twitter"></i>
-              </Link>
-              <Link to="#">
+              </div>
+              <div className="social-icons-img">
                 <i className="fab fa-instagram"></i>
-              </Link>
-              <Link to="#">
+              </div>
+              <div className="social-icons-img">
                 <i className="fab fa-linkedin-in"></i>
-              </Link>
-              <Link to="#">
+              </div>
+              <div className="social-icons-img">
                 <i className="fab fa-youtube"></i>
-              </Link>
+              </div>
             </div>
           </div>
 
@@ -128,11 +152,15 @@ function LandingPage() {
               Stay informed! Enter your email to receive important news and
               updates about our elderly care services.
             </p>
-            <form className="subscribe-form">
-              <input type="email" placeholder="Enter your email address" />
-              <button type="submit" onClick={() => navigate("#")}>
-                Subscribe
-              </button>
+            <form className="subscribe-form" onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={handleEmailChange}
+                required
+              />
+              <button type="submit">Subscribe</button>
             </form>
           </div>
         </div>
@@ -140,9 +168,9 @@ function LandingPage() {
         <div className="Landing_footer-bottom">
           <p>Copyright © 2022</p>
           <div className="Landing_footer-links">
-            <Link to="#">All Rights Reserved</Link>
-            <Link to="#">Terms and Conditions</Link>
-            <Link to="#">Privacy Policy</Link>
+            <h2>All Rights Reserved</h2>
+            <h2>Terms and Conditions</h2>
+            <h2>Privacy Policy</h2>
           </div>
         </div>
       </footer>

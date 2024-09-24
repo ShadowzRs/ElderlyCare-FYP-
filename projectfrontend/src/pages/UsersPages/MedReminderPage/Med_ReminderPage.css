@@ -21,6 +21,64 @@
   font-weight: 500;
 }
 
+.Reminder-search-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 50px;
+  padding-bottom: 35px;
+}
+
+.Reminder-user-search {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: white;
+}
+
+.Reminder-user-search ::placeholder {
+  font-size: 14px;
+  color: var(--secondary-color);
+}
+
+.Reminder-search-logo {
+  position: absolute;
+  right: 65px;
+  padding: 5px;
+  pointer-events: none;
+}
+
+.Reminder-search-results {
+  position: absolute;
+  top: 46px;
+  left: 55px;
+  width: 94%;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(94, 35, 35, 0.1);
+  z-index: 999;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Reminder-search-results li {
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #4a5568;
+  cursor: pointer;
+}
+
+.Reminder-search-results li:hover {
+  background-color: #8d8a8a39;
+}
+
 .Reminder-Content {
   display: flex;
   flex-direction: column;

@@ -49,7 +49,7 @@ const DisplayRecordPage = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/2068/2068998.png",
     },
     {
-      to: "/med",
+      to: "/reminder",
       title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
@@ -90,7 +90,7 @@ const DisplayRecordPage = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },
     {
-      to: "/med",
+      to: "/reminder",
       title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
@@ -109,8 +109,6 @@ const DisplayRecordPage = () => {
   const handleClick = (event) => {
     if (listRef.current && !listRef.current.contains(event.target)) {
       setShowList(false);
-      setSearchQuery("");
-      setFilteredUsers([]);
     }
   };
 
@@ -135,7 +133,11 @@ const DisplayRecordPage = () => {
     }
   };
 
-  const handleUserSelect = async (selectedUserId) => {
+  const handleUserSelect = async (
+    selectedUserId,
+    selectedFirstName,
+    selectedLastName
+  ) => {
     try {
       // Fetch medical history and allergies concurrently
       const [responseHistory, responseAllergy] = await Promise.all([
@@ -172,7 +174,7 @@ const DisplayRecordPage = () => {
       });
 
       setShowList(false);
-      setSearchQuery("");
+      setSearchQuery(`${selectedFirstName} ${selectedLastName}`);
       setFilteredUsers([]);
     } catch (error) {
       console.error("Error handling user selection:", error);
@@ -296,7 +298,13 @@ const DisplayRecordPage = () => {
                               .map((user) => (
                                 <li
                                   key={user.id}
-                                  onClick={() => handleUserSelect(user.id)}
+                                  onClick={() =>
+                                    handleUserSelect(
+                                      user.id,
+                                      user.firstname,
+                                      user.lastname
+                                    )
+                                  }
                                 >
                                   {user.firstname} {user.lastname}
                                 </li>

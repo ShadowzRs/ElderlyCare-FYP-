@@ -1,5 +1,6 @@
 .card {
   display: flex;
+  justify-content: space-between;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
@@ -10,7 +11,7 @@
 .card-content {
   position: relative;
   align-items: start;
-  padding: 5px 0px 0px 25px;
+  padding: 5px 0px 0px 13px;
 }
 
 .card-title {
@@ -21,12 +22,15 @@
 
 .card-text {
   color: #666;
-  font-size: 20px;
+  font-size: 18px;
+  max-width: 450px;
+  text-wrap: wrap;
 }
 
 .card-image img {
-  width: 300px;
-  height: auto;
-  object-fit: cover;
+  width: 210px;
+  height: 180px;
+  object-fit: contain;
   border-radius: 8px;
+  border: 1px solid #ddd;
 }

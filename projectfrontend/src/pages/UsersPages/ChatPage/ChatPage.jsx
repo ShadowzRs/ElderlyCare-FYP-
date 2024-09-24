@@ -37,7 +37,7 @@ const ChatPage = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/2068/2068998.png",
     },
     {
-      to: "/med",
+      to: "/reminder",
       title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
@@ -78,7 +78,7 @@ const ChatPage = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },
     {
-      to: "/med",
+      to: "/reminder",
       title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },

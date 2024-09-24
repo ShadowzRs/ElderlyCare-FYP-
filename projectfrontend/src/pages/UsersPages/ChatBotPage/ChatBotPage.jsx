@@ -27,7 +27,7 @@ const ChatBotPage = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/2068/2068998.png",
     },
     {
-      to: "/med",
+      to: "/reminder",
       title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
@@ -217,8 +217,13 @@ const ChatBotPage = () => {
                         {loading ? "Loading..." : renderChatResponse()}
                       </p>
                     </>
-                  ) : null}
-                  {""}
+                  ) : (
+                  <div className="grid h-96 place-content-center px-4 pt-40">
+                    <h1 className="pt-32 uppercase tracking-widest text-gray-300 text-4xl font-semibold">
+                      Ask Me Anything! AI Assistant
+                    </h1>
+                  </div>
+                  )}
                 </div>
               </div>
 

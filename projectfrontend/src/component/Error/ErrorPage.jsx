@@ -1,7 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const ErrorPage = ({ errorCode = '401', title = 'Uh-oh!', message = 'Unauthorized Access', buttonText = 'Go Back Home', redirectTo = '/' }) => {
+const ErrorPage = ({
+  errorCode = "401",
+  title = "Uh-oh!",
+  message = "Unauthorized Access",
+  buttonText = "Go Back Home",
+  redirectTo = "/",
+}) => {
   return (
     <div className="grid h-screen place-content-center bg-white px-4">
       <div className="text-center">

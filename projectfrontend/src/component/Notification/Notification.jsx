@@ -4,7 +4,11 @@ import "./Notification.css";
 const Notification = ({ message1, message2, onClose }) => {
   return (
     <div className="notification-container">
-      <div role="alert" className="rounded-xl border border-gray-100 p-4" style={{ backgroundColor: '#FBFFF4' }}>
+      <div
+        role="alert"
+        className="rounded-xl border border-gray-100 p-4"
+        style={{ backgroundColor: "#FBFFF4" }}
+      >
         <div className="flex items-start gap-4">
           <span className="text-green-600">
             <svg
@@ -24,7 +28,10 @@ const Notification = ({ message1, message2, onClose }) => {
           </span>
 
           <div className="flex-1">
-            <strong className="block font-medium text-gray-900"> {message1}</strong>
+            <strong className="block font-medium text-gray-900">
+              {" "}
+              {message1}
+            </strong>
 
             <p className="mt-1 text-sm text-gray-700">{message2}</p>
           </div>

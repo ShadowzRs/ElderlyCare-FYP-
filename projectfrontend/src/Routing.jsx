@@ -26,7 +26,7 @@ function Routing() {
 
         <Route path="/chats" element={<ChatPage role={user?.role} />} />
         <Route path="/chatbot" element={<AIChatbot role={user?.role} />} />
-        <Route path="/med/*" element={<Reminder role={user?.role} />}>
+        <Route path="/reminder/*" element={<Reminder role={user?.role} />}>
           <Route path="new-reminder" element={<NewReminder />} />
         </Route>
         <Route path="/healthRecord/*" element={<MedRecord role={user?.role} />}>

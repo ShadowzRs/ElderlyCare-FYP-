@@ -26,7 +26,7 @@ const UserSetting = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/2068/2068998.png",
     },
     {
-      to: "/med",
+      to: "/reminder",
       title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
@@ -67,7 +67,7 @@ const UserSetting = () => {
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },
     {
-      to: "/med",
+      to: "/reminder",
       title: "Medication",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
@@ -222,7 +222,7 @@ const UserSetting = () => {
                 <button
                   className="s-SurveyButton"
                   onClick={() =>
-                    window.open("https://forms.gle/6pHnxQk92hFY76aL8", "_blank")
+                    window.open("https://forms.gle/MPach3tsbHZhR15t8", "_blank")
                   }
                 >
                   Survey

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { UserContext } from "../../../../UserContext.jsx";
 import { RefreshContext } from "../../MedicalRecordPage/MedicalRecordPage.jsx";
+import ErrorPage from "../../../../component/Error/ErrorPage.jsx";
 import axios from "axios";
 
 import "./Modify_AddData.css";
@@ -15,7 +16,7 @@ const Modify_Add = () => {
   const type = queryParams.get("type");
   const [title, setTitle] = useState("");
 
-  const [form, setForm] = useState([{ illness: "", surgeries: "", date: "" }]);
+  const [form, setForm] = useState({ illness: "", surgeries: "", date: "" });
 
   const [allergyId, setAllergyId] = useState(null);
   const [medicationAllergies, setMedicationAllergies] = useState([]);
@@ -293,146 +294,157 @@ const Modify_Add = () => {
 
   return (
     <>
-      <div className="MA-Section">
-        <div className="MA-Header">
-          <Link to={-1} className="MA-Return">
-            {"< Back"}
-          </Link>
-          <h1 className="MA-Title"> {title}</h1>
+      {user ? (
+        <div className="MA-Section">
+          <div className="MA-Header">
+            <Link to={-1} className="MA-Return">
+              {"< Back"}
+            </Link>
+            <h1 className="MA-Title"> {title}</h1>
 
-          <button className="MA-Save_Button" onClick={saveForms}>
-            Save
-          </button>
+            <button className="MA-Save_Button" onClick={saveForms}>
+              Save
+            </button>
+          </div>
+
+          <div className="MA-DataSection">
+            {type === "medicalhistory" && (
+              <div className="bg-white mx-8">
+                <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
+                  <dl className="-my-3 divide-y divide-gray-100 text-sm">
+                    {/* Previous Illnesses Input */}
+                    <div className="MH-Container">
+                      <dt className="MH-DataTitle">Previous Illnesses</dt>
+                      <dd className="MH-Data-Container">
+                        <input
+                          type="text"
+                          name="illness"
+                          placeholder="Enter previous illnesses"
+                          className="MH-Data-Input"
+                          value={form.illness}
+                          onChange={handleInputChange}
+                          autoComplete="off"
+                          required
+                        />
+                      </dd>
+                    </div>
+
+                    {/* Surgeries Input */}
+                    <div className="MH-Container">
+                      <dt className="MH-DataTitle">Surgeries</dt>
+                      <dd className="MH-Data-Container">
+                        <input
+                          type="text"
+                          name="surgeries"
+                          placeholder="Enter surgeries"
+                          className="MH-Data-Input"
+                          value={form.surgeries}
+                          onChange={handleInputChange}
+                          autoComplete="off"
+                          required
+                        />
+                      </dd>
+                    </div>
+
+                    {/* Date Input */}
+                    <div className="MH-Container">
+                      <dt className="MH-DataTitle">Date</dt>
+                      <dd className="MH-Data-Container">
+                        <input
+                          type="date"
+                          name="date"
+                          className="MH-Data-Input"
+                          value={form.date}
+                          onChange={handleInputChange}
+                          required
+                        />
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            )}
+
+            {(type === "allergiesrecord" ||
+              type === "allergiesrecordupdate") && (
+              <div className="AR-Container">
+                <div className="AR-Section">
+                  <h1>Medication Allergies</h1>
+                  <div className="AR-Option-Container">
+                    {medAllergiesOption.map((option) => (
+                      <div className="AR-Option-Item" key={option}>
+                        <input
+                          type="checkbox"
+                          value={option}
+                          checked={medicationAllergies.includes(option)} // Pre-select based on state
+                          onChange={handleMedicationChange}
+                          disabled={
+                            medicationAllergies.includes("None") &&
+                            option !== "None"
+                          }
+                          required
+                        />
+                        {option}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="AR-Section">
+                  <h1>Food Allergies</h1>
+                  <div className="AR-Option-Container">
+                    {foodAllergiesOption.map((option) => (
+                      <div className="AR-Option-Item" key={option}>
+                        <input
+                          type="checkbox"
+                          value={option}
+                          checked={foodAllergies.includes(option)} // Pre-select based on state
+                          onChange={handleFoodChange}
+                          disabled={
+                            foodAllergies.includes("None") && option !== "None"
+                          }
+                          required
+                        />
+                        {option}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="AR-Section">
+                  <h1>Environmental Allergies</h1>
+                  <div className="AR-Option-Container">
+                    {enviAllergiesOption.map((option) => (
+                      <div className="AR-Option-Item" key={option}>
+                        <input
+                          type="checkbox"
+                          value={option}
+                          checked={environmentalAllergies.includes(option)} // Pre-select based on state
+                          onChange={handleEnvironmentalChange}
+                          disabled={
+                            environmentalAllergies.includes("None") &&
+                            option !== "None"
+                          }
+                          required
+                        />
+                        {option}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-
-        <div className="MA-DataSection">
-          {type === "medicalhistory" && (
-            <div className="bg-white mx-8">
-              <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
-                <dl className="-my-3 divide-y divide-gray-100 text-sm">
-                  {/* Previous Illnesses Input */}
-                  <div className="MH-Container">
-                    <dt className="MH-DataTitle">Previous Illnesses</dt>
-                    <dd className="MH-Data-Container">
-                      <input
-                        type="text"
-                        name="illness"
-                        placeholder="Enter previous illnesses"
-                        className="MH-Data-Input"
-                        value={form.illness}
-                        onChange={handleInputChange}
-                        autoComplete="off"
-                        required
-                      />
-                    </dd>
-                  </div>
-
-                  {/* Surgeries Input */}
-                  <div className="MH-Container">
-                    <dt className="MH-DataTitle">Surgeries</dt>
-                    <dd className="MH-Data-Container">
-                      <input
-                        type="text"
-                        name="surgeries"
-                        placeholder="Enter surgeries"
-                        className="MH-Data-Input"
-                        value={form.surgeries}
-                        onChange={handleInputChange}
-                        autoComplete="off"
-                        required
-                      />
-                    </dd>
-                  </div>
-
-                  {/* Date Input */}
-                  <div className="MH-Container">
-                    <dt className="MH-DataTitle">Date</dt>
-                    <dd className="MH-Data-Container">
-                      <input
-                        type="date"
-                        name="date"
-                        className="MH-Data-Input"
-                        value={form.date}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </dd>
-                  </div>
-                </dl>
-              </div>
-            </div>
-          )}
-
-          {(type === "allergiesrecord" || type === "allergiesrecordupdate") && (
-            <div className="AR-Container">
-              <div className="AR-Section">
-                <h1>Medication Allergies</h1>
-                <div className="AR-Option-Container">
-                  {medAllergiesOption.map((option) => (
-                    <div className="AR-Option-Item" key={option}>
-                      <input
-                        type="checkbox"
-                        value={option}
-                        checked={medicationAllergies.includes(option)} // Pre-select based on state
-                        onChange={handleMedicationChange}
-                        disabled={
-                          medicationAllergies.includes("None") &&
-                          option !== "None"
-                        }
-                        required
-                      />
-                      {option}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="AR-Section">
-                <h1>Food Allergies</h1>
-                <div className="AR-Option-Container">
-                  {foodAllergiesOption.map((option) => (
-                    <div className="AR-Option-Item" key={option}>
-                      <input
-                        type="checkbox"
-                        value={option}
-                        checked={foodAllergies.includes(option)} // Pre-select based on state
-                        onChange={handleFoodChange}
-                        disabled={
-                          foodAllergies.includes("None") && option !== "None"
-                        }
-                        required
-                      />
-                      {option}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="AR-Section">
-                <h1>Environmental Allergies</h1>
-                <div className="AR-Option-Container">
-                  {enviAllergiesOption.map((option) => (
-                    <div className="AR-Option-Item" key={option}>
-                      <input
-                        type="checkbox"
-                        value={option}
-                        checked={environmentalAllergies.includes(option)} // Pre-select based on state
-                        onChange={handleEnvironmentalChange}
-                        disabled={
-                          environmentalAllergies.includes("None") &&
-                          option !== "None"
-                        }
-                        required
-                      />
-                      {option}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+      ) : (
+        <ErrorPage
+          errorCode="401"
+          title="Unauthorized Access!"
+          message="Invalid Authentication Credentials to Access Health Record"
+          buttonText="Return to Home"
+          redirectTo="/"
+        />
+      )}
     </>
   );
 };
