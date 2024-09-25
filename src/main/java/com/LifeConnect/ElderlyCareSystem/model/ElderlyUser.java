@@ -13,13 +13,17 @@ public class ElderlyUser {
     private String firstname, lastname, password, email, gender, phonenumber;
     private int age;
 
+    // New fields for emergency contact
+    private String emergencyContactName;
+    private String emergencyContactNumber;
+
     // Default constructor required by JPA/Hibernate
     public ElderlyUser() {
         this.id = generateId(); // Generate the ID when the object is created
     }
 
     private String generateId() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss"); //Year-Month-Date-Hour-Min-Sec
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss"); // Year-Month-Date-Hour-Min-Sec
         return LocalDateTime.now().format(formatter);
     }
 
@@ -81,5 +85,21 @@ public class ElderlyUser {
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
+    }
+
+    public String getEmergencyContactName() {
+        return emergencyContactName;
+    }
+
+    public void setEmergencyContactName(String emergencyContactName) {
+        this.emergencyContactName = emergencyContactName;
+    }
+
+    public String getEmergencyContactNumber() {
+        return emergencyContactNumber;
+    }
+
+    public void setEmergencyContactNumber(String emergencyContactNumber) {
+        this.emergencyContactNumber = emergencyContactNumber;
     }
 }

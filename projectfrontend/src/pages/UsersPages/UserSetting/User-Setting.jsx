@@ -16,23 +16,23 @@ const UserSetting = () => {
 
   const ElderlyLinks = [
     {
-      to: "/chats",
-      title: "Chat",
-      icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
-    },
-    {
       to: "/chatbot",
-      title: "AI Chatbot",
+      title: "AI-Chatbot",
       icon: "https://cdn-icons-png.flaticon.com/128/2068/2068998.png",
     },
     {
+      to: "/chats",
+      title: "Chats",
+      icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
+    },
+    {
       to: "/reminder",
-      title: "Medication",
+      title: "Reminders",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
     {
       to: "/healthRecord",
-      title: "Health Record",
+      title: "Health Records",
       icon: "https://cdn-icons-png.flaticon.com/128/4039/4039062.png",
     },
     {
@@ -45,12 +45,12 @@ const UserSetting = () => {
   const DoctorLinks = [
     {
       to: "/chats",
-      title: "Chat",
+      title: "Chats",
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },
     {
       to: "/healthRecord",
-      title: "Health Record",
+      title: "Health Records",
       icon: "https://cdn-icons-png.flaticon.com/128/4039/4039062.png",
     },
     {
@@ -63,17 +63,17 @@ const UserSetting = () => {
   const CaregiverLinks = [
     {
       to: "/chats",
-      title: "Chat",
+      title: "Chats",
       icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
     },
     {
       to: "/reminder",
-      title: "Medication",
+      title: "Reminders",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
     {
       to: "/healthRecord",
-      title: "Health Record",
+      title: "Health Records",
       icon: "https://cdn-icons-png.flaticon.com/128/4039/4039062.png",
     },
     {
@@ -90,6 +90,7 @@ const UserSetting = () => {
           // Fetch user data
           const userInfo = await getUserById(user.id);
           setUserData(userInfo);
+          console.log(userInfo);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
@@ -196,6 +197,7 @@ const UserSetting = () => {
                           {userData.phonenumber || "N/A"}
                         </dd>
                       </div>
+
                       {(user.role === "Doctor" || user.role === "Caregiver") &&
                         location.pathname === "/settings" && (
                           <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
@@ -206,6 +208,29 @@ const UserSetting = () => {
                               {userData.role || "N/A"}
                             </dd>
                           </div>
+                        )}
+
+                      {user.role === "Elderly" &&
+                        location.pathname === "/settings" && (
+                          <>
+                            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                              <dt className="font-medium text-gray-900">
+                                Emergency Contact Name
+                              </dt>
+                              <dd className="text-gray-700 sm:col-span-2">
+                                {userData.emergencyContactName || "N/A"}
+                              </dd>
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                              <dt className="font-medium text-gray-900">
+                                Emergency Contact Number
+                              </dt>
+                              <dd className="text-gray-700 sm:col-span-2">
+                                {userData.emergencyContactNumber || "N/A"}
+                              </dd>
+                            </div>
+                          </>
                         )}
                     </dl>
                   </div>

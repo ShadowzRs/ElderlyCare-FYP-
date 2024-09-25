@@ -17,23 +17,23 @@ const ChatBotPage = () => {
 
   const ElderlyLinks = [
     {
-      to: "/chats",
-      title: "Chat",
-      icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
-    },
-    {
       to: "/chatbot",
-      title: "AI Chatbot",
+      title: "AI-Chatbot",
       icon: "https://cdn-icons-png.flaticon.com/128/2068/2068998.png",
     },
     {
+      to: "/chats",
+      title: "Chats",
+      icon: "https://cdn-icons-png.flaticon.com/128/589/589708.png",
+    },
+    {
       to: "/reminder",
-      title: "Medication",
+      title: "Reminders",
       icon: "https://cdn-icons-png.flaticon.com/128/5463/5463386.png",
     },
     {
       to: "/healthRecord",
-      title: "Health Record",
+      title: "Health Records",
       icon: "https://cdn-icons-png.flaticon.com/128/4039/4039062.png",
     },
     {
@@ -218,11 +218,11 @@ const ChatBotPage = () => {
                       </p>
                     </>
                   ) : (
-                  <div className="grid h-96 place-content-center px-4 pt-40">
-                    <h1 className="pt-32 uppercase tracking-widest text-gray-300 text-4xl font-semibold">
-                      Ask Me Anything! AI Assistant
-                    </h1>
-                  </div>
+                    <div className="grid h-96 place-content-center px-4 pt-40">
+                      <h1 className="pt-32 uppercase tracking-widest text-gray-300 text-4xl font-semibold">
+                        Ask Me Anything! AI Assistant
+                      </h1>
+                    </div>
                   )}
                 </div>
               </div>

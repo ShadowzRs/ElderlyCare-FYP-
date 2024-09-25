@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import small_logo from "../../assets/AI-LifeConnect_Logo-small.png";
+import My_logo from "../../assets/AI-LifeConnect_Logo.png";
 import Notification from "../Notification/Notification.jsx";
 import { UserContext } from "../../UserContext.jsx";
 import "./Sidebar.css";
@@ -34,7 +34,7 @@ const Sidebar = ({ mainLinks }) => {
   return (
     <div className="sd-container">
       <div className="pb-[35px]">
-        <img className="w-auto h-7" src={small_logo} alt="logo" />
+        <img className="w-auto h-5 pl-2" src={My_logo} alt="logo" />
       </div>
 
       <div className="sd-icon-container">
@@ -43,24 +43,36 @@ const Sidebar = ({ mainLinks }) => {
             <Link
               to={link.to}
               title={link.title}
-              className={`sd-icon-button ${isActive(link.to) ? "active" : ""}`}
+              className={`sd-icon-button ${isActive(link.to) ? "active" : ""} ${
+                link.to === "/chatbot" ? "chatbot-highlight" : ""
+              }`} // Apply special class for AI-Chatbot
               key={index}
             >
-              <img
-                src={link.icon}
-                alt={link.title}
-                style={{ width: "25px", height: "25px" }}
-              />
+              <div className="sd-icon-items">
+                <img
+                  src={link.icon}
+                  alt={link.title}
+                  style={{
+                    width: "25px",
+                    height: "25px",
+                  }}
+                />
+
+                <h1 className="sd-icon-label">{link.title}</h1>
+              </div>
             </Link>
           ))}
         </div>
 
         <Link onClick={handleLogout} title="Logout" className="sd-icon-button">
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/1828/1828427.png"
-            alt="Logout"
-            style={{ width: "25px", height: "25px" }}
-          />
+          <div className="sd-icon-items">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/1828/1828427.png"
+              alt="Logout"
+              style={{ width: "25px", height: "25px" }}
+            />
+            <h1 className="sd-icon-label">Logout</h1>
+          </div>
         </Link>
       </div>
       {notification && (

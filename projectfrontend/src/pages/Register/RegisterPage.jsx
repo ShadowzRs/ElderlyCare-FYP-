@@ -20,6 +20,8 @@ const RegisterPage = () => {
     age: "",
     role: "",
     healthProviderSpecialty: "",
+    emergencyContactName: "",
+    emergencyContactNumber: "",
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -153,6 +155,19 @@ const RegisterPage = () => {
       isValid = false;
     }
 
+    if (!formData.emergencyContactName.trim()) {
+      errors.emergencyContactName = "Emergency Contact Name is required";
+      isValid = false;
+    }
+
+    if (!formData.emergencyContactNumber) {
+      errors.emergencyContactNumber = "Phone number is required";
+      isValid = false;
+    } else if (!/^0\d{2}-\d{3}-\d{4}$/.test(formData.emergencyContactNumber)) {
+      errors.emergencyContactNumber = "Wrong format [0XX-XXX-XXXX]";
+      isValid = false;
+    }
+
     setFormErrors(errors);
     return isValid;
   };
@@ -185,6 +200,8 @@ const RegisterPage = () => {
         age: formData.age,
         gender: formData.gender,
         phonenumber: formData.phone,
+        emergencyContactName: formData.emergencyContactName,
+        emergencyContactNumber: formData.emergencyContactNumber,
       };
     } else if (formData.role === "HealthcareProvider") {
       roleEndpoint = "http://localhost:8080/healthcareprovider/add";
@@ -490,7 +507,6 @@ const RegisterPage = () => {
               </div>
 
               {/* Conditional Rendering for Healthcare Provider */}
-
               {formData.role === "HealthcareProvider" && (
                 <div>
                   <label className="Register-Input-Label">
@@ -537,6 +553,60 @@ const RegisterPage = () => {
                 </div>
               )}
             </div>
+
+            {formData.role === "Elderly" && (
+              <div className="Register-Display">
+                <div className="Register-Items">
+                  <label
+                    htmlFor="emergencyContactName"
+                    className="Register-Input-Label"
+                  >
+                    Emergency Contact Name:
+                  </label>
+
+                  <input
+                    type="text"
+                    id="emergencyContactName"
+                    name="emergencyContactName"
+                    className="Register-Input-Box"
+                    value={formData.emergencyContactName}
+                    onChange={handleChange}
+                    required
+                  />
+                  {formErrors.emergencyContactName && (
+                    <div className="Error-Message">
+                      {formErrors.emergencyContactName}
+                    </div>
+                  )}
+                </div>
+
+                <div className="Register-Items">
+                  <label
+                    htmlFor="emergencyContactNumber"
+                    className="Register-Input-Label"
+                  >
+                    Emergency Contact Number:
+                  </label>
+
+                  <input
+                    type="tel"
+                    id="emergencyContactNumber"
+                    name="emergencyContactNumber"
+                    placeholder="0XX-XXX-XXXX"
+                    pattern="^0\d{2}-\d{3}-\d{4}$"
+                    className="Register-Input-Box"
+                    value={formData.emergencyContactNumber}
+                    onChange={handleChange}
+                    required
+                  />
+                  {formErrors.emergencyContactNumber && (
+                    <div className="Error-Message">
+                      {formErrors.emergencyContactNumber}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </form>
 
           <p className="Register-Notice">
