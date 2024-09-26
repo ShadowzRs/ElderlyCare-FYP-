@@ -255,8 +255,8 @@ const RegisterPage = () => {
         <div className="R-Font">
           <h1>Join Us Today !</h1>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-            nam dolorum aliquam, quibusdam aperiam voluptatum.
+            Experience Compassionate Care with AI-LifeConnect, Empowering You to
+            Live Your Best Life in Your Golden Years!
           </p>
         </div>
       </div>
