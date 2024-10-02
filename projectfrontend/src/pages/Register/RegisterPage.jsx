@@ -155,15 +155,15 @@ const RegisterPage = () => {
       isValid = false;
     }
 
-    if (!formData.emergencyContactName.trim()) {
+    if (formData.role === "Elderly" && !formData.emergencyContactName.trim()) {
       errors.emergencyContactName = "Emergency Contact Name is required";
       isValid = false;
     }
 
-    if (!formData.emergencyContactNumber) {
+    if (formData.role === "Elderly" && !formData.emergencyContactNumber) {
       errors.emergencyContactNumber = "Phone number is required";
       isValid = false;
-    } else if (!/^0\d{2}-\d{3}-\d{4}$/.test(formData.emergencyContactNumber)) {
+    } else if (formData.role === "Elderly" && !/^0\d{2}-\d{3}-\d{4}$/.test(formData.emergencyContactNumber)) {
       errors.emergencyContactNumber = "Wrong format [0XX-XXX-XXXX]";
       isValid = false;
     }
@@ -177,7 +177,7 @@ const RegisterPage = () => {
 
     const isValid = await validate();
     if (!isValid) {
-      return; // Stop if validation fails
+      return;
     }
 
     let roleEndpoint = "";
@@ -219,7 +219,7 @@ const RegisterPage = () => {
       setFormErrors({ role: "Role is required" });
       return; // To Stop submission
     }
-
+    console.log(formData);
     try {
       const response = await fetch(roleEndpoint, {
         method: "POST",
@@ -228,7 +228,7 @@ const RegisterPage = () => {
         },
         body: JSON.stringify(userData),
       });
-
+      console.log(response);
       if (response.ok) {
         // Show notification on success
         showNotification(
@@ -523,7 +523,6 @@ const RegisterPage = () => {
                           formData.healthProviderSpecialty === "Caregiver"
                         }
                         onChange={handleChange}
-                        required
                       />
                       <label htmlFor="caregiver" className="RoleInputLabel">
                         Caregiver
@@ -538,7 +537,6 @@ const RegisterPage = () => {
                         value="Doctor"
                         checked={formData.healthProviderSpecialty === "Doctor"}
                         onChange={handleChange}
-                        required
                       />
                       <label htmlFor="doctor" className="RoleInputLabel">
                         Doctor
@@ -571,7 +569,6 @@ const RegisterPage = () => {
                     className="Register-Input-Box"
                     value={formData.emergencyContactName}
                     onChange={handleChange}
-                    required
                   />
                   {formErrors.emergencyContactName && (
                     <div className="Error-Message">
@@ -597,7 +594,6 @@ const RegisterPage = () => {
                     className="Register-Input-Box"
                     value={formData.emergencyContactNumber}
                     onChange={handleChange}
-                    required
                   />
                   {formErrors.emergencyContactNumber && (
                     <div className="Error-Message">
