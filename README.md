@@ -55,3 +55,6 @@ The core features include:
 
 ![Home_1](https://github.com/ShadowzRs/ElderlyCare-FYP-/blob/2f16f4e9ab3f7cc4d998d02131f09a5630319845/projectfrontend/public/Screenshot%202025-07-30%20214400.png)
 ![AI Bot](https://github.com/ShadowzRs/ElderlyCare-FYP-/blob/2f16f4e9ab3f7cc4d998d02131f09a5630319845/projectfrontend/public/Screenshot%202025-07-30%20214322.png)
+
+To view more previews and features, feel free to explore the full repository.
+**THANK YOUU**
