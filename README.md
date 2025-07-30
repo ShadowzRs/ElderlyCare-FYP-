@@ -21,11 +21,11 @@ _Built with the tools and technologies:_
 
 ## 🔍 Overview
 
-**ElderlyCare** is a full-stack platform designed to enhance elderly care through real-time communication, health management, and AI support. Built with Spring Boot, React, and modern web technologies, it offers a cohesive architecture for secure data handling and interactive user experiences.
+**AI-LifeConnect** is a full-stack platform designed to enhance elderly care through real-time communication, health management, and AI support. Built with Spring Boot, React, and modern web technologies, it offers a cohesive architecture for secure data handling and interactive user experiences.
 
 ---
 
-## 💡 Why ElderlyCare ???
+## 💡 Why AI-LifeConnect ???
 
 This project empowers developers to build scalable, secure, and user-friendly elderly care applications.  
 The core features include:
