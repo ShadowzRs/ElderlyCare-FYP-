@@ -34,7 +34,7 @@ The core features include:
 
 - 🌟 **Role-based user management** for elderly, caregivers, and healthcare providers  
 - 🍀 **Real-time chat and messaging** via WebSocket for instant, seamless communication  
-- 🤖 **AI chatbot integration** for personalized assistance and 24/7 support  
+- 🤖 **AI chatbot integration** for personalized assistance and 24/7 support (*powered by Ollama*)
 - 🎨 **Modern frontend architecture** using React, Vite, and Tailwind CSS for a responsive and user-friendly UI  
 - 🔐 **Secure authentication** with password hashing and session management  
 - 📊 **Comprehensive health data management** including medical records, medication reminders, and health tracking  
@@ -43,7 +43,8 @@ The core features include:
 
 - 💻 **Backend**: Java with Spring Boot Framework 
 - 🌐 **Frontend**: React, Vite, Tailwind CSS  
-- 🗄️ **Database**: MySQL  
+- 🗄️ **Database**: MySQL
+- 🧠 **AI Engine**: [Ollama](https://ollama.com)
 - 🧰 **Tools**: IntelliJ IDEA, Visual Studio Code  
 - ✅ Followed best practices in code quality, security, and UI/UX design to ensure the meet of user requirements
 - 🧪 Conducted user experience evaluations to refine and improve further functionality and usability
@@ -52,7 +53,5 @@ The core features include:
 
 ## 📸 Preview
 
-![Chat Feature](./screenshots/chat-feature.png)
-![AI Bot](./screenshots/ai-chatbot.png)
-![Reminder](./screenshots/ai-chatbot.png)
-![User Health Records](./screenshots/ai-chatbot.png)
+![Home_1](https://github.com/ShadowzRs/ElderlyCare-FYP-/blob/2f16f4e9ab3f7cc4d998d02131f09a5630319845/projectfrontend/public/Screenshot%202025-07-30%20214400.png)
+![AI Bot](https://github.com/ShadowzRs/ElderlyCare-FYP-/blob/2f16f4e9ab3f7cc4d998d02131f09a5630319845/projectfrontend/public/Screenshot%202025-07-30%20214322.png)
